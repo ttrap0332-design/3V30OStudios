@@ -1,4 +1,4 @@
-import { run, network } from "hardhat";
+import { run, network, ethers } from "hardhat";
 import * as fs from "fs";
 import * as path from "path";
 
@@ -79,7 +79,7 @@ async function main() {
       constructorArgs: [
         "EVOLVERSE NFT",
         "EVOL",
-        "115792089237316195423570985008687907853269984665640564039457584007913129639935",
+        ethers.MaxUint256.toString(),
       ],
     },
     {
