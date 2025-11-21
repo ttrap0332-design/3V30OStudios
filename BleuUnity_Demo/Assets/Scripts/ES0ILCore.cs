@@ -21,6 +21,11 @@ public class ES0ILCore : MonoBehaviour
     [SerializeField] private float currentResources = 100f;
     [SerializeField] private float maxResources = 200f;
     
+    // Simulation constants
+    private const float PRESSURE_BASE = 1.0f;
+    private const float PRESSURE_AMPLITUDE = 0.5f;
+    private const float PRESSURE_FREQUENCY = 0.5f;
+    
     // Singleton instance
     private static ES0ILCore instance;
     public static ES0ILCore Instance => instance;
@@ -42,7 +47,7 @@ public class ES0ILCore : MonoBehaviour
     void Update()
     {
         // Simulate environmental pressure oscillation
-        environmentalPressure = 1.0f + 0.5f * Mathf.Sin(Time.time * 0.5f);
+        environmentalPressure = PRESSURE_BASE + PRESSURE_AMPLITUDE * Mathf.Sin(Time.time * PRESSURE_FREQUENCY);
         
         // Regenerate resources over time
         currentResources += regenerationRate * Time.deltaTime;
