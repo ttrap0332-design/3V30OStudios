@@ -94,15 +94,32 @@ jobs:
             base=${{ github.event.pull_request.base.sha }}
             head=${{ github.event.pull_request.head.sha }}
             
-            unsigned_commits=$(git log --show-signature $base..$head | grep -c "No signature" || true)
+            echo "Verifying commits from $base to $head"
             
-            if [ "$unsigned_commits" -gt 0 ]; then
-              echo "❌ Found $unsigned_commits unsigned commit(s)"
-              echo "All commits must be signed with GPG or SSH keys"
+            # Get list of commits
+            commits=$(git rev-list $base..$head)
+            unsigned_count=0
+            
+            for commit in $commits; do
+              # Try to verify the commit (works for both GPG and SSH)
+              if ! git verify-commit "$commit" 2>/dev/null; then
+                echo "❌ Unsigned or unverified commit: $commit"
+                git log -1 --format="%H %s" "$commit"
+                unsigned_count=$((unsigned_count + 1))
+              else
+                echo "✅ Verified commit: $commit"
+              fi
+            done
+            
+            if [ "$unsigned_count" -gt 0 ]; then
+              echo ""
+              echo "❌ Found $unsigned_count unsigned or unverified commit(s)"
+              echo "All commits must be signed with verified GPG or SSH keys"
               exit 1
             fi
             
-            echo "✅ All commits are properly signed"
+            echo ""
+            echo "✅ All commits are properly signed and verified"
           fi
 
   sbom-generation:

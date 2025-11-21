@@ -26,6 +26,15 @@ This document outlines security requirements for implementing OAuth 2.0, OpenID 
 2. **Redirect URI Validation**
    ```javascript
    function validateRedirectUri(requestedUri, allowedUris) {
+     // Validate input parameters
+     if (!Array.isArray(allowedUris) || allowedUris.length === 0) {
+       throw new Error('allowedUris must be a non-empty array');
+     }
+     
+     if (!requestedUri || typeof requestedUri !== 'string') {
+       throw new Error('requestedUri must be a non-empty string');
+     }
+     
      // Exact string match only - no pattern matching
      if (!allowedUris.includes(requestedUri)) {
        throw new Error('Invalid redirect_uri');
@@ -81,6 +90,14 @@ This document outlines security requirements for implementing OAuth 2.0, OpenID 
 
 ```javascript
 const crypto = require('crypto');
+
+// Helper function for base64url encoding
+function base64URLEncode(buffer) {
+  return buffer.toString('base64')
+    .replace(/\+/g, '-')
+    .replace(/\//g, '_')
+    .replace(/=/g, '');
+}
 
 // Generate code verifier
 function generateCodeVerifier() {
