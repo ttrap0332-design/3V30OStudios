@@ -326,8 +326,12 @@ git push origin test-branch-2
 
 **Solution**: Verify your GPG/SSH key is properly added to GitHub:
 ```bash
-# Test GPG
-echo "test" | gpg --clearsign
+# Test GPG (if using GPG signing)
+gpg --list-secret-keys --keyid-format=long
+echo "test" | gpg --clearsign --local-user YOUR_KEY_ID
+
+# Test SSH (if using SSH signing)
+ssh-keygen -Y sign -f ~/.ssh/id_ed25519_signing -n git test.txt
 
 # Verify Git config
 git config --global --get user.signingkey
