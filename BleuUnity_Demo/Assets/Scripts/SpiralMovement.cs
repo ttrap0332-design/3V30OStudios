@@ -74,6 +74,13 @@ public class SpiralMovement : MonoBehaviour
     // ES0IL Core simulation
     private float resourcePressure = 1f;
     
+    // Constants for simulation
+    private const float ENGINE_LOAD_FREQUENCY = 0.1f;
+    private const float EMITTER_CLEANUP_TIME = 2f;
+    private const float BASE_PRESSURE = 1f;
+    private const float PRESSURE_AMPLITUDE = 0.5f;
+    private const float PRESSURE_FREQUENCY = 0.5f;
+    
     void Start()
     {
         // Initialize spiral parameters
@@ -88,7 +95,7 @@ public class SpiralMovement : MonoBehaviour
     void Update()
     {
         // Update engine load simulation (cycles between 0 and 1)
-        engineLoad = Mathf.PingPong(Time.time * 0.1f, 1f);
+        engineLoad = Mathf.PingPong(Time.time * ENGINE_LOAD_FREQUENCY, 1f);
         
         // Check Hellraiser Loop threshold
         isHellraiserActive = engineLoad >= hellraiserThreshold;
@@ -174,7 +181,7 @@ public class SpiralMovement : MonoBehaviour
     private float SimulateES0ILResourcePressure()
     {
         // Simulate resource pressure with sine wave (oscillates between 0.5 and 1.5)
-        float pressure = 1f + 0.5f * Mathf.Sin(Time.time * 0.5f);
+        float pressure = BASE_PRESSURE + PRESSURE_AMPLITUDE * Mathf.Sin(Time.time * PRESSURE_FREQUENCY);
         return pressure;
     }
     
@@ -215,7 +222,7 @@ public class SpiralMovement : MonoBehaviour
         // ParticleSystem ps = emitter.AddComponent<ParticleSystem>();
         // Configure particle system to emit spiral patterns
         
-        Destroy(emitter, 2f); // Cleanup after 2 seconds
+        Destroy(emitter, EMITTER_CLEANUP_TIME); // Cleanup after configured time
     }
     
     /// <summary>

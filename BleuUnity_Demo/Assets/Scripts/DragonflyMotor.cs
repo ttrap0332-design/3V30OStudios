@@ -35,6 +35,9 @@ public class DragonflyMotor : MonoBehaviour
     private float currentAngularMomentum = 0f;
     private Rigidbody rb;
     
+    // Wobble pattern constants
+    private const float WOBBLE_FREQUENCY_OFFSET = 1.2f;
+    
     public enum FlightMode
     {
         Hover,      // Stationary hovering
@@ -116,7 +119,7 @@ public class DragonflyMotor : MonoBehaviour
         
         // Generate wobble pattern
         float wobbleX = Mathf.Sin(Time.time * modeFrequency) * modeAmplitude;
-        float wobbleZ = Mathf.Cos(Time.time * modeFrequency * 1.2f) * modeAmplitude;
+        float wobbleZ = Mathf.Cos(Time.time * modeFrequency * WOBBLE_FREQUENCY_OFFSET) * modeAmplitude;
         
         Vector3 wobbleOffset = new Vector3(wobbleX, 0f, wobbleZ);
         
