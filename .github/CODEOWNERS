@@ -1,0 +1,32 @@
+# Code Owners for 3V30OStudios Repository
+# 
+# These owners will be automatically requested for review when someone 
+# opens a pull request that modifies files matching the patterns.
+#
+# Learn more: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Default owners for everything in the repo
+* @ttrap0332-design
+
+# Security-sensitive files require security team review
+SECURITY.md @ttrap0332-design
+.github/workflows/security-scanning.yml @ttrap0332-design
+.pre-commit-config.yaml @ttrap0332-design
+docs/security/ @ttrap0332-design
+
+# Configuration files
+.gitignore @ttrap0332-design
+.env.example @ttrap0332-design
+hardhat.config.ts @ttrap0332-design
+package.json @ttrap0332-design
+
+# Smart contracts require careful review
+contracts/ @ttrap0332-design
+
+# Deployment configurations
+deployments/ @ttrap0332-design
+deployment-config.json @ttrap0332-design
+DEPLOYMENT.md @ttrap0332-design
+
+# Branch protection and GitHub configurations
+.github/ @ttrap0332-design

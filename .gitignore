@@ -53,7 +53,7 @@ dist/
 *SECRET*
 *credential*
 *CREDENTIAL*
-.secrets.baseline
+!.secrets.baseline
 secrets/
 .vault/
 .password
