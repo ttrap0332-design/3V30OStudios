@@ -24,3 +24,93 @@ revenue_projections_*.md
 
 # environment overrides
 config/.env
+.env
+
+# Hardhat / Solidity
+node_modules/
+cache/
+artifacts/
+typechain-types/
+coverage/
+coverage.json
+*.log
+dist/
+
+# Deployment artifacts (keep these for reference but sensitive info should be excluded)
+# deployments/*_latest.json excluded from repo but timestamped versions kept for audit trail
+
+# Security: Secrets and credentials
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+*.cer
+*.crt
+*.der
+*secret*
+*SECRET*
+*credential*
+*CREDENTIAL*
+!.secrets.baseline
+secrets/
+.vault/
+.password
+*.sqlite
+*.db
+
+# Security: Environment files
+.env
+.env.*
+!.env.example
+.envrc
+*.env.local
+*.env.production
+config/secrets.yml
+config/credentials.yml
+
+# Security: OAuth and auth configs
+oauth_*.json
+auth_*.json
+keycloak.json
+*client_secret*
+
+# Security: SSH and GPG
+id_rsa
+id_dsa
+id_ed25519
+*.gpg
+*.asc
+
+# Security: Cloud provider credentials
+.aws/
+.azure/
+.gcp/
+gcloud/
+
+# Security: CI/CD secrets
+.gitlab-ci-secrets.yml
+.drone.sec
+
+# Python virtual environments
+venv/
+env/
+ENV/
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
