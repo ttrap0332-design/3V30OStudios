@@ -7,6 +7,7 @@ both visual and human synchronization requirements.
 from __future__ import annotations
 
 import hashlib
+import secrets
 import time
 from dataclasses import dataclass, field
 from enum import Enum
@@ -77,12 +78,13 @@ class DoubleHandshakeProtocol:
         self.timeout_seconds = timeout_seconds
 
     def _generate_nonce(self) -> str:
-        """Generate a random nonce for handshake."""
-        return hashlib.sha256(str(time.time_ns()).encode()).hexdigest()[:32]
+        """Generate a cryptographically secure random nonce for handshake."""
+        return secrets.token_hex(16)
 
     def _generate_session_id(self, initiator: str, responder: str) -> str:
-        """Generate a unique session ID."""
-        data = f"{initiator}:{responder}:{time.time_ns()}"
+        """Generate a unique session ID with cryptographic randomness."""
+        random_part = secrets.token_hex(8)
+        data = f"{initiator}:{responder}:{random_part}"
         return hashlib.sha256(data.encode()).hexdigest()[:16]
 
     def initiate_handshake(self, initiator: str, responder: str) -> HandshakeSession:
@@ -327,7 +329,14 @@ class SimulationEngine:
     def complete_access(
         self, session_id: str, confirmation_nonce: str
     ) -> HandshakeSession | None:
-        """Complete an access request.
+        """Complete an access request (convenience method).
+
+        Note: This method automatically calls respond_handshake before
+        confirm_handshake. For explicit control over the handshake flow,
+        use the handshake_protocol directly:
+        1. protocol.initiate_handshake()
+        2. protocol.respond_handshake()
+        3. protocol.confirm_handshake()
 
         Args:
             session_id: Session to complete

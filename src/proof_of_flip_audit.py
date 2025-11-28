@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import secrets
 import time
 from dataclasses import dataclass, field
 from datetime import datetime
@@ -181,28 +182,36 @@ class ProofOfFlipAuditPipeline:
 
     # Default tri-cycle yield as per BLEUFLIP system
     DEFAULT_TRI_CYCLE_YIELD = 2.1
+    # Default tolerance for yield differential verification (5%)
+    DEFAULT_TOLERANCE = 0.05
 
-    def __init__(self, output_dir: str | Path = "data/audits"):
+    def __init__(
+        self,
+        output_dir: str | Path = "data/audits",
+        tolerance: float | None = None,
+    ):
         """Initialize the audit pipeline.
 
         Args:
             output_dir: Directory for audit log output
+            tolerance: Tolerance for yield differential verification (default 5%)
         """
         self.output_dir = Path(output_dir)
         self.output_dir.mkdir(parents=True, exist_ok=True)
         self.audit_log: List[AuditEntry] = []
         self.tri_cycle_count: int = 0
         self.expected_yield_per_tri_cycle: float = self.DEFAULT_TRI_CYCLE_YIELD
+        self.tolerance: float = tolerance if tolerance is not None else self.DEFAULT_TOLERANCE
 
     def _generate_entry_id(self) -> str:
-        """Generate a unique audit entry ID.
+        """Generate a unique audit entry ID with cryptographic randomness.
 
         Returns:
             Unique entry ID
         """
         timestamp = int(time.time() * 1000)
-        hash_suffix = hashlib.sha256(str(timestamp).encode()).hexdigest()[:8]
-        return f"AUDIT-{timestamp}-{hash_suffix}"
+        random_suffix = secrets.token_hex(4)
+        return f"AUDIT-{timestamp}-{random_suffix}"
 
     def _generate_metric_id(self, metric_name: str) -> str:
         """Generate a metric ID.
@@ -214,17 +223,16 @@ class ProofOfFlipAuditPipeline:
             Metric ID
         """
         timestamp = int(time.time() * 1000)
-        return f"METRIC-{metric_name.upper()[:6]}-{timestamp}"
+        random_suffix = secrets.token_hex(2)
+        return f"METRIC-{metric_name.upper()[:6]}-{timestamp}-{random_suffix}"
 
     def _generate_proof_id(self) -> str:
-        """Generate a mythic proof ID.
+        """Generate a mythic proof ID with cryptographic randomness.
 
         Returns:
             Proof ID
         """
-        timestamp = int(time.time() * 1000)
-        hash_suffix = hashlib.sha256(str(timestamp).encode()).hexdigest()[:6]
-        return f"PROOF-{hash_suffix}"
+        return f"PROOF-{secrets.token_hex(3)}"
 
     def calculate_yield_differential(
         self,
@@ -362,10 +370,10 @@ class ProofOfFlipAuditPipeline:
         Returns:
             Created AuditEntry
         """
-        # Determine status based on yield differential
+        # Determine status based on yield differential using configured tolerance
         status = AuditStatus.PENDING
         if yield_differential:
-            if yield_differential.is_within_tolerance():
+            if yield_differential.is_within_tolerance(self.tolerance):
                 status = AuditStatus.VERIFIED
             else:
                 status = AuditStatus.DISCREPANCY

@@ -6,9 +6,12 @@ all systems for thematic and ontological unity.
 from __future__ import annotations
 
 import json
+import logging
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Dict, List
+
+logger = logging.getLogger(__name__)
 
 
 @dataclass(frozen=True)
@@ -141,6 +144,10 @@ class CosmologicalCodexEngine:
     def _load_codex(self) -> None:
         """Load the codex from the JSON file."""
         if not self.codex_path.exists():
+            logger.warning(
+                f"Cosmological codex file not found at {self.codex_path}. "
+                "Codex features will be unavailable until the file is created."
+            )
             return
 
         with self.codex_path.open("r", encoding="utf-8") as f:

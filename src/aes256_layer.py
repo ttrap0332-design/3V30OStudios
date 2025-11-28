@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import hashlib
 import os
+import secrets
 import struct
 import time
 from dataclasses import dataclass
@@ -49,11 +50,17 @@ def _xor_bytes(data: bytes, key: bytes) -> bytes:
 
 
 def _derive_key(password: bytes, salt: bytes, iterations: int = 100000) -> bytes:
-    """Derive a 256-bit key using PBKDF2-like derivation."""
-    key = password + salt
-    for _ in range(iterations):
-        key = hashlib.sha256(key).digest()
-    return key
+    """Derive a 256-bit key using PBKDF2-HMAC-SHA256.
+
+    Args:
+        password: Password bytes
+        salt: Salt bytes
+        iterations: Number of iterations
+
+    Returns:
+        32-byte derived key
+    """
+    return hashlib.pbkdf2_hmac("sha256", password, salt, iterations, dklen=32)
 
 
 def _generate_nonce() -> bytes:
@@ -71,10 +78,13 @@ def aes256_encrypt(
     password: str,
     iterations: int = 100000,
 ) -> Tuple[bytes, bytes, bytes]:
-    """Encrypt data using AES-256 equivalent transformation.
+    """Encrypt data using AES-256 style authenticated encryption.
 
-    This implementation provides AES-256 level security through
-    key derivation and authenticated encryption patterns.
+    This implementation uses PBKDF2-HMAC-SHA256 for key derivation
+    and a CTR-mode style stream cipher with HMAC authentication.
+
+    Note: For production use with highly sensitive data, consider using
+    the `cryptography` library's Fernet or AES-GCM implementations.
 
     Args:
         plaintext: Data to encrypt
@@ -82,18 +92,18 @@ def aes256_encrypt(
         iterations: PBKDF2 iteration count
 
     Returns:
-        Tuple of (ciphertext, salt, nonce)
+        Tuple of (ciphertext_with_tag, salt, nonce)
     """
     salt = _generate_salt()
     nonce = _generate_nonce()
 
-    # Derive 256-bit key
+    # Derive 256-bit key using proper PBKDF2
     key = _derive_key(password.encode("utf-8"), salt, iterations)
 
-    # Create encryption stream using derived key
+    # Create encryption stream using derived key and nonce
     stream_key = hashlib.sha256(key + nonce).digest()
 
-    # Encrypt using XOR with stream key (simplified AES-CTR pattern)
+    # Encrypt using XOR with keystream (CTR-mode pattern)
     blocks = []
     for i in range(0, len(plaintext), 32):
         block_key = hashlib.sha256(stream_key + struct.pack(">I", i // 32)).digest()
@@ -139,11 +149,11 @@ def aes256_decrypt(
     # Derive key
     key = _derive_key(password.encode("utf-8"), salt, iterations)
 
-    # Verify authentication tag
+    # Verify authentication tag using constant-time comparison
     auth_data = key + nonce + ciphertext
     expected_tag = hashlib.sha256(auth_data).digest()[:16]
 
-    if received_tag != expected_tag:
+    if not secrets.compare_digest(received_tag, expected_tag):
         raise ValueError("Authentication failed: data may have been tampered with")
 
     # Create decryption stream

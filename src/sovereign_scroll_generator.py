@@ -7,7 +7,7 @@ from __future__ import annotations
 
 import hashlib
 import json
-import os
+import secrets
 import time
 from dataclasses import dataclass, field
 from datetime import datetime
@@ -208,7 +208,7 @@ class SovereignScrollGenerator:
         self.scroll_registry: Dict[str, SovereignScroll] = {}
 
     def _generate_scroll_id(self, scroll_type: ScrollType) -> str:
-        """Generate a unique scroll ID.
+        """Generate a unique scroll ID with cryptographic randomness.
 
         Args:
             scroll_type: Type of scroll
@@ -218,8 +218,8 @@ class SovereignScrollGenerator:
         """
         timestamp = int(time.time() * 1000)
         type_prefix = scroll_type.value.upper()[:3]
-        hash_suffix = hashlib.sha256(str(timestamp).encode()).hexdigest()[:8]
-        return f"SCROLL-{type_prefix}-{timestamp}-{hash_suffix}"
+        random_suffix = secrets.token_hex(4)
+        return f"SCROLL-{type_prefix}-{timestamp}-{random_suffix}"
 
     def _get_current_epoch(self) -> str:
         """Get the current epoch string.
@@ -527,20 +527,26 @@ class SovereignScrollGenerator:
 
 # Global generator instance
 _generator: SovereignScrollGenerator | None = None
+_generator_output_dir: str | Path | None = None
 
 
 def get_generator(output_dir: str | Path = "data/scrolls") -> SovereignScrollGenerator:
     """Get or create the global scroll generator.
 
+    Note: The output_dir parameter is only used when creating a new instance.
+    Once initialized, the same instance is returned regardless of output_dir.
+    To use a different directory, create a new SovereignScrollGenerator directly.
+
     Args:
-        output_dir: Output directory for scrolls
+        output_dir: Output directory for scrolls (only used on first call)
 
     Returns:
         The global SovereignScrollGenerator instance
     """
-    global _generator
+    global _generator, _generator_output_dir
     if _generator is None:
         _generator = SovereignScrollGenerator(output_dir)
+        _generator_output_dir = output_dir
     return _generator
 
 
