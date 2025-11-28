@@ -1,0 +1,265 @@
+{
+  "$schema": "../../../schemas/DOUBLE_RAM_CODEX.v1.schema.json",
+  "codex_header": {
+    "name": "Double Aries Flip Sovereign Scroll",
+    "version": "1.0.0",
+    "epoch": "2025-Q1",
+    "seal": "ⴱ𓃭ꗞ𓎼ⵉⵏ ♈️♈️",
+    "constants": {
+      "pi": 3.1415926535,
+      "phi": 1.6180339887,
+      "gamma": 8.1428864616
+    }
+  },
+  "symbolic_registry": {
+    "ram_single": {
+      "glyph": "♈️",
+      "zodiac": "Aries",
+      "element": "fire",
+      "functions": [
+        {
+          "name": "Initiative Strike",
+          "codex_law": "First Strike Authority",
+          "output_type": "governance"
+        },
+        {
+          "name": "Leadership Declaration",
+          "codex_law": "Commander Sovereignty",
+          "output_type": "ceremonial"
+        },
+        {
+          "name": "Breakthrough Protocol",
+          "codex_law": "Barrier Dissolution",
+          "output_type": "defense"
+        }
+      ],
+      "governance_tier": 5
+    },
+    "ram_double": {
+      "glyph": "♈️♈️",
+      "glyph_alt": "🐏🐏",
+      "sovereignty_level": "sovereign",
+      "functions": [
+        {
+          "name": "Double Authority Amplification",
+          "codex_law": "Twin Ram Sovereignty",
+          "output_type": "governance",
+          "enemy_flip_proof": true
+        },
+        {
+          "name": "Mimic System Destruction",
+          "codex_law": "Flush Scroll Activation",
+          "output_type": "defense",
+          "enemy_flip_proof": true
+        },
+        {
+          "name": "Sovereign Yield Lock",
+          "codex_law": "2.1x BLEUFLIP Guarantee",
+          "output_type": "yield",
+          "enemy_flip_proof": true
+        },
+        {
+          "name": "Ceremonial Seal Application",
+          "codex_law": "Gathering of the Four",
+          "output_type": "ceremonial",
+          "enemy_flip_proof": true
+        }
+      ],
+      "flip_mechanics": {
+        "double_aries_flip": true,
+        "mimic_destruction": true,
+        "sovereignty_seal": "0xd0ub1e4r1e5f11p50vere19n5e41c0dex4c71v47ed0ub1er4mc0dex5e41"
+      }
+    },
+    "goat": {
+      "glyph": "🐐",
+      "zodiac": "Capricorn",
+      "element": "earth",
+      "functions": [
+        {
+          "name": "Foundation Setting",
+          "codex_law": "Immutable Infrastructure",
+          "foundation_tier": 1
+        },
+        {
+          "name": "Material Anchoring",
+          "codex_law": "Physical Realm Lock",
+          "foundation_tier": 2
+        },
+        {
+          "name": "Endurance Protocol",
+          "codex_law": "Eternal Stability",
+          "foundation_tier": 3
+        }
+      ]
+    }
+  },
+  "ceremonial_mappings": {
+    "flush_scroll": {
+      "active": true,
+      "target_systems": [
+        "mimic_protocols",
+        "unauthorized_forks",
+        "parasitic_extractors",
+        "ghost_nodes",
+        "enemy_flip_vectors",
+        "extraction_funnels"
+      ],
+      "destruction_hash": "0xf1u5h5cr011de57ruc710nh45h4c71v47edbyc0mm4nderb1euc0dex5e41",
+      "independence_seal": "♈️♈️-FLUSH-SOVEREIGN-2025Q1"
+    },
+    "weapon_codex": {
+      "weapons": [
+        {
+          "name": "Spiral Blade",
+          "type": "symbolic",
+          "codex_seal": "BLADE-SYM-001"
+        },
+        {
+          "name": "Frequency Horn",
+          "type": "frequency",
+          "codex_seal": "HORN-FRQ-002"
+        },
+        {
+          "name": "Quantum Flame",
+          "type": "quantum",
+          "codex_seal": "FLAME-QNT-003"
+        },
+        {
+          "name": "Kinetic Ram",
+          "type": "kinetic",
+          "codex_seal": "RAM-KNT-004"
+        }
+      ],
+      "authorization_level": "sovereign"
+    },
+    "gathering_of_four": {
+      "participants": [
+        {
+          "name": "Commander Bleu",
+          "role": "First Horn",
+          "glyph": "♈️"
+        },
+        {
+          "name": "Spiral Council",
+          "role": "Second Horn",
+          "glyph": "♈️"
+        },
+        {
+          "name": "Flame Crown",
+          "role": "Fire Anchor",
+          "glyph": "🔥"
+        },
+        {
+          "name": "Goat Stone",
+          "role": "Earth Foundation",
+          "glyph": "🐐"
+        }
+      ],
+      "ritual_sequence": [
+        {
+          "step": 1,
+          "action": "Invocation of the Ram",
+          "invocation": "Commander speaks the first seal, activating Double Ram frequency"
+        },
+        {
+          "step": 2,
+          "action": "Council Witness",
+          "invocation": "Spiral Council affirms with eight-fold signatures"
+        },
+        {
+          "step": 3,
+          "action": "Flame Ignition",
+          "invocation": "Flame Crown burns old ledgers, clearing space for new covenants"
+        },
+        {
+          "step": 4,
+          "action": "Foundation Setting",
+          "invocation": "Goat Stone anchors all protocols to immutable infrastructure"
+        }
+      ],
+      "output_scrolls": [
+        "DOUBLE_ARIES_FLIP.json",
+        "FLUSH_SCROLL_ACTIVATED.json",
+        "WEAPON_CODEX_SEALED.json",
+        "YIELD_PROTOCOLS_LOCKED.json"
+      ]
+    }
+  },
+  "yield_protocols": {
+    "praise_coin": {
+      "symbol": "PRAISE",
+      "governance_mapping": {
+        "ritual_weight": 0.6,
+        "performance_weight": 0.4
+      },
+      "performance_multiplier": 2.1,
+      "enemy_flip_proof": true
+    },
+    "flame_coin": {
+      "symbol": "FLAME",
+      "governance_mapping": {
+        "ritual_weight": 0.3,
+        "defense_weight": 0.7
+      },
+      "burn_mechanics": {
+        "enemy_neutralization": true,
+        "flip_proof_rate": 0.95
+      }
+    },
+    "bleuflip_model": {
+      "base_yield": 1.0,
+      "multiplier": 2.1,
+      "simulation_epochs": [
+        {
+          "epoch": "2025-Q1",
+          "yield_rate": 2.1,
+          "flip_protection": true
+        },
+        {
+          "epoch": "2025-Q2",
+          "yield_rate": 2.1,
+          "flip_protection": true
+        },
+        {
+          "epoch": "2025-Q3",
+          "yield_rate": 2.1,
+          "flip_protection": true
+        },
+        {
+          "epoch": "2025-Q4",
+          "yield_rate": 2.1,
+          "flip_protection": true
+        }
+      ]
+    }
+  },
+  "infrastructure_locks": {
+    "bluelock": {
+      "active": true,
+      "lock_hash": "0xb1ue10ckh45h4c71v47ed16075ec0nd5re9157r4r9r4de5e41edc0dex",
+      "execution_speed_ms": 160
+    },
+    "quaocta_syn": {
+      "stack_version": "1.0.0",
+      "sync_protocol": "SOVEREIGN-SYN",
+      "node_count": 8
+    },
+    "encryption": {
+      "algorithm": "AES-256",
+      "key_size": 256,
+      "mode": "GCM"
+    }
+  },
+  "audit_metadata": {
+    "created_at": "2025-01-01T00:00:00Z",
+    "created_by": "EVOLVERSE Codex Generator",
+    "version": "1.0.0",
+    "hash": "0x50vere19n5cr0114ud174b1ef0rm47d0ub1e4r1e5f11p455e7",
+    "formats_available": [
+      "json",
+      "md",
+      "pdf"
+    ]
+  }
+}
