@@ -1,0 +1,247 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://evolverse.io/schemas/PROOF_OF_FLIP_AUDIT.v1.schema.json",
+  "title": "Proof-of-Flip Economic Audit Schema",
+  "description": "Schema for audit logs reflecting runtime metrics and yield differentials matched against the BLEUFLIP system",
+  "type": "object",
+  "required": ["audit_id", "timestamp", "bleuflip_promise", "actual_outcome", "status"],
+  "properties": {
+    "audit_id": {
+      "type": "string",
+      "pattern": "^AUDIT-[0-9]+-[0-9a-fA-F]{8}$",
+      "description": "Unique identifier for the audit entry"
+    },
+    "timestamp": {
+      "type": "number",
+      "description": "Unix timestamp of the audit"
+    },
+    "timestamp_iso": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 formatted timestamp"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["pending", "verified", "discrepancy", "resolved"],
+      "description": "Current status of the audit entry"
+    },
+    "yield_differential": {
+      "type": "object",
+      "description": "Yield differential measurement",
+      "required": ["expected_yield", "actual_yield", "differential", "tri_cycle_number"],
+      "properties": {
+        "expected_yield": {
+          "type": "number",
+          "description": "Expected yield per tri-cycle (e.g., 2.1)"
+        },
+        "actual_yield": {
+          "type": "number",
+          "description": "Actual yield achieved"
+        },
+        "differential": {
+          "type": "number",
+          "description": "Absolute difference between expected and actual"
+        },
+        "differential_pct": {
+          "type": "number",
+          "description": "Percentage differential"
+        },
+        "tri_cycle_number": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "The tri-cycle number for this measurement"
+        },
+        "within_tolerance": {
+          "type": "boolean",
+          "description": "Whether differential is within acceptable tolerance (5%)"
+        }
+      }
+    },
+    "runtime_metrics": {
+      "type": "array",
+      "description": "Runtime metrics collected during the audit period",
+      "items": {
+        "type": "object",
+        "required": ["metric_id", "metric_name", "value", "unit", "source"],
+        "properties": {
+          "metric_id": {
+            "type": "string",
+            "description": "Unique metric identifier"
+          },
+          "metric_name": {
+            "type": "string",
+            "description": "Human-readable metric name"
+          },
+          "value": {
+            "type": "number",
+            "description": "Metric value"
+          },
+          "unit": {
+            "type": "string",
+            "description": "Unit of measurement"
+          },
+          "timestamp": {
+            "type": "number",
+            "description": "Metric collection timestamp"
+          },
+          "source": {
+            "type": "string",
+            "description": "Source system for the metric"
+          },
+          "mythic_layer": {
+            "type": "string",
+            "enum": ["genesis", "spiral", "flame", "tribunal", "cosmic"],
+            "description": "Associated mythic proof layer"
+          }
+        }
+      }
+    },
+    "mythic_proofs": {
+      "type": "array",
+      "description": "Cross-referenced mythic proof layers connecting governance to ceremony",
+      "items": {
+        "type": "object",
+        "required": ["proof_id", "layer", "governance_outcome", "ceremonial_claim", "proof_hash"],
+        "properties": {
+          "proof_id": {
+            "type": "string",
+            "pattern": "^PROOF-[0-9a-fA-F]{6}$",
+            "description": "Unique proof identifier"
+          },
+          "layer": {
+            "type": "string",
+            "enum": ["genesis", "spiral", "flame", "tribunal", "cosmic"],
+            "description": "Mythic proof layer"
+          },
+          "governance_outcome": {
+            "type": "string",
+            "description": "The practical governance outcome"
+          },
+          "ceremonial_claim": {
+            "type": "string",
+            "description": "The ceremonial claim embedded in EVOLVERSE"
+          },
+          "proof_hash": {
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{64}$",
+            "description": "SHA-256 hash of the proof"
+          },
+          "verified": {
+            "type": "boolean",
+            "description": "Whether the proof has been verified"
+          },
+          "verification_timestamp": {
+            "type": "number",
+            "description": "Timestamp of verification"
+          },
+          "act_scene_ref": {
+            "type": "string",
+            "description": "EVOLVERSE Act I Scene reference"
+          }
+        }
+      }
+    },
+    "bleuflip_promise": {
+      "type": "object",
+      "description": "The BLEUFLIP system's promise for this audit period",
+      "required": ["tri_cycle_yield", "system"],
+      "properties": {
+        "tri_cycle_yield": {
+          "type": "number",
+          "description": "Promised yield per tri-cycle"
+        },
+        "system": {
+          "type": "string",
+          "const": "BLEUFLIP",
+          "description": "System identifier"
+        },
+        "details": {
+          "type": "object",
+          "additionalProperties": true,
+          "description": "Additional promise details"
+        }
+      }
+    },
+    "actual_outcome": {
+      "type": "object",
+      "description": "The actual outcome achieved",
+      "required": ["actual_yield"],
+      "properties": {
+        "actual_yield": {
+          "type": "number",
+          "description": "Actual yield achieved"
+        },
+        "differential": {
+          "type": "number",
+          "description": "Yield differential"
+        },
+        "differential_pct": {
+          "type": "number",
+          "description": "Percentage differential"
+        },
+        "within_tolerance": {
+          "type": "boolean",
+          "description": "Whether outcome is within tolerance"
+        }
+      },
+      "additionalProperties": true
+    },
+    "entry_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-fA-F]{64}$",
+      "description": "SHA-256 hash of the audit entry for verification"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes for the audit entry"
+    }
+  },
+  "$defs": {
+    "auditLogExport": {
+      "type": "object",
+      "description": "Schema for exported audit log files",
+      "required": ["export_timestamp", "total_entries", "entries", "summary"],
+      "properties": {
+        "export_timestamp": {
+          "type": "number",
+          "description": "Unix timestamp of export"
+        },
+        "export_timestamp_iso": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO 8601 formatted export timestamp"
+        },
+        "tri_cycle_count": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Total number of tri-cycles audited"
+        },
+        "expected_yield_per_tri_cycle": {
+          "type": "number",
+          "description": "Expected yield per tri-cycle (default 2.1)"
+        },
+        "total_entries": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Total number of audit entries"
+        },
+        "entries": {
+          "type": "array",
+          "items": { "$ref": "#" }
+        },
+        "summary": {
+          "type": "object",
+          "properties": {
+            "total_entries": { "type": "integer" },
+            "verified_count": { "type": "integer" },
+            "discrepancy_count": { "type": "integer" },
+            "pending_count": { "type": "integer" },
+            "verification_rate": { "type": "number" },
+            "avg_yield_differential_pct": { "type": "number" },
+            "mythic_proofs_count": { "type": "integer" }
+          }
+        }
+      }
+    }
+  }
+}

@@ -114,3 +114,7 @@ desktop.ini
 *.swp
 *.swo
 *~
+
+# Generated scroll and audit output (runtime generated)
+data/scrolls/
+data/audits/

@@ -1,0 +1,251 @@
+{
+  "$schema": "https://evolverse.io/schemas/COSMOLOGICAL_CODEX.v1.schema.json",
+  "codex_name": "EVOLVERSE Cosmological Codex",
+  "version": "1.0.0",
+  "doubleAries": {
+    "symbol": "♈️🐏🐏",
+    "mythicRoot": "Twin Ram Sovereignty",
+    "celestialAlignment": "Aries-Aries Conjunction"
+  },
+  "codexPoints": [
+    {
+      "id": "CODEX-GENESIS-001",
+      "name": "Genesis Flame",
+      "layer": "genesis",
+      "cosmologicalReference": "The First Ignition",
+      "ontologicalUnity": "Origin of all sovereign systems",
+      "symbolism": "🔥",
+      "coordinates": {
+        "celestial": "0° Aries",
+        "temporal": "4:12",
+        "dimensional": "D1"
+      },
+      "governanceBinding": "treasury_initialization",
+      "description": "The primordial codex point from which all governance flows"
+    },
+    {
+      "id": "CODEX-SPIRAL-002",
+      "name": "Spiral Return",
+      "layer": "spiral",
+      "cosmologicalReference": "The Golden Return",
+      "ontologicalUnity": "Yield reciprocity and flow",
+      "symbolism": "🌀",
+      "coordinates": {
+        "celestial": "15° Aries",
+        "temporal": "7:07",
+        "dimensional": "D2"
+      },
+      "governanceBinding": "yield_distribution",
+      "description": "Codex point governing the spiral of returns and reinvestment"
+    },
+    {
+      "id": "CODEX-TWIN-003",
+      "name": "Twin Gateway",
+      "layer": "tribunal",
+      "cosmologicalReference": "Double Aries Portal",
+      "ontologicalUnity": "Governance portal activation",
+      "symbolism": "♈️♈️",
+      "coordinates": {
+        "celestial": "30° Aries",
+        "temporal": "12:12",
+        "dimensional": "D3"
+      },
+      "governanceBinding": "governance_proposal",
+      "description": "The twin gateway through which all governance proposals pass"
+    },
+    {
+      "id": "CODEX-FLAME-004",
+      "name": "Ceremonial Flame",
+      "layer": "flame",
+      "cosmologicalReference": "Sacred Fire",
+      "ontologicalUnity": "Ritual confirmation and binding",
+      "symbolism": "🕯️",
+      "coordinates": {
+        "celestial": "45° Aries",
+        "temporal": "3:33",
+        "dimensional": "D4"
+      },
+      "governanceBinding": "ritual_confirmation",
+      "description": "Codex point for ceremonial bindings and scroll generation"
+    },
+    {
+      "id": "CODEX-COSMIC-005",
+      "name": "Cosmic Anchor",
+      "layer": "cosmic",
+      "cosmologicalReference": "Universal Binding",
+      "ontologicalUnity": "Cross-dimensional synchronization",
+      "symbolism": "⚓",
+      "coordinates": {
+        "celestial": "60° Aries",
+        "temporal": "11:11",
+        "dimensional": "D5"
+      },
+      "governanceBinding": "cross_chain_sync",
+      "description": "Anchor point for cosmic and cross-chain operations"
+    },
+    {
+      "id": "CODEX-PRAISE-006",
+      "name": "Praise Meridian",
+      "layer": "spiral",
+      "cosmologicalReference": "Merit Constellation",
+      "ontologicalUnity": "Reputation and recognition",
+      "symbolism": "🌟",
+      "coordinates": {
+        "celestial": "75° Aries",
+        "temporal": "9:09",
+        "dimensional": "D2"
+      },
+      "governanceBinding": "praise_distribution",
+      "description": "Codex point governing PraiseCoin distribution and merit"
+    },
+    {
+      "id": "CODEX-SCROLL-007",
+      "name": "Scholar Archive",
+      "layer": "genesis",
+      "cosmologicalReference": "Knowledge Repository",
+      "ontologicalUnity": "Academic and educational systems",
+      "symbolism": "📜",
+      "coordinates": {
+        "celestial": "90° Aries",
+        "temporal": "6:06",
+        "dimensional": "D1"
+      },
+      "governanceBinding": "scholarship_allocation",
+      "description": "Codex point for ScrollCoin and academic governance"
+    },
+    {
+      "id": "CODEX-ZION-008",
+      "name": "Sovereign Throne",
+      "layer": "tribunal",
+      "cosmologicalReference": "Supreme Authority",
+      "ontologicalUnity": "Sovereign governance and Zioniare",
+      "symbolism": "👑",
+      "coordinates": {
+        "celestial": "105° Aries",
+        "temporal": "1:44",
+        "dimensional": "D3"
+      },
+      "governanceBinding": "sovereign_decision",
+      "description": "Supreme codex point for Zioniare sovereign governance"
+    },
+    {
+      "id": "CODEX-WATCHTOWER-009",
+      "name": "Watchtower Beacon",
+      "layer": "tribunal",
+      "cosmologicalReference": "Guardian Light",
+      "ontologicalUnity": "Audit and compliance",
+      "symbolism": "🗼",
+      "coordinates": {
+        "celestial": "120° Aries",
+        "temporal": "8:08",
+        "dimensional": "D3"
+      },
+      "governanceBinding": "audit_trigger",
+      "description": "Codex point for watchtower audit activation"
+    },
+    {
+      "id": "CODEX-RIPPLE-010",
+      "name": "Ripple Origin",
+      "layer": "cosmic",
+      "cosmologicalReference": "Wave Genesis",
+      "ontologicalUnity": "Effect propagation and forensics",
+      "symbolism": "🌊",
+      "coordinates": {
+        "celestial": "135° Aries",
+        "temporal": "5:55",
+        "dimensional": "D5"
+      },
+      "governanceBinding": "ripple_effect_init",
+      "description": "Origin point for Ripple Effect forensic propagation"
+    },
+    {
+      "id": "CODEX-BLEU-011",
+      "name": "BLEU Heart",
+      "layer": "genesis",
+      "cosmologicalReference": "Core Essence",
+      "ontologicalUnity": "BLEUCOIN central binding",
+      "symbolism": "💙",
+      "coordinates": {
+        "celestial": "150° Aries",
+        "temporal": "2:22",
+        "dimensional": "D1"
+      },
+      "governanceBinding": "treasury_core",
+      "description": "Heart of the BLEU token ecosystem"
+    },
+    {
+      "id": "CODEX-PROPHECY-012",
+      "name": "Prophecy Seal",
+      "layer": "cosmic",
+      "cosmologicalReference": "Future Vision",
+      "ontologicalUnity": "Governance proposals and triggers",
+      "symbolism": "🔮",
+      "coordinates": {
+        "celestial": "165° Aries",
+        "temporal": "10:10",
+        "dimensional": "D5"
+      },
+      "governanceBinding": "prophecy_trigger",
+      "description": "Codex point for prophecy-based governance triggers"
+    }
+  ],
+  "layerDefinitions": {
+    "genesis": {
+      "name": "Genesis Layer",
+      "description": "Foundation and origin codex points",
+      "color": "#FFD700",
+      "priority": 1
+    },
+    "spiral": {
+      "name": "Spiral Layer",
+      "description": "Yield and flow codex points",
+      "color": "#00CED1",
+      "priority": 2
+    },
+    "flame": {
+      "name": "Flame Layer",
+      "description": "Ceremonial and ritual codex points",
+      "color": "#FF4500",
+      "priority": 3
+    },
+    "tribunal": {
+      "name": "Tribunal Layer",
+      "description": "Governance and authority codex points",
+      "color": "#9400D3",
+      "priority": 4
+    },
+    "cosmic": {
+      "name": "Cosmic Layer",
+      "description": "Universal and cross-dimensional codex points",
+      "color": "#191970",
+      "priority": 5
+    }
+  },
+  "thematicUnity": {
+    "principle": "All systems within EVOLVERSE share cosmological references for ontological coherence",
+    "binding": "Each governance action maps to a codex point for ceremonial validation",
+    "flow": "Energy and value flow through codex coordinates following celestial alignments"
+  },
+  "actSceneReferences": {
+    "actI": {
+      "name": "EVOLVERSE Act I: Genesis",
+      "scenes": [
+        {
+          "scene": "Scene 1: The First Flame",
+          "codexBinding": "CODEX-GENESIS-001",
+          "description": "The ignition of sovereign systems"
+        },
+        {
+          "scene": "Scene 2: The Twin Awakening",
+          "codexBinding": "CODEX-TWIN-003",
+          "description": "Double Aries portal activation"
+        },
+        {
+          "scene": "Scene 3: The Spiral Begins",
+          "codexBinding": "CODEX-SPIRAL-002",
+          "description": "Initiation of yield flows"
+        }
+      ]
+    }
+  }
+}

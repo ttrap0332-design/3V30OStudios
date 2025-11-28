@@ -1,0 +1,214 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://evolverse.io/schemas/EVOLVERSE_GOVERNANCE.v1.schema.json",
+  "title": "EVOLVERSE Governance Protocol Schema",
+  "description": "Schema for governance structures, token definitions, and ceremonial integrations inspired by the mythological double Aries (♈️🐏🐏)",
+  "type": "object",
+  "required": ["protocol", "tokens", "governance", "ceremonial"],
+  "properties": {
+    "protocol": {
+      "type": "object",
+      "description": "Protocol metadata and versioning",
+      "required": ["name", "version", "epoch", "doubleAries"],
+      "properties": {
+        "name": { "type": "string" },
+        "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+        "epoch": { "type": "string", "pattern": "^\\d{4}-Q[1-4]$" },
+        "doubleAries": {
+          "type": "object",
+          "description": "Double Aries symbolic framework (♈️🐏🐏)",
+          "properties": {
+            "symbol": { "type": "string", "const": "♈️🐏🐏" },
+            "mythicRoot": { "type": "string" },
+            "ceremonialBinding": { "type": "boolean" }
+          }
+        },
+        "chainSet": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        }
+      }
+    },
+    "tokens": {
+      "type": "object",
+      "description": "Token definitions for governance and yield",
+      "required": ["BLEUCOIN", "PraiseCoin", "FlameCoin", "ScrollCoin", "Zioniare"],
+      "properties": {
+        "BLEUCOIN": {
+          "$ref": "#/$defs/tokenDefinition",
+          "description": "Primary governance token"
+        },
+        "PraiseCoin": {
+          "$ref": "#/$defs/tokenDefinition",
+          "description": "Reputation and merit token"
+        },
+        "FlameCoin": {
+          "$ref": "#/$defs/tokenDefinition",
+          "description": "Ceremonial activation token"
+        },
+        "ScrollCoin": {
+          "$ref": "#/$defs/tokenDefinition",
+          "description": "Academic usage token"
+        },
+        "Zioniare": {
+          "$ref": "#/$defs/tokenDefinition",
+          "description": "Sovereign governance token"
+        }
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/tokenDefinition"
+      }
+    },
+    "governance": {
+      "type": "object",
+      "description": "Governance structures and voting mechanisms",
+      "required": ["tribunal", "watchtowers", "votingRules"],
+      "properties": {
+        "tribunal": {
+          "type": "object",
+          "description": "Grand Vault Tribunal - DAO core council",
+          "required": ["name", "councilSize", "quorum"],
+          "properties": {
+            "name": { "type": "string" },
+            "councilSize": { "type": "integer", "minimum": 3 },
+            "quorum": { "type": "number", "minimum": 0, "maximum": 1 },
+            "members": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "address": { "type": "string", "pattern": "^0x[0-9a-fA-F]{40}$" },
+                  "role": { "type": "string" },
+                  "votingPower": { "type": "number", "minimum": 0 }
+                }
+              }
+            }
+          }
+        },
+        "watchtowers": {
+          "type": "array",
+          "description": "Automated auditors monitoring yields and rule compliance",
+          "items": {
+            "type": "object",
+            "required": ["id", "function", "auditInterval"],
+            "properties": {
+              "id": { "type": "string" },
+              "function": { "type": "string", "enum": ["yield_monitor", "compliance_check", "extraction_detector", "prophecy_validator"] },
+              "auditInterval": { "type": "integer", "description": "Audit interval in seconds" },
+              "contractAddress": { "type": "string", "pattern": "^0x[0-9a-fA-F]{40}$" }
+            }
+          }
+        },
+        "votingRules": {
+          "type": "object",
+          "properties": {
+            "proposalThreshold": { "type": "number", "minimum": 0 },
+            "votingPeriod": { "type": "integer", "description": "Voting period in blocks" },
+            "executionDelay": { "type": "integer", "description": "Execution delay in blocks" },
+            "prophecyTriggers": {
+              "type": "array",
+              "description": "Governance proposals with time or event locks",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "triggerType": { "type": "string", "enum": ["time", "event", "ceremonial"] },
+                  "condition": { "type": "string" },
+                  "action": { "type": "string" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "ceremonial": {
+      "type": "object",
+      "description": "Ceremonial integration and ritual confirmations",
+      "properties": {
+        "ritualConfirmations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "ritualId": { "type": "string" },
+              "name": { "type": "string" },
+              "requiredSignatures": { "type": "integer", "minimum": 1 },
+              "outputFormat": { "type": "string", "enum": ["PDF", "JSON", "ENFT"] }
+            }
+          }
+        },
+        "codexMappings": {
+          "type": "array",
+          "description": "Codex point mappings for governance actions",
+          "items": {
+            "type": "object",
+            "properties": {
+              "codexPoint": { "type": "string" },
+              "governanceAction": { "type": "string" },
+              "cosmologicalReference": { "type": "string" }
+            }
+          }
+        },
+        "mythicTimestamps": {
+          "type": "object",
+          "description": "Symbolic timestamps for universal myths",
+          "properties": {
+            "indices": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "timestamp": { "type": "string", "pattern": "^\\d+:\\d+$" },
+                  "mythicReference": { "type": "string" },
+                  "symbolism": { "type": "string" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "yieldProtocol": {
+      "type": "object",
+      "description": "Yield protocol configuration",
+      "properties": {
+        "triCycleYield": {
+          "type": "number",
+          "description": "Yield per tri-cycle (e.g., 2.1)"
+        },
+        "compoundingFormula": {
+          "type": "string",
+          "description": "Formula for yield compounding (e.g., π⁴)"
+        },
+        "distributionRatios": {
+          "type": "object",
+          "properties": {
+            "praise": { "type": "number" },
+            "redress": { "type": "number" },
+            "reserve": { "type": "number" }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "tokenDefinition": {
+      "type": "object",
+      "required": ["symbol", "standard", "function", "vaultRoute"],
+      "properties": {
+        "symbol": { "type": "string" },
+        "name": { "type": "string" },
+        "standard": { "type": "string", "enum": ["ERC-20", "ERC-721", "ERC-1155"] },
+        "function": { "type": "string" },
+        "vaultRoute": { "type": "string" },
+        "yieldCycle": { "type": "string" },
+        "accessTier": { "type": "string", "enum": ["Civilian", "Ancestral", "Cosmic", "Sovereign"] },
+        "scrollSeal": { "type": "string", "pattern": "^0x[0-9a-fA-F]{64}$" },
+        "reinvestmentLogic": { "type": "string" },
+        "scholarshipRef": { "type": "string" },
+        "contractAddress": { "type": "string", "pattern": "^0x[0-9a-fA-F]{40}$" }
+      }
+    }
+  }
+}
