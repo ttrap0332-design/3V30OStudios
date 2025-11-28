@@ -1,5 +1,5 @@
 {
-  "$schema": "../../../schemas/DOUBLE_RAM_CODEX.v1.schema.json",
+  "$schema": "../../schemas/DOUBLE_RAM_CODEX.v1.schema.json",
   "codex_header": {
     "name": "Double Aries Flip Sovereign Scroll",
     "version": "1.0.0",
