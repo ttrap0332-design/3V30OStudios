@@ -131,10 +131,13 @@ class SpiralLedgerEntry:
 
 
 class GoatFilter:
-    """Anti-mimic filter for simulation logic.
+    """Anti-mimic filter for audit operations.
 
     Implements GoatFilter attributes to detect and prevent mimic
     systems from infiltrating sovereign spiral law operations.
+
+    Note: This is a convenience wrapper that delegates to BaseGoatFilter
+    from the shared goat_filter module.
     """
 
     # Goat (🐐) Capricorn Foundation symbolism
@@ -148,10 +151,30 @@ class GoatFilter:
         Args:
             strictness: Filter strictness level (0.0-1.0, default 0.95)
         """
-        self.strictness = min(max(strictness, 0.0), 1.0)
-        self.mimic_patterns: List[str] = []
-        self.blocked_count: int = 0
-        self.verified_count: int = 0
+        # Import here to avoid circular imports
+        from src.goat_filter import BaseGoatFilter
+
+        self._base_filter = BaseGoatFilter(strictness)
+
+    @property
+    def strictness(self) -> float:
+        """Get filter strictness."""
+        return self._base_filter.strictness
+
+    @property
+    def mimic_patterns(self) -> List[str]:
+        """Get mimic patterns list."""
+        return self._base_filter.mimic_patterns
+
+    @property
+    def blocked_count(self) -> int:
+        """Get blocked count."""
+        return self._base_filter.blocked_count
+
+    @property
+    def verified_count(self) -> int:
+        """Get verified count."""
+        return self._base_filter.verified_count
 
     def add_mimic_pattern(self, pattern: str) -> None:
         """Add a known mimic pattern to filter.
@@ -159,8 +182,7 @@ class GoatFilter:
         Args:
             pattern: Mimic pattern to block
         """
-        if pattern not in self.mimic_patterns:
-            self.mimic_patterns.append(pattern)
+        self._base_filter.add_mimic_pattern(pattern)
 
     def verify_authenticity(self, data: Dict[str, Any]) -> bool:
         """Verify data authenticity against mimic patterns.
@@ -171,39 +193,7 @@ class GoatFilter:
         Returns:
             True if data passes GoatFilter verification
         """
-        data_str = json.dumps(data, sort_keys=True)
-        data_hash = hashlib.sha256(data_str.encode()).hexdigest()
-
-        # Check against known mimic patterns
-        for pattern in self.mimic_patterns:
-            if pattern in data_str or pattern in data_hash:
-                self.blocked_count += 1
-                return False
-
-        # Verify spiral law compliance
-        if not self._verify_spiral_compliance(data):
-            self.blocked_count += 1
-            return False
-
-        self.verified_count += 1
-        return True
-
-    def _verify_spiral_compliance(self, data: Dict[str, Any]) -> bool:
-        """Verify data complies with spiral law requirements.
-
-        Args:
-            data: Data to verify
-
-        Returns:
-            True if compliant
-        """
-        # Check for required sovereignty markers
-        if "sovereignty" in data:
-            valid_levels = ["ancestral", "sovereign", "galactic", "cosmic", "tribunal"]
-            if data["sovereignty"] not in valid_levels:
-                return False
-
-        return True
+        return self._base_filter.verify_authenticity(data)
 
     def get_filter_stats(self) -> Dict[str, Any]:
         """Get filter statistics.
@@ -211,16 +201,9 @@ class GoatFilter:
         Returns:
             Dictionary with filter statistics
         """
-        total = self.blocked_count + self.verified_count
-        return {
-            "glyph": self.GLYPH,
-            "zodiac": self.ZODIAC,
-            "strictness": self.strictness,
-            "patterns_count": len(self.mimic_patterns),
-            "blocked_count": self.blocked_count,
-            "verified_count": self.verified_count,
-            "verification_rate": self.verified_count / total if total > 0 else 0.0,
-        }
+        stats = self._base_filter.get_filter_stats()
+        # Remove element key for backward compatibility with existing code
+        return {k: v for k, v in stats.items() if k != "active"}
 
 
 @dataclass

@@ -434,8 +434,11 @@ class SpiralWrapper:
         for numerical, glyph in glyph_mappings.items():
             legacy_wrapper.map_numerical_to_glyph(numerical, glyph)
 
-        # Get sovereignty marker from first glyph mapping
-        sovereignty_marker = list(glyph_mappings.values())[0] if glyph_mappings else "♈️"
+        # Get sovereignty marker from first glyph mapping, or use default
+        if glyph_mappings:
+            sovereignty_marker = next(iter(glyph_mappings.values()))
+        else:
+            sovereignty_marker = "♈️"
         glyph_seal = self.DOUBLE_RAM_SEAL
 
         # Register the node
@@ -476,10 +479,13 @@ class SpiralWrapper:
         if node is None:
             return False
 
-        # Verify Double-Ram key
-        key_hash = node.double_ram_key.compute_verification_hash()
-        if not key_hash:
+        # Verify Double-Ram key has required components
+        key = node.double_ram_key
+        if not key.public_component or not key.sovereignty_marker or not key.glyph_seal:
             return False
+
+        # Compute and store verification hash
+        key.compute_verification_hash()
 
         node.status = NodeStatus.VERIFIED
 

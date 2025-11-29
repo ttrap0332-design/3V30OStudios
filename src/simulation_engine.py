@@ -86,6 +86,9 @@ class SimulationGoatFilter:
     Implements GoatFilter (🐐 Capricorn Foundation) attributes to detect
     and prevent mimic systems from infiltrating simulation operations.
     Compliant with sovereign spiral law requirements.
+
+    Note: Extends BaseGoatFilter from the shared goat_filter module
+    with simulation-specific functionality.
     """
 
     # Goat (🐐) Capricorn Foundation symbolism
@@ -99,11 +102,32 @@ class SimulationGoatFilter:
         Args:
             strictness: Filter strictness level (0.0-1.0, default 0.95)
         """
-        self.strictness = min(max(strictness, 0.0), 1.0)
-        self.mimic_patterns: List[str] = []
+        # Import here to avoid circular imports
+        from src.goat_filter import BaseGoatFilter
+
+        self._base_filter = BaseGoatFilter(strictness)
         self.blocked_ticks: int = 0
         self.verified_ticks: int = 0
-        self.active: bool = True
+
+    @property
+    def strictness(self) -> float:
+        """Get filter strictness."""
+        return self._base_filter.strictness
+
+    @property
+    def mimic_patterns(self) -> List[str]:
+        """Get mimic patterns list."""
+        return self._base_filter.mimic_patterns
+
+    @property
+    def active(self) -> bool:
+        """Get filter active status."""
+        return self._base_filter.active
+
+    @active.setter
+    def active(self, value: bool) -> None:
+        """Set filter active status."""
+        self._base_filter.active = value
 
     def add_mimic_pattern(self, pattern: str) -> None:
         """Add a known mimic pattern to filter.
@@ -111,8 +135,7 @@ class SimulationGoatFilter:
         Args:
             pattern: Mimic pattern to block
         """
-        if pattern not in self.mimic_patterns:
-            self.mimic_patterns.append(pattern)
+        self._base_filter.add_mimic_pattern(pattern)
 
     def verify_tick(self, tick: SimulationTick) -> GoatFilterStatus:
         """Verify a simulation tick against mimic patterns.
@@ -130,12 +153,11 @@ class SimulationGoatFilter:
         tick_data = json.dumps(tick.to_dict(), sort_keys=True)
         tick_hash = hashlib.sha256(tick_data.encode()).hexdigest()
 
-        # Check against known mimic patterns
-        for pattern in self.mimic_patterns:
-            if pattern in tick_data or pattern in tick_hash:
-                self.blocked_ticks += 1
-                tick.goat_filter_status = GoatFilterStatus.BLOCKING
-                return GoatFilterStatus.BLOCKING
+        # Check against known mimic patterns using base filter
+        if self._base_filter._check_mimic_patterns(tick_data, tick_hash):
+            self.blocked_ticks += 1
+            tick.goat_filter_status = GoatFilterStatus.BLOCKING
+            return GoatFilterStatus.BLOCKING
 
         self.verified_ticks += 1
         tick.goat_filter_status = GoatFilterStatus.PASSED
@@ -154,12 +176,9 @@ class SimulationGoatFilter:
             return True
 
         session_data = f"{session.session_id}:{session.initiator}:{session.responder}"
+        session_hash = hashlib.sha256(session_data.encode()).hexdigest()
 
-        for pattern in self.mimic_patterns:
-            if pattern in session_data:
-                return False
-
-        return True
+        return not self._base_filter._check_mimic_patterns(session_data, session_hash)
 
     def get_filter_stats(self) -> Dict[str, Any]:
         """Get filter statistics.
