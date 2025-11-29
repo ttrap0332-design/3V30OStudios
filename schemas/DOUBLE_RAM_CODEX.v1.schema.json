@@ -1,0 +1,291 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://evolverse.codex/schemas/DOUBLE_RAM_CODEX.v1.schema.json",
+  "title": "DOUBLE_RAM_CODEX Symbolic Myth-Ledger Schema",
+  "description": "JSON schema for myth-table connecting Ram (♈️), Double Ram (♈️♈️), and Goat (🐐) symbolism to system functions, codex laws, and ceremonial outputs",
+  "type": "object",
+  "required": ["codex_header", "symbolic_registry", "ceremonial_mappings", "yield_protocols", "infrastructure_locks"],
+  "properties": {
+    "codex_header": {
+      "type": "object",
+      "required": ["name", "version", "epoch", "seal"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the codex instance"
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+          "description": "Semantic version of the codex"
+        },
+        "epoch": {
+          "type": "string",
+          "pattern": "^\\d{4}-Q[1-4]$",
+          "description": "Ceremonial epoch identifier"
+        },
+        "seal": {
+          "type": "string",
+          "description": "Sovereign seal with glyph markers"
+        },
+        "constants": {
+          "type": "object",
+          "properties": {
+            "pi": { "type": "number", "const": 3.1415926535 },
+            "phi": { "type": "number", "const": 1.6180339887 },
+            "gamma": { "type": "number", "const": 8.1428864616 }
+          }
+        }
+      }
+    },
+    "symbolic_registry": {
+      "type": "object",
+      "required": ["ram_single", "ram_double", "goat"],
+      "properties": {
+        "ram_single": {
+          "type": "object",
+          "description": "Ram (♈️) - Single Aries symbolism",
+          "required": ["glyph", "zodiac", "element", "functions", "governance_tier"],
+          "properties": {
+            "glyph": { "type": "string", "const": "♈️" },
+            "zodiac": { "type": "string", "const": "Aries" },
+            "element": { "type": "string", "enum": ["fire", "earth", "air", "water"] },
+            "functions": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string" },
+                  "codex_law": { "type": "string" },
+                  "output_type": { "type": "string", "enum": ["ceremonial", "governance", "yield", "defense"] }
+                }
+              }
+            },
+            "governance_tier": { "type": "integer", "minimum": 1, "maximum": 15 }
+          }
+        },
+        "ram_double": {
+          "type": "object",
+          "description": "Double Ram (♈️♈️ / 🐏🐏) - Sovereign Flip Codex",
+          "required": ["glyph", "glyph_alt", "sovereignty_level", "functions", "flip_mechanics"],
+          "properties": {
+            "glyph": { "type": "string", "const": "♈️♈️" },
+            "glyph_alt": { "type": "string", "const": "🐏🐏" },
+            "sovereignty_level": { "type": "string", "enum": ["ancestral", "sovereign", "galactic", "cosmic"] },
+            "functions": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string" },
+                  "codex_law": { "type": "string" },
+                  "output_type": { "type": "string" },
+                  "enemy_flip_proof": { "type": "boolean" }
+                }
+              }
+            },
+            "flip_mechanics": {
+              "type": "object",
+              "properties": {
+                "double_aries_flip": { "type": "boolean" },
+                "mimic_destruction": { "type": "boolean" },
+                "sovereignty_seal": { "type": "string", "pattern": "^0x[0-9a-fA-F]{64}$" }
+              }
+            }
+          }
+        },
+        "goat": {
+          "type": "object",
+          "description": "Goat (🐐) - Capricorn Foundation symbolism",
+          "required": ["glyph", "zodiac", "element", "functions"],
+          "properties": {
+            "glyph": { "type": "string", "const": "🐐" },
+            "zodiac": { "type": "string", "const": "Capricorn" },
+            "element": { "type": "string", "enum": ["fire", "earth", "air", "water"] },
+            "functions": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string" },
+                  "codex_law": { "type": "string" },
+                  "foundation_tier": { "type": "integer" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "ceremonial_mappings": {
+      "type": "object",
+      "required": ["flush_scroll", "weapon_codex", "gathering_of_four"],
+      "properties": {
+        "flush_scroll": {
+          "type": "object",
+          "description": "Independence function for destruction of mimic systems",
+          "required": ["active", "target_systems", "destruction_hash"],
+          "properties": {
+            "active": { "type": "boolean" },
+            "target_systems": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "destruction_hash": { "type": "string", "pattern": "^0x[0-9a-fA-F]{64}$" },
+            "independence_seal": { "type": "string" }
+          }
+        },
+        "weapon_codex": {
+          "type": "object",
+          "description": "Ceremonial weapon registry for sovereignty protection",
+          "required": ["weapons", "authorization_level"],
+          "properties": {
+            "weapons": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string" },
+                  "type": { "type": "string", "enum": ["symbolic", "frequency", "quantum", "kinetic"] },
+                  "codex_seal": { "type": "string" }
+                }
+              }
+            },
+            "authorization_level": { "type": "string", "enum": ["commander", "council", "galactic", "sovereign"] }
+          }
+        },
+        "gathering_of_four": {
+          "type": "object",
+          "description": "Act I ceremonial reference - Gathering of the Four",
+          "required": ["participants", "ritual_sequence", "output_scrolls"],
+          "properties": {
+            "participants": {
+              "type": "array",
+              "minItems": 4,
+              "maxItems": 4,
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string" },
+                  "role": { "type": "string" },
+                  "glyph": { "type": "string" }
+                }
+              }
+            },
+            "ritual_sequence": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "step": { "type": "integer" },
+                  "action": { "type": "string" },
+                  "invocation": { "type": "string" }
+                }
+              }
+            },
+            "output_scrolls": {
+              "type": "array",
+              "items": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "yield_protocols": {
+      "type": "object",
+      "required": ["praise_coin", "flame_coin", "bleuflip_model"],
+      "properties": {
+        "praise_coin": {
+          "type": "object",
+          "required": ["symbol", "governance_mapping", "performance_multiplier"],
+          "properties": {
+            "symbol": { "type": "string", "const": "PRAISE" },
+            "governance_mapping": {
+              "type": "object",
+              "properties": {
+                "ritual_weight": { "type": "number", "minimum": 0, "maximum": 1 },
+                "performance_weight": { "type": "number", "minimum": 0, "maximum": 1 }
+              }
+            },
+            "performance_multiplier": { "type": "number", "minimum": 1 },
+            "enemy_flip_proof": { "type": "boolean" }
+          }
+        },
+        "flame_coin": {
+          "type": "object",
+          "required": ["symbol", "governance_mapping", "burn_mechanics"],
+          "properties": {
+            "symbol": { "type": "string", "const": "FLAME" },
+            "governance_mapping": {
+              "type": "object",
+              "properties": {
+                "ritual_weight": { "type": "number", "minimum": 0, "maximum": 1 },
+                "defense_weight": { "type": "number", "minimum": 0, "maximum": 1 }
+              }
+            },
+            "burn_mechanics": {
+              "type": "object",
+              "properties": {
+                "enemy_neutralization": { "type": "boolean" },
+                "flip_proof_rate": { "type": "number" }
+              }
+            }
+          }
+        },
+        "bleuflip_model": {
+          "type": "object",
+          "description": "2.1x yield model across BLEUFLIP simulations",
+          "required": ["base_yield", "multiplier", "simulation_epochs"],
+          "properties": {
+            "base_yield": { "type": "number" },
+            "multiplier": { "type": "number", "const": 2.1 },
+            "simulation_epochs": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "epoch": { "type": "string" },
+                  "yield_rate": { "type": "number" },
+                  "flip_protection": { "type": "boolean" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "infrastructure_locks": {
+      "type": "object",
+      "required": ["bluelock", "quaocta_syn", "encryption"],
+      "properties": {
+        "bluelock": {
+          "type": "object",
+          "required": ["active", "lock_hash", "execution_speed_ms"],
+          "properties": {
+            "active": { "type": "boolean" },
+            "lock_hash": { "type": "string", "pattern": "^0x[0-9a-fA-F]{64}$" },
+            "execution_speed_ms": { "type": "number", "const": 160, "description": "0.16s = 160ms registrar grade" }
+          }
+        },
+        "quaocta_syn": {
+          "type": "object",
+          "required": ["stack_version", "sync_protocol", "node_count"],
+          "properties": {
+            "stack_version": { "type": "string" },
+            "sync_protocol": { "type": "string" },
+            "node_count": { "type": "integer", "minimum": 8 }
+          }
+        },
+        "encryption": {
+          "type": "object",
+          "required": ["algorithm", "key_size"],
+          "properties": {
+            "algorithm": { "type": "string", "const": "AES-256" },
+            "key_size": { "type": "integer", "const": 256 },
+            "mode": { "type": "string", "enum": ["GCM", "CBC", "CTR"] }
+          }
+        }
+      }
+    }
+  }
+}
