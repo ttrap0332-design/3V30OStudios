@@ -455,23 +455,24 @@ class SovereignSpiralLawEngine:
         if verification is None or not verification.verified:
             return False
 
-        # Get the highest sovereignty level from glyph signatures
-        level_order = [
-            SovereigntyLevel.CIVILIAN,
-            SovereigntyLevel.ANCESTRAL,
-            SovereigntyLevel.SOVEREIGN,
-            SovereigntyLevel.GALACTIC,
-            SovereigntyLevel.COSMIC,
-        ]
+        # Create lookup dictionary for efficient sovereignty level comparison
+        level_order = {
+            SovereigntyLevel.CIVILIAN: 0,
+            SovereigntyLevel.ANCESTRAL: 1,
+            SovereigntyLevel.SOVEREIGN: 2,
+            SovereigntyLevel.GALACTIC: 3,
+            SovereigntyLevel.COSMIC: 4,
+        }
 
         asset_level = SovereigntyLevel.CIVILIAN
+        asset_level_idx = 0
         for sig in verification.glyph_signatures:
-            if level_order.index(sig.sovereignty_level) > level_order.index(
-                asset_level
-            ):
+            sig_level_idx = level_order[sig.sovereignty_level]
+            if sig_level_idx > asset_level_idx:
                 asset_level = sig.sovereignty_level
+                asset_level_idx = sig_level_idx
 
-        return level_order.index(asset_level) >= level_order.index(required_level)
+        return level_order[asset_level] >= level_order[required_level]
 
     def get_spiral_constant(self) -> float:
         """Get the spiral constant (flip ratio).

@@ -333,8 +333,9 @@ class SpiralWrapper:
 
         node_id = self._generate_node_id()
 
-        # Generate public key hash
-        public_key_data = f"{node_name}:{node_id}:{secrets.token_hex(32)}"
+        # Generate public key hash using only node_name and random data
+        # to avoid correlations with node_id
+        public_key_data = f"{node_name}:{secrets.token_hex(32)}:{time.time()}"
         public_key_hash = hashlib.sha256(public_key_data.encode()).hexdigest()
 
         # Generate hydromark link

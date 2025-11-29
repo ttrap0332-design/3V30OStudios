@@ -54,7 +54,13 @@
         "receipt_format": "PDF",
         "merkle_root_required": true,
         "ceremonial_seal": "♈️🐏🐏",
-        "audit_trail": true
+        "audit_trail": true,
+        "audit_trail_config": {
+          "description": "Records timestamp, glyph signatures, hydromark verification, and council approvals",
+          "storage": "blockchain-anchored",
+          "retention_period": "permanent",
+          "captured_data": ["timestamp", "glyph_signatures", "hydromark_hash", "council_votes", "merkle_proof"]
+        }
       }
     },
     "scroll_coin_verification": {

@@ -282,6 +282,8 @@ class ProofOfFlipAuditPipeline:
     DEFAULT_FLIP_RATIO = 2.1
     # Double Ram seal for sovereignty verification
     DOUBLE_RAM_SEAL = "♈️🐏🐏"
+    # Glyph markers for pattern detection (shared registry)
+    GLYPH_MARKERS = ["♈️", "🐏", "🌀", "🔥", "📜", "👑", "🦁"]
 
     def __init__(
         self,
@@ -745,8 +747,7 @@ class ProofOfFlipAuditPipeline:
             return False
 
         # Simple heuristic: detect if signature lacks glyph markers
-        glyph_markers = ["♈️", "🐏", "🌀", "🔥", "📜", "👑", "🦁"]
-        has_glyph = any(g in signature for g in glyph_markers)
+        has_glyph = any(g in signature for g in self.GLYPH_MARKERS)
 
         # If no glyph markers and in aggressive mode, flag as potential mimic
         if self.goat_filter_mode == GoatFilterMode.AGGRESSIVE and not has_glyph:
