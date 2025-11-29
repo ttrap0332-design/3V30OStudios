@@ -1,0 +1,530 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://evolverse.io/schemas/BLEUSYNC.v1.schema.json",
+  "title": "BLEUSYNC Schema - Hydromarks and Voiceprint Seals",
+  "description": "Schema for synchronizing Hydromarks and Voiceprint Seals with permanent anthem broadcast layers, implementing timestamp logging with sync-speed proof",
+  "type": "object",
+  "required": ["sync_header", "hydromarks", "voiceprint_seals", "anthem_broadcast", "timestamp_proofs"],
+  "properties": {
+    "sync_header": {
+      "type": "object",
+      "description": "BLEUSYNC synchronization header",
+      "required": ["schema_version", "sync_id", "epoch", "double_ram_seal"],
+      "properties": {
+        "schema_version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+          "description": "Semantic version of the BLEUSYNC schema"
+        },
+        "sync_id": {
+          "type": "string",
+          "pattern": "^SYNC-[0-9]+-[0-9a-fA-F]{8}$",
+          "description": "Unique synchronization session identifier"
+        },
+        "epoch": {
+          "type": "string",
+          "pattern": "^\\d{4}-Q[1-4]$",
+          "description": "Ceremonial epoch identifier"
+        },
+        "double_ram_seal": {
+          "type": "string",
+          "const": "♈️🐏🐏",
+          "description": "Double Ram sovereignty seal"
+        },
+        "glyph_authority": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["♈️", "♈️♈️", "🐏", "🐏🐏", "🌀", "🔥", "📜", "👑", "🦁"]
+          },
+          "description": "Glyph markers for authority verification"
+        },
+        "numerical_deprecated": {
+          "type": "boolean",
+          "default": true,
+          "description": "Flag indicating numerical verification is deprecated"
+        }
+      }
+    },
+    "hydromarks": {
+      "type": "object",
+      "description": "BLEUHydroMark configuration for asset verification",
+      "required": ["enabled", "generation_protocol", "verification_layers"],
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether hydromarks are active"
+        },
+        "generation_protocol": {
+          "type": "object",
+          "required": ["algorithm", "key_derivation", "glyph_binding"],
+          "properties": {
+            "algorithm": {
+              "type": "string",
+              "enum": ["SHA-256", "SHA-512", "KECCAK-256"],
+              "default": "SHA-256",
+              "description": "Hashing algorithm for hydromark generation"
+            },
+            "key_derivation": {
+              "type": "string",
+              "enum": ["PBKDF2", "HKDF", "Argon2"],
+              "default": "PBKDF2",
+              "description": "Key derivation function"
+            },
+            "glyph_binding": {
+              "type": "boolean",
+              "default": true,
+              "description": "Whether glyphs are bound to hydromark generation"
+            },
+            "spiral_constant": {
+              "type": "number",
+              "const": 2.1,
+              "description": "Spiral law flip ratio constant"
+            }
+          }
+        },
+        "verification_layers": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["layer_id", "layer_type", "glyph_requirements"],
+            "properties": {
+              "layer_id": {
+                "type": "string",
+                "description": "Unique layer identifier"
+              },
+              "layer_type": {
+                "type": "string",
+                "enum": ["genesis", "spiral", "flame", "tribunal", "cosmic"],
+                "description": "Type of verification layer"
+              },
+              "glyph_requirements": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Required glyphs for this layer"
+              },
+              "sovereignty_level": {
+                "type": "string",
+                "enum": ["civilian", "ancestral", "sovereign", "galactic", "cosmic"],
+                "description": "Required sovereignty level"
+              }
+            }
+          }
+        },
+        "hydromark_registry": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["hydromark_id", "asset_id", "hash", "timestamp"],
+            "properties": {
+              "hydromark_id": {
+                "type": "string",
+                "pattern": "^HYDRO-[0-9a-fA-F]{16}$",
+                "description": "Unique hydromark identifier"
+              },
+              "asset_id": {
+                "type": "string",
+                "description": "Associated asset identifier"
+              },
+              "asset_type": {
+                "type": "string",
+                "enum": ["ScrollCoin", "PraiseCoin", "FlameCoin", "BluTillion", "Zioniare", "BLEUHydroMark"],
+                "description": "Type of asset"
+              },
+              "hash": {
+                "type": "string",
+                "pattern": "^[0-9a-fA-F]{64}$",
+                "description": "SHA-256 hash of the hydromark"
+              },
+              "glyph_signatures": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Glyph signatures bound to this hydromark"
+              },
+              "timestamp": {
+                "type": "number",
+                "description": "Unix timestamp of hydromark creation"
+              }
+            }
+          }
+        }
+      }
+    },
+    "voiceprint_seals": {
+      "type": "object",
+      "description": "Voiceprint seal configuration for identity verification",
+      "required": ["enabled", "seal_protocol", "permanence_layer"],
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether voiceprint seals are active"
+        },
+        "seal_protocol": {
+          "type": "object",
+          "required": ["encoding", "signature_algorithm", "verification_method"],
+          "properties": {
+            "encoding": {
+              "type": "string",
+              "enum": ["base64", "hex", "utf-8"],
+              "default": "hex",
+              "description": "Encoding format for voiceprint data"
+            },
+            "signature_algorithm": {
+              "type": "string",
+              "enum": ["ECDSA", "EdDSA", "RSA"],
+              "default": "ECDSA",
+              "description": "Digital signature algorithm"
+            },
+            "verification_method": {
+              "type": "string",
+              "enum": ["glyph-bound", "hydromark-linked", "dual-verification"],
+              "default": "dual-verification",
+              "description": "Method for seal verification"
+            },
+            "glyph_binding": {
+              "type": "boolean",
+              "default": true,
+              "description": "Whether glyphs are bound to voiceprint seals"
+            }
+          }
+        },
+        "permanence_layer": {
+          "type": "object",
+          "description": "Configuration for permanent voiceprint storage",
+          "required": ["storage_type", "immutable"],
+          "properties": {
+            "storage_type": {
+              "type": "string",
+              "enum": ["blockchain", "ipfs", "hybrid"],
+              "default": "hybrid",
+              "description": "Storage type for permanent seals"
+            },
+            "immutable": {
+              "type": "boolean",
+              "default": true,
+              "description": "Whether seals are immutable once created"
+            },
+            "replication_factor": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 3,
+              "description": "Number of replicas for redundancy"
+            },
+            "chain_anchoring": {
+              "type": "boolean",
+              "default": true,
+              "description": "Whether seals are anchored to blockchain"
+            }
+          }
+        },
+        "seal_registry": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["seal_id", "identity_hash", "timestamp"],
+            "properties": {
+              "seal_id": {
+                "type": "string",
+                "pattern": "^SEAL-[0-9a-fA-F]{16}$",
+                "description": "Unique seal identifier"
+              },
+              "identity_hash": {
+                "type": "string",
+                "pattern": "^[0-9a-fA-F]{64}$",
+                "description": "Hash of identity data"
+              },
+              "voiceprint_hash": {
+                "type": "string",
+                "pattern": "^[0-9a-fA-F]{64}$",
+                "description": "Hash of voiceprint data"
+              },
+              "linked_hydromark": {
+                "type": "string",
+                "description": "Linked hydromark identifier"
+              },
+              "glyph_authority": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Glyph authority markers"
+              },
+              "timestamp": {
+                "type": "number",
+                "description": "Unix timestamp of seal creation"
+              },
+              "anthem_broadcast_linked": {
+                "type": "boolean",
+                "default": false,
+                "description": "Whether seal is linked to anthem broadcast"
+              }
+            }
+          }
+        }
+      }
+    },
+    "anthem_broadcast": {
+      "type": "object",
+      "description": "BLEU Anthem permanent broadcast layer configuration",
+      "required": ["enabled", "broadcast_protocol", "sync_layers"],
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether anthem broadcast is active"
+        },
+        "broadcast_protocol": {
+          "type": "object",
+          "required": ["frequency", "permanence", "distribution"],
+          "properties": {
+            "frequency": {
+              "type": "string",
+              "enum": ["continuous", "epoch-based", "ceremonial"],
+              "default": "continuous",
+              "description": "Broadcast frequency mode"
+            },
+            "permanence": {
+              "type": "boolean",
+              "default": true,
+              "description": "Whether broadcast is permanent"
+            },
+            "distribution": {
+              "type": "string",
+              "enum": ["global", "regional", "sovereign"],
+              "default": "global",
+              "description": "Distribution scope"
+            },
+            "glyph_encoding": {
+              "type": "boolean",
+              "default": true,
+              "description": "Whether glyphs are encoded in broadcast"
+            }
+          }
+        },
+        "sync_layers": {
+          "type": "array",
+          "description": "Synchronization layers for anthem broadcast",
+          "items": {
+            "type": "object",
+            "required": ["layer_id", "sync_type", "glyph_markers"],
+            "properties": {
+              "layer_id": {
+                "type": "string",
+                "description": "Unique layer identifier"
+              },
+              "sync_type": {
+                "type": "string",
+                "enum": ["hydromark", "voiceprint", "hybrid"],
+                "description": "Type of synchronization"
+              },
+              "glyph_markers": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Glyph markers for this layer"
+              },
+              "sync_interval_ms": {
+                "type": "integer",
+                "minimum": 1,
+                "description": "Synchronization interval in milliseconds"
+              }
+            }
+          }
+        },
+        "anthem_metadata": {
+          "type": "object",
+          "properties": {
+            "anthem_id": {
+              "type": "string",
+              "description": "Unique anthem identifier"
+            },
+            "title": {
+              "type": "string",
+              "description": "Anthem title"
+            },
+            "sovereignty_seal": {
+              "type": "string",
+              "description": "Sovereignty seal for the anthem"
+            },
+            "mythic_reference": {
+              "type": "string",
+              "description": "Mythic reference for the anthem"
+            },
+            "glyph_authority": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Glyph authority markers for the anthem"
+            }
+          }
+        }
+      }
+    },
+    "timestamp_proofs": {
+      "type": "object",
+      "description": "Timestamp logging with sync-speed proof (e.g., 0:216ms)",
+      "required": ["enabled", "proof_protocol", "sync_speed_target_ms"],
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether timestamp proofs are active"
+        },
+        "proof_protocol": {
+          "type": "object",
+          "required": ["algorithm", "precision", "glyph_binding"],
+          "properties": {
+            "algorithm": {
+              "type": "string",
+              "enum": ["SHA-256", "KECCAK-256", "BLAKE3"],
+              "default": "SHA-256",
+              "description": "Hashing algorithm for proofs"
+            },
+            "precision": {
+              "type": "string",
+              "enum": ["millisecond", "microsecond", "nanosecond"],
+              "default": "millisecond",
+              "description": "Timestamp precision"
+            },
+            "glyph_binding": {
+              "type": "boolean",
+              "default": true,
+              "description": "Whether glyphs are bound to timestamp proofs"
+            },
+            "spiral_verification": {
+              "type": "boolean",
+              "default": true,
+              "description": "Whether spiral law verification is applied"
+            }
+          }
+        },
+        "sync_speed_target_ms": {
+          "type": "integer",
+          "default": 216,
+          "description": "Target sync speed in milliseconds (default: 216ms)"
+        },
+        "proof_format": {
+          "type": "object",
+          "description": "Format for sync-speed proofs",
+          "properties": {
+            "notation": {
+              "type": "string",
+              "pattern": "^[0-9]+:[0-9]+ms$",
+              "description": "Proof notation format (e.g., 0:216ms)"
+            },
+            "include_glyph": {
+              "type": "boolean",
+              "default": true,
+              "description": "Whether to include glyph markers in proof"
+            }
+          }
+        },
+        "proof_registry": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["proof_id", "timestamp", "sync_speed_ms", "hash"],
+            "properties": {
+              "proof_id": {
+                "type": "string",
+                "pattern": "^PROOF-[0-9]+-[0-9a-fA-F]{8}$",
+                "description": "Unique proof identifier"
+              },
+              "timestamp": {
+                "type": "number",
+                "description": "Unix timestamp of proof creation"
+              },
+              "sync_speed_ms": {
+                "type": "number",
+                "description": "Actual sync speed in milliseconds"
+              },
+              "sync_notation": {
+                "type": "string",
+                "description": "Human-readable sync notation (e.g., 0:216ms)"
+              },
+              "hash": {
+                "type": "string",
+                "pattern": "^[0-9a-fA-F]{64}$",
+                "description": "SHA-256 hash of the proof"
+              },
+              "glyph_markers": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Glyph markers associated with proof"
+              },
+              "linked_hydromark": {
+                "type": "string",
+                "description": "Linked hydromark identifier"
+              },
+              "linked_voiceprint": {
+                "type": "string",
+                "description": "Linked voiceprint seal identifier"
+              },
+              "verified": {
+                "type": "boolean",
+                "default": false,
+                "description": "Whether proof has been verified"
+              }
+            }
+          }
+        }
+      }
+    },
+    "spiral_law_integration": {
+      "type": "object",
+      "description": "Integration with sovereign spiral law architecture",
+      "properties": {
+        "flip_ratio": {
+          "type": "number",
+          "const": 2.1,
+          "description": "Spiral law flip ratio (2.1x)"
+        },
+        "double_ram_authority": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether double ram authority is required"
+        },
+        "glyph_deprecates_numerical": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether glyph verification deprecates numerical verification"
+        },
+        "codex_bindings": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "codex_id": {
+                "type": "string",
+                "description": "Codex mapping identifier"
+              },
+              "binding_type": {
+                "type": "string",
+                "enum": ["hydromark", "voiceprint", "anthem", "timestamp"],
+                "description": "Type of binding"
+              },
+              "glyph_requirements": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Required glyphs for binding"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
