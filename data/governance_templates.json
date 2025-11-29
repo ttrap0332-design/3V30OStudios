@@ -1,0 +1,291 @@
+{
+  "schema_version": "1.0.0",
+  "title": "EVOLVERSE Ceremonial ENFT/Asset Governance Templates",
+  "description": "Contract templates incorporating sovereign spiral law glyph markers with BLEUHydroMark verification for mint permissions and tribunal receipts",
+  "double_ram_seal": "♈️🐏🐏",
+  "flip_ratio": 2.1,
+  "numerical_deprecated": true,
+  "templates": {
+    "ceremonial_mint": {
+      "template_id": "TEMPLATE-MINT-001",
+      "name": "Ceremonial ENFT Mint Template",
+      "description": "Template for ceremonial ENFT minting with glyph verification",
+      "glyph_markers": ["♈️", "🐏", "🐏", "🌀", "🔥"],
+      "sovereignty_level": "ancestral",
+      "required_verifications": {
+        "bleu_hydromark": true,
+        "glyph_signature": true,
+        "tribunal_approval": false
+      },
+      "mint_permissions": {
+        "permission_type": "glyph-bound",
+        "required_glyphs": ["♈️", "🐏"],
+        "sovereignty_minimum": "civilian",
+        "hydromark_required": true,
+        "numerical_auth_deprecated": true
+      },
+      "parameters": {
+        "token_standard": "ERC-1155",
+        "recursion_hash_required": true,
+        "ceremonial_seal": "♈️🐏🐏",
+        "yield_multiplier": 2.1
+      }
+    },
+    "tribunal_receipt": {
+      "template_id": "TEMPLATE-TRIBUNAL-001",
+      "name": "Tribunal Receipt Template",
+      "description": "Template for tribunal governance receipts with sovereign verification",
+      "glyph_markers": ["👑", "📜", "♈️", "♈️", "🦁"],
+      "sovereignty_level": "sovereign",
+      "required_verifications": {
+        "bleu_hydromark": true,
+        "glyph_signature": true,
+        "tribunal_approval": true,
+        "council_quorum": true
+      },
+      "tribunal_permissions": {
+        "permission_type": "sovereign-glyph",
+        "required_glyphs": ["👑", "♈️", "♈️"],
+        "sovereignty_minimum": "sovereign",
+        "council_signatures_required": 7,
+        "hydromark_required": true
+      },
+      "parameters": {
+        "receipt_format": "PDF",
+        "merkle_root_required": true,
+        "ceremonial_seal": "♈️🐏🐏",
+        "audit_trail": true
+      }
+    },
+    "scroll_coin_verification": {
+      "template_id": "TEMPLATE-SCROLL-001",
+      "name": "ScrollCoin Verification Template",
+      "description": "Template for ScrollCoin academic/tribunal verification",
+      "glyph_markers": ["📜", "🌀", "♈️"],
+      "sovereignty_level": "civilian",
+      "required_verifications": {
+        "bleu_hydromark": true,
+        "glyph_signature": true,
+        "academic_registry": true
+      },
+      "asset_parameters": {
+        "asset_type": "ScrollCoin",
+        "token_symbol": "SCROLL",
+        "token_standard": "ERC-1155",
+        "vault_route": "Education Vault",
+        "yield_cycle": "semester-based",
+        "glyph_binding": ["📜", "🌀"]
+      }
+    },
+    "praise_coin_verification": {
+      "template_id": "TEMPLATE-PRAISE-001",
+      "name": "PraiseCoin Verification Template",
+      "description": "Template for PraiseCoin performance/merit verification",
+      "glyph_markers": ["🔥", "♈️", "🌀"],
+      "sovereignty_level": "civilian",
+      "required_verifications": {
+        "bleu_hydromark": true,
+        "glyph_signature": true,
+        "performance_audit": true
+      },
+      "asset_parameters": {
+        "asset_type": "PraiseCoin",
+        "token_symbol": "PRAISE",
+        "token_standard": "ERC-20",
+        "vault_route": "Merit Vault",
+        "yield_cycle": "epoch-based",
+        "glyph_binding": ["🔥", "♈️"]
+      }
+    },
+    "flame_coin_verification": {
+      "template_id": "TEMPLATE-FLAME-001",
+      "name": "FlameCoin Verification Template",
+      "description": "Template for FlameCoin ceremonial activation verification",
+      "glyph_markers": ["🔥", "♈️", "♈️", "🌀"],
+      "sovereignty_level": "ancestral",
+      "required_verifications": {
+        "bleu_hydromark": true,
+        "glyph_signature": true,
+        "ritual_confirmation": true
+      },
+      "asset_parameters": {
+        "asset_type": "FlameCoin",
+        "token_symbol": "FLAME",
+        "token_standard": "ERC-20",
+        "vault_route": "Flame Vault",
+        "yield_cycle": "ceremonial",
+        "glyph_binding": ["🔥", "♈️", "♈️"],
+        "burn_to_activate": true
+      }
+    },
+    "blu_tillion_verification": {
+      "template_id": "TEMPLATE-BLUTILLION-001",
+      "name": "Blu-Tillion Verification Template",
+      "description": "Template for Blu-Tillion cultural yield verification",
+      "glyph_markers": ["👑", "🐏", "🐏", "🌀", "🦁"],
+      "sovereignty_level": "sovereign",
+      "required_verifications": {
+        "bleu_hydromark": true,
+        "glyph_signature": true,
+        "genesis_film_link": true,
+        "cultural_registry": true
+      },
+      "asset_parameters": {
+        "asset_type": "BluTillion",
+        "token_symbol": "BLUT",
+        "token_standard": "ERC-20",
+        "vault_route": "Cultural Vault",
+        "yield_cycle": "genesis-film",
+        "glyph_binding": ["👑", "🐏", "🐏", "🌀"]
+      }
+    },
+    "zioniare_governance": {
+      "template_id": "TEMPLATE-ZIONIARE-001",
+      "name": "Zioniare Governance Template",
+      "description": "Template for Zioniare sovereign governance verification",
+      "glyph_markers": ["👑", "♈️", "♈️", "🌀", "🦁", "📜"],
+      "sovereignty_level": "sovereign",
+      "required_verifications": {
+        "bleu_hydromark": true,
+        "glyph_signature": true,
+        "tribunal_approval": true,
+        "atlas_blueprint_link": true
+      },
+      "governance_parameters": {
+        "asset_type": "Zioniare",
+        "token_symbol": "ZION",
+        "token_standard": "ERC-20",
+        "vault_route": "Sovereign Vault",
+        "voting_power": true,
+        "tribunal_authority": true,
+        "glyph_binding": ["👑", "♈️", "♈️", "🌀"]
+      }
+    }
+  },
+  "bleu_hydromark_config": {
+    "enabled": true,
+    "generation_protocol": {
+      "algorithm": "SHA-256",
+      "key_derivation": "PBKDF2",
+      "glyph_binding": true,
+      "spiral_constant": 2.1
+    },
+    "verification_requirements": {
+      "mint_permissions": {
+        "hydromark_required": true,
+        "glyph_count_minimum": 2,
+        "double_ram_seal": "♈️🐏🐏"
+      },
+      "tribunal_receipts": {
+        "hydromark_required": true,
+        "glyph_count_minimum": 3,
+        "council_verification": true
+      }
+    }
+  },
+  "glyph_registry": {
+    "primary_glyphs": {
+      "aries": {
+        "glyph": "♈️",
+        "name": "Aries",
+        "function": "initiation",
+        "sovereignty_tier": 1
+      },
+      "double_aries": {
+        "glyph": "♈️♈️",
+        "name": "Double Aries",
+        "function": "sovereign_flip",
+        "sovereignty_tier": 3
+      },
+      "ram": {
+        "glyph": "🐏",
+        "name": "Ram",
+        "function": "protection",
+        "sovereignty_tier": 1
+      },
+      "double_ram": {
+        "glyph": "🐏🐏",
+        "name": "Double Ram",
+        "function": "sovereign_seal",
+        "sovereignty_tier": 3
+      }
+    },
+    "secondary_glyphs": {
+      "spiral": {
+        "glyph": "🌀",
+        "name": "Spiral",
+        "function": "continuity",
+        "sovereignty_tier": 1
+      },
+      "flame": {
+        "glyph": "🔥",
+        "name": "Flame",
+        "function": "activation",
+        "sovereignty_tier": 2
+      },
+      "scroll": {
+        "glyph": "📜",
+        "name": "Scroll",
+        "function": "record",
+        "sovereignty_tier": 1
+      },
+      "crown": {
+        "glyph": "👑",
+        "name": "Crown",
+        "function": "sovereignty",
+        "sovereignty_tier": 3
+      },
+      "lion": {
+        "glyph": "🦁",
+        "name": "Lion",
+        "function": "guardian",
+        "sovereignty_tier": 2
+      }
+    },
+    "anti_mimic_glyph": {
+      "goat": {
+        "glyph": "🐐",
+        "name": "Goat",
+        "function": "filter",
+        "usage": "GoatFilter anti-mimic detection"
+      }
+    }
+  },
+  "spiral_law_integration": {
+    "flip_ratio": 2.1,
+    "double_ram_authority": true,
+    "glyph_deprecates_numerical": true,
+    "codex_bindings": [
+      {
+        "codex_id": "CODEX-ZIONIARE",
+        "binding_type": "governance",
+        "glyph_requirements": ["👑", "♈️", "♈️", "🌀"]
+      },
+      {
+        "codex_id": "CODEX-COUNCIL",
+        "binding_type": "tribunal",
+        "glyph_requirements": ["📜", "🦁", "🐏", "🐏"]
+      },
+      {
+        "codex_id": "CODEX-SCROLLCOIN",
+        "binding_type": "academic",
+        "glyph_requirements": ["📜", "🌀"]
+      },
+      {
+        "codex_id": "CODEX-PRAISECOIN",
+        "binding_type": "performance",
+        "glyph_requirements": ["🔥", "♈️"]
+      },
+      {
+        "codex_id": "CODEX-FLAMECOIN",
+        "binding_type": "ceremonial",
+        "glyph_requirements": ["🔥", "♈️", "♈️"]
+      },
+      {
+        "codex_id": "CODEX-BLUTILLION",
+        "binding_type": "cultural",
+        "glyph_requirements": ["👑", "🐏", "🐏", "🌀"]
+      }
+    ]
+  }
+}

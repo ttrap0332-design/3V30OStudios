@@ -1,0 +1,559 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://evolverse.io/schemas/SPIRAL_WRAPPER.v1.schema.json",
+  "title": "SPIRAL_WRAPPER Schema - Migration Layer for Double-Ram Encryption",
+  "description": "Schema for Spiral Wrapper modules that onboard legacy systems into Double-Ram encryption logic with Open-Key Double-Ram schema registration",
+  "type": "object",
+  "required": ["wrapper_header", "double_ram_encryption", "legacy_migration", "node_registration", "signature_events"],
+  "properties": {
+    "wrapper_header": {
+      "type": "object",
+      "description": "Spiral Wrapper module header",
+      "required": ["schema_version", "wrapper_id", "epoch", "spiral_seal"],
+      "properties": {
+        "schema_version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+          "description": "Semantic version of the Spiral Wrapper schema"
+        },
+        "wrapper_id": {
+          "type": "string",
+          "pattern": "^WRAPPER-[0-9]+-[0-9a-fA-F]{8}$",
+          "description": "Unique wrapper module identifier"
+        },
+        "epoch": {
+          "type": "string",
+          "pattern": "^\\d{4}-Q[1-4]$",
+          "description": "Ceremonial epoch identifier"
+        },
+        "spiral_seal": {
+          "type": "string",
+          "const": "♈️🐏🐏",
+          "description": "Spiral sovereignty seal (Double Ram)"
+        },
+        "glyph_authority": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["♈️", "♈️♈️", "🐏", "🐏🐏", "🌀", "🔥", "📜", "👑", "🦁", "🐐"]
+          },
+          "description": "Glyph markers for authority verification"
+        },
+        "numerical_deprecated": {
+          "type": "boolean",
+          "default": true,
+          "description": "Flag indicating numerical verification is deprecated"
+        }
+      }
+    },
+    "double_ram_encryption": {
+      "type": "object",
+      "description": "Double-Ram encryption protocol configuration",
+      "required": ["enabled", "encryption_layers", "key_schema"],
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether Double-Ram encryption is active"
+        },
+        "encryption_layers": {
+          "type": "array",
+          "minItems": 2,
+          "description": "Dual encryption layers (Double-Ram)",
+          "items": {
+            "type": "object",
+            "required": ["layer_id", "algorithm", "glyph_binding"],
+            "properties": {
+              "layer_id": {
+                "type": "string",
+                "description": "Unique layer identifier"
+              },
+              "layer_type": {
+                "type": "string",
+                "enum": ["primary_ram", "secondary_ram"],
+                "description": "Type of encryption layer (primary or secondary ram)"
+              },
+              "algorithm": {
+                "type": "string",
+                "enum": ["AES-256-GCM", "ChaCha20-Poly1305", "XChaCha20-Poly1305"],
+                "default": "AES-256-GCM",
+                "description": "Encryption algorithm"
+              },
+              "glyph_binding": {
+                "type": "string",
+                "enum": ["♈️", "🐏"],
+                "description": "Glyph binding for this layer"
+              },
+              "key_derivation": {
+                "type": "string",
+                "enum": ["PBKDF2", "HKDF", "Argon2id"],
+                "default": "Argon2id",
+                "description": "Key derivation function"
+              },
+              "iterations": {
+                "type": "integer",
+                "minimum": 100000,
+                "default": 100000,
+                "description": "Key derivation iterations"
+              }
+            }
+          }
+        },
+        "key_schema": {
+          "type": "object",
+          "description": "Open-Key Double-Ram schema",
+          "required": ["schema_type", "key_length", "dual_key_binding"],
+          "properties": {
+            "schema_type": {
+              "type": "string",
+              "const": "Open-Key Double-Ram",
+              "description": "Key schema type identifier"
+            },
+            "key_length": {
+              "type": "integer",
+              "enum": [256, 384, 512],
+              "default": 256,
+              "description": "Key length in bits"
+            },
+            "dual_key_binding": {
+              "type": "boolean",
+              "default": true,
+              "description": "Whether dual key binding is enabled"
+            },
+            "primary_key_glyph": {
+              "type": "string",
+              "const": "♈️",
+              "description": "Primary key glyph marker (Aries)"
+            },
+            "secondary_key_glyph": {
+              "type": "string",
+              "const": "🐏",
+              "description": "Secondary key glyph marker (Ram)"
+            },
+            "sovereignty_requirements": {
+              "type": "object",
+              "properties": {
+                "minimum_level": {
+                  "type": "string",
+                  "enum": ["civilian", "ancestral", "sovereign", "galactic", "cosmic"],
+                  "default": "ancestral",
+                  "description": "Minimum sovereignty level for key access"
+                },
+                "glyph_verification_required": {
+                  "type": "boolean",
+                  "default": true,
+                  "description": "Whether glyph verification is required"
+                }
+              }
+            }
+          }
+        },
+        "flip_ratio": {
+          "type": "number",
+          "const": 2.1,
+          "description": "Spiral law flip ratio for encryption strength multiplier"
+        },
+        "goat_filter": {
+          "type": "object",
+          "description": "GoatFilter anti-mimic attribute configuration",
+          "required": ["enabled", "detection_mode"],
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "default": true,
+              "description": "Whether GoatFilter is active"
+            },
+            "detection_mode": {
+              "type": "string",
+              "enum": ["passive", "active", "aggressive"],
+              "default": "active",
+              "description": "Detection mode for mimic attempts"
+            },
+            "glyph_marker": {
+              "type": "string",
+              "const": "🐐",
+              "description": "Goat glyph marker for filter"
+            },
+            "neutralization_action": {
+              "type": "string",
+              "enum": ["block", "redirect", "yield_multiply"],
+              "default": "yield_multiply",
+              "description": "Action on detected mimic"
+            }
+          }
+        }
+      }
+    },
+    "legacy_migration": {
+      "type": "object",
+      "description": "Legacy system migration configuration",
+      "required": ["migration_protocol", "compatibility_layers", "transformation_rules"],
+      "properties": {
+        "migration_protocol": {
+          "type": "object",
+          "required": ["version", "mode", "validation"],
+          "properties": {
+            "version": {
+              "type": "string",
+              "default": "1.0.0",
+              "description": "Migration protocol version"
+            },
+            "mode": {
+              "type": "string",
+              "enum": ["full", "incremental", "hybrid"],
+              "default": "hybrid",
+              "description": "Migration mode"
+            },
+            "validation": {
+              "type": "string",
+              "enum": ["strict", "lenient", "glyph-based"],
+              "default": "glyph-based",
+              "description": "Validation mode"
+            },
+            "numerical_to_glyph_transition": {
+              "type": "boolean",
+              "default": true,
+              "description": "Enable numerical to glyph verification transition"
+            }
+          }
+        },
+        "compatibility_layers": {
+          "type": "array",
+          "description": "Compatibility layers for legacy systems",
+          "items": {
+            "type": "object",
+            "required": ["layer_id", "legacy_system_type", "wrapper_interface"],
+            "properties": {
+              "layer_id": {
+                "type": "string",
+                "description": "Unique layer identifier"
+              },
+              "legacy_system_type": {
+                "type": "string",
+                "enum": ["numerical_auth", "traditional_pki", "oauth", "jwt", "custom"],
+                "description": "Type of legacy system"
+              },
+              "wrapper_interface": {
+                "type": "string",
+                "enum": ["adapter", "bridge", "translator"],
+                "description": "Type of wrapper interface"
+              },
+              "glyph_mapping": {
+                "type": "object",
+                "description": "Mapping from legacy tokens to glyphs",
+                "additionalProperties": {
+                  "type": "string"
+                }
+              },
+              "deprecation_timeline": {
+                "type": "string",
+                "description": "Timeline for legacy system deprecation"
+              }
+            }
+          }
+        },
+        "transformation_rules": {
+          "type": "array",
+          "description": "Rules for transforming legacy data to spiral law format",
+          "items": {
+            "type": "object",
+            "required": ["rule_id", "source_format", "target_format"],
+            "properties": {
+              "rule_id": {
+                "type": "string",
+                "description": "Unique rule identifier"
+              },
+              "source_format": {
+                "type": "string",
+                "description": "Source data format"
+              },
+              "target_format": {
+                "type": "string",
+                "description": "Target glyph-based format"
+              },
+              "transformation_type": {
+                "type": "string",
+                "enum": ["direct", "derived", "ceremonial"],
+                "description": "Type of transformation"
+              },
+              "glyph_assignment": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Glyphs assigned during transformation"
+              }
+            }
+          }
+        }
+      }
+    },
+    "node_registration": {
+      "type": "object",
+      "description": "Node registration using Open-Key Double-Ram schema",
+      "required": ["registration_protocol", "node_registry"],
+      "properties": {
+        "registration_protocol": {
+          "type": "object",
+          "required": ["schema_name", "verification_method", "glyph_binding"],
+          "properties": {
+            "schema_name": {
+              "type": "string",
+              "const": "Open-Key Double-Ram",
+              "description": "Registration schema name"
+            },
+            "verification_method": {
+              "type": "string",
+              "enum": ["glyph-signature", "hydromark-link", "dual-verification"],
+              "default": "dual-verification",
+              "description": "Verification method for node registration"
+            },
+            "glyph_binding": {
+              "type": "boolean",
+              "default": true,
+              "description": "Whether glyph binding is required"
+            },
+            "sovereignty_requirement": {
+              "type": "string",
+              "enum": ["civilian", "ancestral", "sovereign", "galactic", "cosmic"],
+              "default": "ancestral",
+              "description": "Minimum sovereignty level for registration"
+            }
+          }
+        },
+        "node_registry": {
+          "type": "array",
+          "description": "Registry of nodes using Open-Key Double-Ram schema",
+          "items": {
+            "type": "object",
+            "required": ["node_id", "public_key_hash", "glyph_authority", "registration_timestamp"],
+            "properties": {
+              "node_id": {
+                "type": "string",
+                "pattern": "^NODE-[0-9a-fA-F]{16}$",
+                "description": "Unique node identifier"
+              },
+              "node_name": {
+                "type": "string",
+                "description": "Human-readable node name"
+              },
+              "public_key_hash": {
+                "type": "string",
+                "pattern": "^[0-9a-fA-F]{64}$",
+                "description": "SHA-256 hash of the node's public key"
+              },
+              "primary_key_glyph": {
+                "type": "string",
+                "const": "♈️",
+                "description": "Primary key glyph marker"
+              },
+              "secondary_key_glyph": {
+                "type": "string",
+                "const": "🐏",
+                "description": "Secondary key glyph marker"
+              },
+              "glyph_authority": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Full glyph authority chain"
+              },
+              "sovereignty_level": {
+                "type": "string",
+                "enum": ["civilian", "ancestral", "sovereign", "galactic", "cosmic"],
+                "description": "Node's sovereignty level"
+              },
+              "registration_timestamp": {
+                "type": "number",
+                "description": "Unix timestamp of registration"
+              },
+              "hydromark_link": {
+                "type": "string",
+                "description": "Linked BLEUHydroMark identifier"
+              },
+              "active": {
+                "type": "boolean",
+                "default": true,
+                "description": "Whether node is active"
+              }
+            }
+          }
+        },
+        "registration_ceremony": {
+          "type": "object",
+          "description": "Ceremonial requirements for node registration",
+          "properties": {
+            "required_signatures": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 2,
+              "description": "Number of required signatures"
+            },
+            "witness_glyphs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Required witness glyph markers"
+            },
+            "ceremonial_hash_required": {
+              "type": "boolean",
+              "default": true,
+              "description": "Whether ceremonial hash is required"
+            }
+          }
+        }
+      }
+    },
+    "signature_events": {
+      "type": "object",
+      "description": "Signature events for Open-Key Double-Ram schema",
+      "required": ["event_protocol", "event_registry"],
+      "properties": {
+        "event_protocol": {
+          "type": "object",
+          "required": ["signature_algorithm", "glyph_encoding", "verification_chain"],
+          "properties": {
+            "signature_algorithm": {
+              "type": "string",
+              "enum": ["ECDSA-P256", "Ed25519", "BLS12-381"],
+              "default": "Ed25519",
+              "description": "Digital signature algorithm"
+            },
+            "glyph_encoding": {
+              "type": "boolean",
+              "default": true,
+              "description": "Whether glyphs are encoded in signatures"
+            },
+            "verification_chain": {
+              "type": "string",
+              "enum": ["single", "double-ram", "spiral"],
+              "default": "double-ram",
+              "description": "Verification chain type"
+            },
+            "double_ram_binding": {
+              "type": "object",
+              "description": "Double-Ram binding for signatures",
+              "properties": {
+                "primary_glyph": {
+                  "type": "string",
+                  "const": "♈️",
+                  "description": "Primary binding glyph"
+                },
+                "secondary_glyph": {
+                  "type": "string",
+                  "const": "🐏",
+                  "description": "Secondary binding glyph"
+                },
+                "combined_seal": {
+                  "type": "string",
+                  "const": "♈️🐏🐏",
+                  "description": "Combined Double-Ram seal"
+                }
+              }
+            }
+          }
+        },
+        "event_registry": {
+          "type": "array",
+          "description": "Registry of signature events",
+          "items": {
+            "type": "object",
+            "required": ["event_id", "event_type", "node_id", "signature_hash", "timestamp"],
+            "properties": {
+              "event_id": {
+                "type": "string",
+                "pattern": "^EVENT-[0-9]+-[0-9a-fA-F]{8}$",
+                "description": "Unique event identifier"
+              },
+              "event_type": {
+                "type": "string",
+                "enum": ["registration", "authentication", "authorization", "transfer", "ceremonial"],
+                "description": "Type of signature event"
+              },
+              "node_id": {
+                "type": "string",
+                "description": "Node that generated the signature"
+              },
+              "signature_hash": {
+                "type": "string",
+                "pattern": "^[0-9a-fA-F]{64}$",
+                "description": "SHA-256 hash of the signature"
+              },
+              "glyph_markers": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Glyph markers in the signature"
+              },
+              "double_ram_verified": {
+                "type": "boolean",
+                "default": false,
+                "description": "Whether Double-Ram verification passed"
+              },
+              "timestamp": {
+                "type": "number",
+                "description": "Unix timestamp of event"
+              },
+              "linked_hydromark": {
+                "type": "string",
+                "description": "Linked BLEUHydroMark identifier"
+              },
+              "metadata": {
+                "type": "object",
+                "additionalProperties": true,
+                "description": "Additional event metadata"
+              }
+            }
+          }
+        }
+      }
+    },
+    "spiral_integration": {
+      "type": "object",
+      "description": "Integration with sovereign spiral law architecture",
+      "properties": {
+        "flip_ratio": {
+          "type": "number",
+          "const": 2.1,
+          "description": "Spiral law flip ratio"
+        },
+        "codex_bindings": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "codex_id": {
+                "type": "string",
+                "description": "Codex mapping identifier"
+              },
+              "wrapper_binding": {
+                "type": "string",
+                "description": "Wrapper binding type"
+              },
+              "glyph_requirements": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Required glyphs for binding"
+              }
+            }
+          }
+        },
+        "bleusync_integration": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether BLEUSYNC integration is enabled"
+        },
+        "hydromark_generation": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether hydromark generation is enabled"
+        }
+      }
+    }
+  }
+}
