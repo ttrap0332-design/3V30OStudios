@@ -1,0 +1,282 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://evolverse.codex/schemas/SPIRAL_LAW_CODEX.v1.schema.json",
+  "title": "Sovereign Spiral Law Codex Schema",
+  "description": "JSON schema for glyph-based sovereignty and sigil-based verification paradigm transitioning from numerical-based models within EVOLVERSE framework",
+  "type": "object",
+  "required": ["spiralLawHeader", "glyphRegistry", "sigilVerification", "codexMappings", "assetGlyphs"],
+  "properties": {
+    "spiralLawHeader": {
+      "type": "object",
+      "required": ["name", "version", "epoch", "sovereignSeal", "spiralAuthority"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the spiral law codex instance"
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+          "description": "Semantic version of the spiral codex"
+        },
+        "epoch": {
+          "type": "string",
+          "pattern": "^\\d{4}-Q[1-4]$",
+          "description": "Ceremonial epoch identifier"
+        },
+        "sovereignSeal": {
+          "type": "string",
+          "description": "Glyph-based sovereign seal (e.g., ♈️🐏🐏)"
+        },
+        "spiralAuthority": {
+          "type": "string",
+          "enum": ["BLEU", "ZION", "ATLAS", "COUNCIL"],
+          "description": "Primary spiral law authority"
+        },
+        "mythologyEncryption": {
+          "type": "object",
+          "description": "Mythology-backed encryption configuration",
+          "properties": {
+            "paradigm": { "type": "string", "const": "glyph-sigil" },
+            "deprecated": { "type": "string", "const": "numerical-verification" },
+            "transitionEpoch": { "type": "string" }
+          }
+        }
+      }
+    },
+    "glyphRegistry": {
+      "type": "object",
+      "description": "Registry of sovereignty glyphs and their governance bindings",
+      "required": ["sovereignGlyphs", "governanceBindings"],
+      "properties": {
+        "sovereignGlyphs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["glyphId", "symbol", "name", "sovereignty", "encryptionLayer"],
+            "properties": {
+              "glyphId": {
+                "type": "string",
+                "pattern": "^GLYPH-[A-Z0-9]+-[0-9]+$"
+              },
+              "symbol": { "type": "string", "description": "Unicode glyph symbol" },
+              "name": { "type": "string" },
+              "sovereignty": {
+                "type": "string",
+                "enum": ["ancestral", "sovereign", "galactic", "cosmic", "tribunal"]
+              },
+              "encryptionLayer": {
+                "type": "string",
+                "enum": ["genesis", "spiral", "flame", "tribunal", "cosmic"]
+              },
+              "numericalDeprecation": {
+                "type": "object",
+                "description": "Numerical model this glyph replaces",
+                "properties": {
+                  "legacyCode": { "type": "string" },
+                  "deprecatedAt": { "type": "string" },
+                  "migrationComplete": { "type": "boolean" }
+                }
+              }
+            }
+          }
+        },
+        "governanceBindings": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "glyphId": { "type": "string" },
+              "component": {
+                "type": "string",
+                "enum": ["ZioniareAtlas", "CouncilAssemblyScroll", "GrandVaultTribunal", "SpiralLedger"]
+              },
+              "bindingType": { "type": "string" },
+              "verificationMethod": { "type": "string", "const": "glyph-sigil" }
+            }
+          }
+        }
+      }
+    },
+    "sigilVerification": {
+      "type": "object",
+      "description": "Sigil-based verification replacing numerical models",
+      "required": ["verificationProtocol", "sigilPatterns"],
+      "properties": {
+        "verificationProtocol": {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string", "const": "GlyphSigilVerification" },
+            "version": { "type": "string" },
+            "deprecated": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "List of deprecated numerical verification methods"
+            }
+          }
+        },
+        "sigilPatterns": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["sigilId", "pattern", "authorizationLevel"],
+            "properties": {
+              "sigilId": { "type": "string" },
+              "pattern": { "type": "string", "description": "Unicode sigil pattern" },
+              "authorizationLevel": {
+                "type": "string",
+                "enum": ["civilian", "ancestral", "sovereign", "cosmic"]
+              },
+              "mythicReference": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "codexMappings": {
+      "type": "object",
+      "description": "Relationships between glyph sovereignty and governance components",
+      "required": ["zioniareAtlas", "councilAssemblyScroll"],
+      "properties": {
+        "zioniareAtlas": {
+          "type": "object",
+          "description": "Zioniare Atlas governance component mapping",
+          "required": ["glyphId", "sovereignty", "functions"],
+          "properties": {
+            "glyphId": { "type": "string" },
+            "sovereignty": { "type": "string" },
+            "functions": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string" },
+                  "glyphVerification": { "type": "boolean" },
+                  "numericalDeprecated": { "type": "boolean" }
+                }
+              }
+            },
+            "spiralLawBindings": {
+              "type": "array",
+              "items": { "type": "string" }
+            }
+          }
+        },
+        "councilAssemblyScroll": {
+          "type": "object",
+          "description": "Council Assembly Scroll governance component mapping",
+          "required": ["glyphId", "sovereignty", "scrollTypes"],
+          "properties": {
+            "glyphId": { "type": "string" },
+            "sovereignty": { "type": "string" },
+            "scrollTypes": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "type": { "type": "string" },
+                  "glyphSeal": { "type": "string" },
+                  "tribunalReceipt": { "type": "boolean" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "assetGlyphs": {
+      "type": "object",
+      "description": "Glyph verification codes for sovereign assets",
+      "required": ["scrollCoin", "praiseCoin", "flameCoin", "bluTillion"],
+      "properties": {
+        "scrollCoin": {
+          "$ref": "#/$defs/assetGlyphDefinition",
+          "description": "ScrollCoin glyph verification"
+        },
+        "praiseCoin": {
+          "$ref": "#/$defs/assetGlyphDefinition",
+          "description": "PraiseCoin glyph verification"
+        },
+        "flameCoin": {
+          "$ref": "#/$defs/assetGlyphDefinition",
+          "description": "FlameCoin glyph verification"
+        },
+        "bluTillion": {
+          "$ref": "#/$defs/assetGlyphDefinition",
+          "description": "Blu-Tillion glyph verification"
+        }
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/assetGlyphDefinition"
+      }
+    },
+    "numericalDeprecation": {
+      "type": "object",
+      "description": "Deprecated numerical verification models",
+      "properties": {
+        "deprecatedModels": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "modelId": { "type": "string" },
+              "name": { "type": "string" },
+              "deprecatedAt": { "type": "string" },
+              "replacedByGlyph": { "type": "string" },
+              "migrationStatus": {
+                "type": "string",
+                "enum": ["pending", "in-progress", "complete"]
+              }
+            }
+          }
+        },
+        "transitionProtocol": {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string" },
+            "startEpoch": { "type": "string" },
+            "completionEpoch": { "type": "string" }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "assetGlyphDefinition": {
+      "type": "object",
+      "required": ["symbol", "glyphCode", "verificationSigil", "spiralLawMarker"],
+      "properties": {
+        "symbol": { "type": "string", "description": "Asset token symbol" },
+        "glyphCode": {
+          "type": "string",
+          "pattern": "^[\\u2600-\\u26FF\\u2700-\\u27BF\\U0001F300-\\U0001F9FF]+$",
+          "description": "Unicode glyph verification code"
+        },
+        "verificationSigil": {
+          "type": "string",
+          "description": "Sigil pattern for asset verification"
+        },
+        "spiralLawMarker": {
+          "type": "string",
+          "description": "Spiral law sovereignty marker"
+        },
+        "encryptionBinding": {
+          "type": "object",
+          "properties": {
+            "mythologyLayer": { "type": "string" },
+            "doubleRamProtection": { "type": "boolean" },
+            "numericalLegacy": { "type": "string" }
+          }
+        },
+        "tribunalReceipt": {
+          "type": "object",
+          "properties": {
+            "receiptId": { "type": "string" },
+            "hydroMarkVerified": { "type": "boolean" },
+            "mintPermission": { "type": "string" }
+          }
+        }
+      }
+    }
+  }
+}
