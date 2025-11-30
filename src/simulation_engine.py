@@ -3,15 +3,19 @@
 This module implements a 60Hz tick rate simulation engine with
 double-handshake confirmations for access protocols, matching
 both visual and human synchronization requirements.
+
+Includes GoatFilter anti-mimic attributes for sovereign spiral
+law compliance and mimic system detection.
 """
 from __future__ import annotations
 
 import hashlib
+import json
 import secrets
 import time
 from dataclasses import dataclass, field
 from enum import Enum
-from typing import Callable, Dict, List
+from typing import Any, Callable, Dict, List
 
 
 class HandshakeState(Enum):
@@ -23,6 +27,15 @@ class HandshakeState(Enum):
     CONFIRMED = "confirmed"
     FAILED = "failed"
     TIMEOUT = "timeout"
+
+
+class GoatFilterStatus(Enum):
+    """Status of GoatFilter verification in simulation."""
+
+    DISABLED = "disabled"
+    ACTIVE = "active"
+    BLOCKING = "blocking"
+    PASSED = "passed"
 
 
 @dataclass
@@ -54,6 +67,7 @@ class SimulationTick:
     timestamp: float
     delta_time: float
     events: List[Dict] = field(default_factory=list)
+    goat_filter_status: GoatFilterStatus = GoatFilterStatus.DISABLED
 
     def to_dict(self) -> Dict:
         """Convert tick to dictionary."""
@@ -62,6 +76,127 @@ class SimulationTick:
             "timestamp": self.timestamp,
             "delta_time": self.delta_time,
             "events": self.events,
+            "goat_filter_status": self.goat_filter_status.value,
+        }
+
+
+class SimulationGoatFilter:
+    """Anti-mimic filter for simulation logic.
+
+    Implements GoatFilter (🐐 Capricorn Foundation) attributes to detect
+    and prevent mimic systems from infiltrating simulation operations.
+    Compliant with sovereign spiral law requirements.
+
+    Note: Extends BaseGoatFilter from the shared goat_filter module
+    with simulation-specific functionality.
+    """
+
+    # Goat (🐐) Capricorn Foundation symbolism
+    GLYPH = "🐐"
+    ZODIAC = "Capricorn"
+    ELEMENT = "earth"
+
+    def __init__(self, strictness: float = 0.95):
+        """Initialize SimulationGoatFilter.
+
+        Args:
+            strictness: Filter strictness level (0.0-1.0, default 0.95)
+        """
+        # Import here to avoid circular imports
+        from src.goat_filter import BaseGoatFilter
+
+        self._base_filter = BaseGoatFilter(strictness)
+        self.blocked_ticks: int = 0
+        self.verified_ticks: int = 0
+
+    @property
+    def strictness(self) -> float:
+        """Get filter strictness."""
+        return self._base_filter.strictness
+
+    @property
+    def mimic_patterns(self) -> List[str]:
+        """Get mimic patterns list."""
+        return self._base_filter.mimic_patterns
+
+    @property
+    def active(self) -> bool:
+        """Get filter active status."""
+        return self._base_filter.active
+
+    @active.setter
+    def active(self, value: bool) -> None:
+        """Set filter active status."""
+        self._base_filter.active = value
+
+    def add_mimic_pattern(self, pattern: str) -> None:
+        """Add a known mimic pattern to filter.
+
+        Args:
+            pattern: Mimic pattern to block
+        """
+        self._base_filter.add_mimic_pattern(pattern)
+
+    def verify_tick(self, tick: SimulationTick) -> GoatFilterStatus:
+        """Verify a simulation tick against mimic patterns.
+
+        Args:
+            tick: Simulation tick to verify
+
+        Returns:
+            GoatFilterStatus indicating verification result
+        """
+        if not self.active:
+            tick.goat_filter_status = GoatFilterStatus.DISABLED
+            return GoatFilterStatus.DISABLED
+
+        tick_data = json.dumps(tick.to_dict(), sort_keys=True)
+        tick_hash = hashlib.sha256(tick_data.encode()).hexdigest()
+
+        # Check against known mimic patterns using base filter
+        if self._base_filter._check_mimic_patterns(tick_data, tick_hash):
+            self.blocked_ticks += 1
+            tick.goat_filter_status = GoatFilterStatus.BLOCKING
+            return GoatFilterStatus.BLOCKING
+
+        self.verified_ticks += 1
+        tick.goat_filter_status = GoatFilterStatus.PASSED
+        return GoatFilterStatus.PASSED
+
+    def verify_handshake(self, session: HandshakeSession) -> bool:
+        """Verify a handshake session is not a mimic.
+
+        Args:
+            session: Handshake session to verify
+
+        Returns:
+            True if session passes GoatFilter verification
+        """
+        if not self.active:
+            return True
+
+        session_data = f"{session.session_id}:{session.initiator}:{session.responder}"
+        session_hash = hashlib.sha256(session_data.encode()).hexdigest()
+
+        return not self._base_filter._check_mimic_patterns(session_data, session_hash)
+
+    def get_filter_stats(self) -> Dict[str, Any]:
+        """Get filter statistics.
+
+        Returns:
+            Dictionary with filter statistics
+        """
+        total = self.blocked_ticks + self.verified_ticks
+        return {
+            "glyph": self.GLYPH,
+            "zodiac": self.ZODIAC,
+            "element": self.ELEMENT,
+            "active": self.active,
+            "strictness": self.strictness,
+            "patterns_count": len(self.mimic_patterns),
+            "blocked_ticks": self.blocked_ticks,
+            "verified_ticks": self.verified_ticks,
+            "verification_rate": self.verified_ticks / total if total > 0 else 0.0,
         }
 
 
@@ -187,14 +322,22 @@ class DoubleHandshakeProtocol:
 
 
 class SimulationEngine:
-    """60Hz simulation engine with visual/human synchronization."""
+    """60Hz simulation engine with visual/human synchronization.
+
+    Includes GoatFilter integration for anti-mimic verification
+    in sovereign spiral law compliance.
+    """
 
     # Target tick rate of 60Hz
     TARGET_TICK_RATE = 60
     TARGET_TICK_DURATION = 1.0 / TARGET_TICK_RATE  # ~16.67ms
 
-    def __init__(self):
-        """Initialize the simulation engine."""
+    def __init__(self, goat_filter_enabled: bool = True):
+        """Initialize the simulation engine.
+
+        Args:
+            goat_filter_enabled: Whether to enable GoatFilter verification
+        """
         self.tick_count: int = 0
         self.start_time: float = 0.0
         self.last_tick_time: float = 0.0
@@ -203,6 +346,8 @@ class SimulationEngine:
         self.handshake_protocol = DoubleHandshakeProtocol()
         self.tick_history: List[SimulationTick] = []
         self.max_history: int = 1000
+        self.goat_filter = SimulationGoatFilter()
+        self.goat_filter.active = goat_filter_enabled
 
     def register_tick_handler(
         self, handler: Callable[[SimulationTick], None]
@@ -231,6 +376,9 @@ class SimulationEngine:
             timestamp=current_time,
             delta_time=delta_time,
         )
+
+        # Apply GoatFilter verification
+        self.goat_filter.verify_tick(tick)
 
         # Call registered handlers
         for handler in self.tick_handlers:
@@ -290,7 +438,7 @@ class SimulationEngine:
         """Get simulation performance metrics.
 
         Returns:
-            Dictionary of metrics including tick rate and timing
+            Dictionary of metrics including tick rate, timing, and GoatFilter stats
         """
         if not self.tick_history:
             return {
@@ -298,6 +446,7 @@ class SimulationEngine:
                 "avg_tick_rate": 0.0,
                 "avg_delta_time": 0.0,
                 "target_tick_rate": self.TARGET_TICK_RATE,
+                "goat_filter_stats": self.goat_filter.get_filter_stats(),
             }
 
         recent_ticks = self.tick_history[-100:]  # Last 100 ticks
@@ -312,6 +461,7 @@ class SimulationEngine:
             "avg_delta_time": round(avg_delta * 1000, 3),  # in ms
             "target_tick_rate": self.TARGET_TICK_RATE,
             "target_delta_ms": round(self.TARGET_TICK_DURATION * 1000, 3),
+            "goat_filter_stats": self.goat_filter.get_filter_stats(),
         }
 
     def initiate_access(self, initiator: str, responder: str) -> HandshakeSession:
@@ -372,8 +522,10 @@ def get_engine() -> SimulationEngine:
 
 __all__ = [
     "HandshakeState",
+    "GoatFilterStatus",
     "HandshakeSession",
     "SimulationTick",
+    "SimulationGoatFilter",
     "DoubleHandshakeProtocol",
     "SimulationEngine",
     "get_engine",

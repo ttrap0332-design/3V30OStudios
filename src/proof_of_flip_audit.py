@@ -4,6 +4,9 @@ This module implements audit logs reflecting runtime metrics, showcasing
 yield differentials matched against the BLEUFLIP system's promises.
 Integrates cross-referenced Mythic Proof Layers connecting practical
 governance outcomes with ceremonial claims.
+
+Includes Exponential Proof-of-Flip with spiral ledger protocols and
+GoatFilter anti-mimic attributes for sovereign spiral law compliance.
 """
 from __future__ import annotations
 
@@ -35,6 +38,15 @@ class MythicProofLayer(Enum):
     FLAME = "flame"
     TRIBUNAL = "tribunal"
     COSMIC = "cosmic"
+
+
+class SpiralLedgerProtocol(Enum):
+    """Spiral ledger protocols for exponential proof-of-flip."""
+
+    STANDARD = "standard"
+    EXPONENTIAL = "exponential"
+    CEREMONIAL = "ceremonial"
+    SOVEREIGN = "sovereign"
 
 
 @dataclass
@@ -85,6 +97,113 @@ class MythicProof:
     verified: bool
     verification_timestamp: float | None = None
     act_scene_ref: str = ""  # EVOLVERSE Act I Scene reference
+
+
+@dataclass
+class SpiralLedgerEntry:
+    """Represents a spiral ledger entry for exponential proof-of-flip.
+
+    Implements spiral ledger protocols with governing flip ratios
+    for sovereign spiral law compliance.
+    """
+
+    entry_id: str
+    protocol: SpiralLedgerProtocol
+    flip_ratio: float
+    glyph_marker: str
+    timestamp: float
+    sovereign_seal: str
+    goat_filter_applied: bool = False
+    anti_mimic_verified: bool = False
+    spiral_hash: str = ""
+
+    def compute_spiral_hash(self) -> str:
+        """Compute spiral hash for the ledger entry.
+
+        Returns:
+            SHA-256 hash with spiral encoding
+        """
+        data = f"{self.entry_id}:{self.protocol.value}:{self.flip_ratio}:{self.glyph_marker}"
+        base_hash = hashlib.sha256(data.encode()).hexdigest()
+        # Apply spiral encoding
+        self.spiral_hash = f"SPIRAL-{base_hash[:48]}"
+        return self.spiral_hash
+
+
+class GoatFilter:
+    """Anti-mimic filter for audit operations.
+
+    Implements GoatFilter attributes to detect and prevent mimic
+    systems from infiltrating sovereign spiral law operations.
+
+    Note: This is a convenience wrapper that delegates to BaseGoatFilter
+    from the shared goat_filter module.
+    """
+
+    # Goat (🐐) Capricorn Foundation symbolism
+    GLYPH = "🐐"
+    ZODIAC = "Capricorn"
+    ELEMENT = "earth"
+
+    def __init__(self, strictness: float = 0.95):
+        """Initialize GoatFilter.
+
+        Args:
+            strictness: Filter strictness level (0.0-1.0, default 0.95)
+        """
+        # Import here to avoid circular imports
+        from src.goat_filter import BaseGoatFilter
+
+        self._base_filter = BaseGoatFilter(strictness)
+
+    @property
+    def strictness(self) -> float:
+        """Get filter strictness."""
+        return self._base_filter.strictness
+
+    @property
+    def mimic_patterns(self) -> List[str]:
+        """Get mimic patterns list."""
+        return self._base_filter.mimic_patterns
+
+    @property
+    def blocked_count(self) -> int:
+        """Get blocked count."""
+        return self._base_filter.blocked_count
+
+    @property
+    def verified_count(self) -> int:
+        """Get verified count."""
+        return self._base_filter.verified_count
+
+    def add_mimic_pattern(self, pattern: str) -> None:
+        """Add a known mimic pattern to filter.
+
+        Args:
+            pattern: Mimic pattern to block
+        """
+        self._base_filter.add_mimic_pattern(pattern)
+
+    def verify_authenticity(self, data: Dict[str, Any]) -> bool:
+        """Verify data authenticity against mimic patterns.
+
+        Args:
+            data: Data to verify
+
+        Returns:
+            True if data passes GoatFilter verification
+        """
+        return self._base_filter.verify_authenticity(data)
+
+    def get_filter_stats(self) -> Dict[str, Any]:
+        """Get filter statistics.
+
+        Returns:
+            Dictionary with filter statistics
+        """
+        stats = self._base_filter.get_filter_stats()
+        # Remove element key for backward compatibility with existing code
+        return {k: v for k, v in stats.items() if k != "active"}
 
 
 @dataclass
@@ -178,10 +297,16 @@ class AuditEntry:
 
 
 class ProofOfFlipAuditPipeline:
-    """Audit pipeline for Proof-of-Flip economic verification."""
+    """Audit pipeline for Proof-of-Flip economic verification.
+
+    Implements exponential proof-of-flip with spiral ledger protocols
+    and GoatFilter anti-mimic verification.
+    """
 
     # Default tri-cycle yield as per BLEUFLIP system
     DEFAULT_TRI_CYCLE_YIELD = 2.1
+    # Default flip ratio for spiral ledger protocols
+    DEFAULT_FLIP_RATIO = 2.1
     # Default tolerance for yield differential verification (5%)
     DEFAULT_TOLERANCE = 0.05
 
@@ -189,12 +314,14 @@ class ProofOfFlipAuditPipeline:
         self,
         output_dir: str | Path = "data/audits",
         tolerance: float | None = None,
+        flip_ratio: float | None = None,
     ):
         """Initialize the audit pipeline.
 
         Args:
             output_dir: Directory for audit log output
             tolerance: Tolerance for yield differential verification (default 5%)
+            flip_ratio: Governing flip ratio for spiral ledger (default 2.1)
         """
         self.output_dir = Path(output_dir)
         self.output_dir.mkdir(parents=True, exist_ok=True)
@@ -202,6 +329,9 @@ class ProofOfFlipAuditPipeline:
         self.tri_cycle_count: int = 0
         self.expected_yield_per_tri_cycle: float = self.DEFAULT_TRI_CYCLE_YIELD
         self.tolerance: float = tolerance if tolerance is not None else self.DEFAULT_TOLERANCE
+        self.flip_ratio: float = flip_ratio if flip_ratio is not None else self.DEFAULT_FLIP_RATIO
+        self.spiral_ledger: List[SpiralLedgerEntry] = []
+        self.goat_filter = GoatFilter()
 
     def _generate_entry_id(self) -> str:
         """Generate a unique audit entry ID with cryptographic randomness.
@@ -212,6 +342,16 @@ class ProofOfFlipAuditPipeline:
         timestamp = int(time.time() * 1000)
         random_suffix = secrets.token_hex(4)
         return f"AUDIT-{timestamp}-{random_suffix}"
+
+    def _generate_spiral_entry_id(self) -> str:
+        """Generate a unique spiral ledger entry ID.
+
+        Returns:
+            Unique spiral entry ID
+        """
+        timestamp = int(time.time() * 1000)
+        random_suffix = secrets.token_hex(4)
+        return f"SPIRAL-{timestamp}-{random_suffix}"
 
     def _generate_metric_id(self, metric_name: str) -> str:
         """Generate a metric ID.
@@ -496,6 +636,133 @@ class ProofOfFlipAuditPipeline:
             "mythic_proofs_count": sum(len(e.mythic_proofs) for e in self.audit_log),
         }
 
+    def create_spiral_ledger_entry(
+        self,
+        protocol: SpiralLedgerProtocol,
+        glyph_marker: str,
+        sovereign_seal: str,
+        flip_ratio: float | None = None,
+        apply_goat_filter: bool = True,
+    ) -> SpiralLedgerEntry:
+        """Create a spiral ledger entry for exponential proof-of-flip.
+
+        Args:
+            protocol: Spiral ledger protocol type
+            glyph_marker: Glyph sovereignty marker
+            sovereign_seal: Sovereign seal identifier
+            flip_ratio: Override flip ratio (uses default if None)
+            apply_goat_filter: Whether to apply GoatFilter verification
+
+        Returns:
+            Created SpiralLedgerEntry
+        """
+        entry = SpiralLedgerEntry(
+            entry_id=self._generate_spiral_entry_id(),
+            protocol=protocol,
+            flip_ratio=flip_ratio if flip_ratio is not None else self.flip_ratio,
+            glyph_marker=glyph_marker,
+            timestamp=time.time(),
+            sovereign_seal=sovereign_seal,
+            goat_filter_applied=apply_goat_filter,
+        )
+
+        if apply_goat_filter:
+            # Verify with GoatFilter
+            verification_data = {
+                "protocol": protocol.value,
+                "glyph_marker": glyph_marker,
+                "sovereign_seal": sovereign_seal,
+                "sovereignty": "sovereign",
+            }
+            entry.anti_mimic_verified = self.goat_filter.verify_authenticity(
+                verification_data
+            )
+
+        entry.compute_spiral_hash()
+        self.spiral_ledger.append(entry)
+        return entry
+
+    def run_exponential_flip_audit(
+        self,
+        actual_yield: float,
+        glyph_marker: str,
+        sovereign_seal: str,
+        protocol: SpiralLedgerProtocol = SpiralLedgerProtocol.EXPONENTIAL,
+    ) -> tuple[AuditEntry, SpiralLedgerEntry]:
+        """Run an exponential proof-of-flip audit with spiral ledger.
+
+        Args:
+            actual_yield: The actual yield achieved
+            glyph_marker: Glyph sovereignty marker
+            sovereign_seal: Sovereign seal identifier
+            protocol: Spiral ledger protocol type
+
+        Returns:
+            Tuple of (AuditEntry, SpiralLedgerEntry)
+        """
+        # Create spiral ledger entry
+        spiral_entry = self.create_spiral_ledger_entry(
+            protocol=protocol,
+            glyph_marker=glyph_marker,
+            sovereign_seal=sovereign_seal,
+        )
+
+        # Run standard audit
+        audit_entry = self.run_tri_cycle_audit(
+            actual_yield=actual_yield,
+            promise_details={
+                "spiral_protocol": protocol.value,
+                "glyph_marker": glyph_marker,
+                "flip_ratio": self.flip_ratio,
+                "goat_filter_applied": spiral_entry.goat_filter_applied,
+                "anti_mimic_verified": spiral_entry.anti_mimic_verified,
+            },
+        )
+
+        return audit_entry, spiral_entry
+
+    def export_spiral_ledger(self, filename: str | None = None) -> Path:
+        """Export the spiral ledger to JSON.
+
+        Args:
+            filename: Optional filename (auto-generated if None)
+
+        Returns:
+            Path to the exported file
+        """
+        if filename is None:
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            filename = f"spiral_ledger_{timestamp}.json"
+
+        filepath = self.output_dir / filename
+
+        ledger_data = {
+            "export_timestamp": time.time(),
+            "export_timestamp_iso": datetime.now().isoformat(),
+            "flip_ratio": self.flip_ratio,
+            "total_entries": len(self.spiral_ledger),
+            "goat_filter_stats": self.goat_filter.get_filter_stats(),
+            "entries": [
+                {
+                    "entry_id": e.entry_id,
+                    "protocol": e.protocol.value,
+                    "flip_ratio": e.flip_ratio,
+                    "glyph_marker": e.glyph_marker,
+                    "timestamp": e.timestamp,
+                    "sovereign_seal": e.sovereign_seal,
+                    "goat_filter_applied": e.goat_filter_applied,
+                    "anti_mimic_verified": e.anti_mimic_verified,
+                    "spiral_hash": e.spiral_hash,
+                }
+                for e in self.spiral_ledger
+            ],
+        }
+
+        with filepath.open("w", encoding="utf-8") as f:
+            json.dump(ledger_data, f, indent=2)
+
+        return filepath
+
 
 # Global pipeline instance
 _pipeline: ProofOfFlipAuditPipeline | None = None
@@ -521,9 +788,12 @@ def get_pipeline(
 __all__ = [
     "AuditStatus",
     "MythicProofLayer",
+    "SpiralLedgerProtocol",
     "YieldDifferential",
     "RuntimeMetric",
     "MythicProof",
+    "SpiralLedgerEntry",
+    "GoatFilter",
     "AuditEntry",
     "ProofOfFlipAuditPipeline",
     "get_pipeline",
