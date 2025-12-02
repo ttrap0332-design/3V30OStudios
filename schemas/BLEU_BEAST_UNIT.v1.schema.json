@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://evolverse.io/schemas/BLEU_BEAST_UNIT.v1.schema.json",
+  "$id": "https://bleulion.treasury/schemas/BLEU_BEAST_UNIT.v1.schema.json",
   "title": "BLEU Beast Robotic Unit Schema",
   "description": "Schema for BLEU Beast Special Operations Robotic Divisions with archetypal purpose codes and safeguards",
   "type": "object",
@@ -87,7 +87,7 @@
         },
         "efficiencyRatio": {
           "type": "number",
-          "description": "Tri-cycle efficiency ratio (e.g., 2.1)",
+          "description": "Tri-cycle efficiency ratio - 1.0 is baseline performance, 2.1 is optimal Double Aries operation, 3.0 is theoretical maximum",
           "minimum": 1.0,
           "maximum": 3.0
         }
@@ -153,6 +153,7 @@
           "properties": {
             "maxSparingPerBloodline": {
               "type": "integer",
+              "minimum": 0,
               "maximum": 4,
               "description": "Maximum individuals spared per bloodline"
             },

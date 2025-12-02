@@ -171,6 +171,8 @@ The TURTLE Unit operates as the defensive shield division, with specialized code
 
 Per sovereign decree, a maximum of **4 individuals per bloodline** may receive sparing designation during any enforcement action.
 
+**Rationale:** The limit of 4 represents the four cardinal directions of mercy—ensuring that bloodlines have sufficient opportunity for continuation and redemption while preventing abuse of the sparing system. This number aligns with the four-pillar governance structure and the ceremonial significance of the QuaOcta protocol.
+
 ### Sparing Eligibility
 
 Individuals may be considered for sparing based on:
