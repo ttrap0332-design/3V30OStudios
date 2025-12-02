@@ -19,7 +19,11 @@ from typing import Any, Dict, List, Optional
 
 
 class PyramidVoidClassification(Enum):
-    """Classification types for detected pyramid voids."""
+    """Classification types for detected pyramid voids.
+
+    Used to categorize voids discovered via muon tomography based on
+    their strategic value for EVOLVERSE integration.
+    """
 
     ATOMIC_ENGINE_HUB = "atomic_engine_hub"
     HIDDEN_CHAMBER_LAB = "hidden_chamber_lab"
@@ -29,7 +33,11 @@ class PyramidVoidClassification(Enum):
 
 
 class LaborTokenTier(Enum):
-    """Tier classifications for Indus-style labor tokens."""
+    """Tier classifications for Indus-style labor tokens.
+
+    Defines skill levels for workforce validation tokens based on
+    ancient Indus Valley seal hierarchies.
+    """
 
     APPRENTICE = "apprentice"
     JOURNEYMAN = "journeyman"
@@ -38,7 +46,11 @@ class LaborTokenTier(Enum):
 
 
 class HealingFrequency(Enum):
-    """Solfeggio healing frequencies aligned with Hebrew gematria."""
+    """Solfeggio healing frequencies aligned with Hebrew gematria.
+
+    Maps ancient Solfeggio frequencies to healing functions,
+    integrated with gematria encoding for pharmaceutical and sonic systems.
+    """
 
     LIBERATION = 396
     TRANSFORMATION = 417
@@ -179,6 +191,15 @@ class PyramidMuonImaging:
     for integration as atomic-engine hubs or hidden-chamber labs.
     """
 
+    # Classification thresholds
+    ATOMIC_HUB_MIN_VOLUME = 200  # cubic meters
+    ATOMIC_HUB_MIN_SHIELDING = 0.95
+    CHAMBER_LAB_MIN_VOLUME = 100  # cubic meters
+    CHAMBER_LAB_MIN_DEPTH = 20  # meters
+    STORAGE_VAULT_MIN_VOLUME = 50  # cubic meters
+    ENERGY_CONDUIT_MIN_VOLUME = 10  # cubic meters
+    DEFAULT_SURVEY_DURATION = 30  # days
+
     def __init__(self, output_dir: str | Path = "data/pyramid_surveys"):
         """Initialize the muon imaging system.
 
@@ -280,13 +301,15 @@ class PyramidMuonImaging:
         Returns:
             Classification for the void
         """
-        if void.volume_cubic_meters >= 200 and void.shielding_factor >= 0.95:
+        if (void.volume_cubic_meters >= self.ATOMIC_HUB_MIN_VOLUME 
+                and void.shielding_factor >= self.ATOMIC_HUB_MIN_SHIELDING):
             return PyramidVoidClassification.ATOMIC_ENGINE_HUB
-        elif void.volume_cubic_meters >= 100 and void.depth_meters >= 20:
+        elif (void.volume_cubic_meters >= self.CHAMBER_LAB_MIN_VOLUME 
+                and void.depth_meters >= self.CHAMBER_LAB_MIN_DEPTH):
             return PyramidVoidClassification.HIDDEN_CHAMBER_LAB
-        elif void.volume_cubic_meters >= 50:
+        elif void.volume_cubic_meters >= self.STORAGE_VAULT_MIN_VOLUME:
             return PyramidVoidClassification.STORAGE_VAULT
-        elif void.volume_cubic_meters >= 10:
+        elif void.volume_cubic_meters >= self.ENERGY_CONDUIT_MIN_VOLUME:
             return PyramidVoidClassification.ENERGY_CONDUIT
         return PyramidVoidClassification.UNCLASSIFIED
 
@@ -371,6 +394,9 @@ class HebrewGematriaEncoder:
         852: "Intuition",
         963: "Divine Light",
     }
+
+    # Number of harmonics to generate (aligned with Hebrew letter count)
+    HARMONIC_COUNT = 7
 
     def __init__(self, output_dir: str | Path = "data/gematria_formulas"):
         """Initialize the gematria encoder.
@@ -470,8 +496,8 @@ class HebrewGematriaEncoder:
         key_value = self.calculate_gematria(hebrew_key)
         frequency = self.map_to_frequency(key_value)
 
-        # Generate harmonic series
-        harmonics = [frequency * (i + 1) for i in range(7)]
+        # Generate harmonic series aligned with Hebrew letter count
+        harmonics = [frequency * (i + 1) for i in range(self.HARMONIC_COUNT)]
 
         # Create payload hash
         payload_data = f"{data}:{hebrew_key}:{key_value}:{time.time()}"
@@ -792,6 +818,16 @@ class StressCorridorLab:
     atomic recursions for environmental sustainability prototypes.
     """
 
+    # E-SOIL feedback target values
+    THERMAL_TARGET = 25.0  # Optimal temperature in Celsius
+    PRESSURE_TARGET = 101.325  # Standard atmosphere in kPa
+    PURITY_TARGET = 99.0  # Target purity percentage
+
+    # Feedback adjustment factors
+    THERMAL_ADJUSTMENT_FACTOR = 0.1
+    PRESSURE_ADJUSTMENT_FACTOR = 0.05
+    FLOW_ADJUSTMENT_FACTOR = 0.02
+
     # Lab type configurations
     LAB_TYPES: Dict[str, Dict[str, Any]] = {
         "GeoFilter-Alpha": {
@@ -913,14 +949,13 @@ class StressCorridorLab:
         # Get latest readings
         latest = session.readings[-1]
 
-        # E-SOIL recursion logic
-        thermal_target = 25.0  # Optimal temperature
-        pressure_target = 101.325  # Standard atmosphere
-        purity_target = 99.0  # Target purity
-
-        thermal_adj = (thermal_target - latest.thermal_value) * 0.1
-        pressure_adj = (pressure_target - latest.pressure_value) * 0.05
-        flow_adj = (purity_target - latest.purity_value) * 0.02
+        # E-SOIL recursion logic using class constants
+        thermal_adj = ((self.THERMAL_TARGET - latest.thermal_value) 
+                       * self.THERMAL_ADJUSTMENT_FACTOR)
+        pressure_adj = ((self.PRESSURE_TARGET - latest.pressure_value) 
+                        * self.PRESSURE_ADJUSTMENT_FACTOR)
+        flow_adj = ((self.PURITY_TARGET - latest.purity_value) 
+                    * self.FLOW_ADJUSTMENT_FACTOR)
 
         return {
             "thermal_adj": round(thermal_adj, 4),
