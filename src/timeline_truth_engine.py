@@ -170,7 +170,9 @@ class TimelineTruthEngine:
         if not self.map_path.exists():
             logger.warning(
                 f"Timeline truth map file not found at {self.map_path}. "
-                "Timeline features will be unavailable until the file is created."
+                "Timeline features will be unavailable until the file is created. "
+                "Create the file at 'data/timeline_truth_map.json' or see "
+                "docs/TIMELINE_TRUTH_MAP.md for the expected structure."
             )
             return
 

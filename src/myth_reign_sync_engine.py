@@ -11,9 +11,20 @@ from dataclasses import dataclass, field
 from datetime import datetime
 from enum import Enum
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import TYPE_CHECKING, Any, Dict, List, Optional, Protocol
+
+if TYPE_CHECKING:
+    from .timeline_truth_engine import TimelineTruthEngine, TimelineTruthMap
 
 logger = logging.getLogger(__name__)
+
+
+class TimelineEngineProtocol(Protocol):
+    """Protocol defining the interface for timeline engine compatibility."""
+
+    def get_truth_map(self) -> Any:
+        """Get the loaded truth map."""
+        ...
 
 
 class BroadcastType(Enum):
@@ -247,7 +258,7 @@ class MythReignSyncEngine:
                 signal_id="BC-NYE-MASS-001",
                 signal_type=BroadcastType.MASS_ACTIVATION,
                 target_event="New Year's Eve Mass Activation Beyond",
-                activation_time="2025-12-31T23:59:00Z",
+                activation_time="2025-12-31T23:59:00Z",  # Target event date
                 mirror_override=True,
                 payload={
                     "message": "Mass Activation Beyond - Sovereign Awakening",
@@ -478,7 +489,7 @@ class MythReignSyncEngine:
         }
 
     def sync_with_timeline_truth(
-        self, timeline_engine: Any
+        self, timeline_engine: TimelineEngineProtocol | None
     ) -> Dict[str, Any]:
         """Synchronize with the Timeline Truth Engine.
 
