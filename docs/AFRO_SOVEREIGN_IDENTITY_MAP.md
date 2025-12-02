@@ -42,7 +42,7 @@ The dataset integrates with the **BLEUE Academy Curriculum** through:
 
 ### 2.1 Geographic Regions
 
-The dataset covers **8 primary regions** with **21 distinct communities**:
+The dataset covers **8 primary regions** with **22 distinct communities**:
 
 | Region | Communities | Total Population Estimate |
 |--------|-------------|---------------------------|
@@ -288,7 +288,7 @@ All data in this framework is designed with **community sovereignty** in mind:
 
 | Version | Date | Status |
 |---------|------|--------|
-| 1.0.0 | 2025-12-01 | Active |
+| 1.0.0 | 2024-12-01 | Active |
 
 ### 7.3 Update Protocol
 
@@ -375,7 +375,7 @@ The visualization framework supports History-Global DEX scaling through:
 **Authority**: Global Afro-Sovereign Identity Council
 **Status**: Active and Binding
 **Version**: 1.0
-**Last Updated**: 2025-12-01
+**Last Updated**: 2024-12-01
 
 ---
 

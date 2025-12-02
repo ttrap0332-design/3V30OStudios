@@ -315,6 +315,16 @@ class AfroIdentityVisualizer:
             msg = "matplotlib is required for visualization. Install with: pip install matplotlib"
             raise ImportError(msg) from e
 
+    def _get_numpy(self) -> Any:
+        """Lazy import numpy to avoid import errors if not installed."""
+        try:
+            import numpy as np
+
+            return np
+        except ImportError as e:
+            msg = "numpy is required for heatmap. Install with: pip install numpy"
+            raise ImportError(msg) from e
+
     def plot_population_by_region(
         self, output_path: str | None = None, show: bool = False
     ) -> Any:
@@ -445,12 +455,7 @@ class AfroIdentityVisualizer:
             Matplotlib figure object
         """
         plt = self._get_matplotlib()
-
-        try:
-            import numpy as np
-        except ImportError as e:
-            msg = "numpy is required for heatmap. Install with: pip install numpy"
-            raise ImportError(msg) from e
+        np = self._get_numpy()
 
         df = self.framework.build_communities_dataframe()
 
