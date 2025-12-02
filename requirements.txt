@@ -1,0 +1,2 @@
+# Python dependencies for EVOLVERSE Python modules
+reportlab>=4.0.0
