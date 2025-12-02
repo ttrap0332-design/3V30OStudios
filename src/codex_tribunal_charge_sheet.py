@@ -364,6 +364,7 @@ def generate_bleu_charge_sheet_pdf(output_dir: str | Path = "data/tribunal") -> 
 
 # Global generator instance
 _generator: CodexTribunalChargeSheetGenerator | None = None
+_generator_output_dir: str | Path | None = None
 
 
 def get_generator(
@@ -371,15 +372,20 @@ def get_generator(
 ) -> CodexTribunalChargeSheetGenerator:
     """Get or create the global charge sheet generator.
 
+    Note: The output_dir parameter is only used when creating a new instance.
+    Once initialized, the same instance is returned regardless of output_dir.
+    To use a different directory, create a new CodexTribunalChargeSheetGenerator directly.
+
     Args:
         output_dir: Output directory for charge sheets (only used on first call)
 
     Returns:
         The global CodexTribunalChargeSheetGenerator instance
     """
-    global _generator
+    global _generator, _generator_output_dir
     if _generator is None:
         _generator = CodexTribunalChargeSheetGenerator(output_dir)
+        _generator_output_dir = output_dir
     return _generator
 
 
