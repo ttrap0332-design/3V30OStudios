@@ -1,0 +1,616 @@
+{
+  "version": "1.0.0",
+  "dataset_id": "AFRO_SOVEREIGN_IDENTITY_MAP",
+  "description": "Global Afro-Sovereign Identity Map - A unique aggregation of Afro-descendant communities worldwide with encoded symbolic, historical, and present-day insights for the EV0LVerse educational module.",
+  "lifecycle": {
+    "status": "active",
+    "tags": ["educational", "cultural", "identity", "heritage"],
+    "last_update": "2025-12-01T00:00:00Z"
+  },
+  "regions": [
+    {
+      "id": "REGION.PUERTO_RICO",
+      "name": "Puerto Rico",
+      "emoji": "🇵🇷",
+      "geographic_coordinates": {"latitude": 18.2208, "longitude": -66.5901},
+      "communities": [
+        {
+          "id": "PR.LOIZA",
+          "name": "Loíza Aldea",
+          "population_estimate": 28000,
+          "historical_significance": "Highest concentration of African heritage in Puerto Rico, home to Bomba tradition",
+          "symbolic_elements": ["Bomba drums", "Vejigante masks", "Coconut palm"],
+          "cultural_practices": ["Bomba dance", "Plena music", "Festival de Santiago Apóstol"],
+          "modern_relevance_score": 0.92,
+          "economic_indicators": {
+            "tourism_potential": 0.85,
+            "cultural_preservation_index": 0.88,
+            "blockchain_integration_readiness": 0.72
+          },
+          "enft_template": "enft://afro-sovereign/puerto-rico/loiza"
+        },
+        {
+          "id": "PR.CAROLINA",
+          "name": "Carolina",
+          "population_estimate": 155000,
+          "historical_significance": "Formerly enslaved populations from West African Yoruba communities",
+          "symbolic_elements": ["Coconut groves", "Santos de palo", "Artisanal crafts"],
+          "cultural_practices": ["Bomba y Plena", "Afro-Taíno syncretism", "Community festivals"],
+          "modern_relevance_score": 0.78,
+          "economic_indicators": {
+            "tourism_potential": 0.70,
+            "cultural_preservation_index": 0.75,
+            "blockchain_integration_readiness": 0.80
+          },
+          "enft_template": "enft://afro-sovereign/puerto-rico/carolina"
+        },
+        {
+          "id": "PR.PONCE",
+          "name": "Ponce",
+          "population_estimate": 145000,
+          "historical_significance": "Sugar plantation legacy with significant African labor history",
+          "symbolic_elements": ["Hacienda architecture", "Plena instruments", "Mask traditions"],
+          "cultural_practices": ["Plena music", "Carnival traditions", "Heritage preservation"],
+          "modern_relevance_score": 0.82,
+          "economic_indicators": {
+            "tourism_potential": 0.88,
+            "cultural_preservation_index": 0.80,
+            "blockchain_integration_readiness": 0.75
+          },
+          "enft_template": "enft://afro-sovereign/puerto-rico/ponce"
+        }
+      ],
+      "blockchain_anchor": {
+        "currency_tie": "ΔTLA_COIN",
+        "dex_integration": "EVOL_MIRROR_MARKET",
+        "cultural_asset_class": "HERITAGE_BOND"
+      }
+    },
+    {
+      "id": "REGION.BRAZIL",
+      "name": "Brazil",
+      "emoji": "🇧🇷",
+      "geographic_coordinates": {"latitude": -14.2350, "longitude": -51.9253},
+      "communities": [
+        {
+          "id": "BR.SALVADOR_BAHIA",
+          "name": "Salvador, Bahia",
+          "population_estimate": 2890000,
+          "historical_significance": "First capital of Brazil, largest African diaspora city outside Africa",
+          "symbolic_elements": ["Orixás", "Capoeira circles", "Candomblé temples"],
+          "cultural_practices": ["Candomblé", "Capoeira Angola", "Afoxé", "Samba de Roda"],
+          "modern_relevance_score": 0.98,
+          "economic_indicators": {
+            "tourism_potential": 0.95,
+            "cultural_preservation_index": 0.94,
+            "blockchain_integration_readiness": 0.85
+          },
+          "enft_template": "enft://afro-sovereign/brazil/salvador"
+        },
+        {
+          "id": "BR.QUILOMBO_PALMARES",
+          "name": "Quilombo dos Palmares Heritage",
+          "population_estimate": 50000,
+          "historical_significance": "Historic fugitive slave settlement, largest in the Americas, symbol of resistance",
+          "symbolic_elements": ["Zumbi figure", "Palm tree", "Resistance symbols"],
+          "cultural_practices": ["Quilombo traditions", "Agricultural collectives", "Resistance ceremonies"],
+          "modern_relevance_score": 0.96,
+          "economic_indicators": {
+            "tourism_potential": 0.80,
+            "cultural_preservation_index": 0.92,
+            "blockchain_integration_readiness": 0.70
+          },
+          "enft_template": "enft://afro-sovereign/brazil/palmares"
+        },
+        {
+          "id": "BR.RIO_FAVELAS",
+          "name": "Rio de Janeiro Afro-Communities",
+          "population_estimate": 1500000,
+          "historical_significance": "Birthplace of Samba and center of Afro-Brazilian cultural innovation",
+          "symbolic_elements": ["Samba schools", "Carnival floats", "Morro landmarks"],
+          "cultural_practices": ["Samba", "Funk carioca", "Escola de Samba"],
+          "modern_relevance_score": 0.94,
+          "economic_indicators": {
+            "tourism_potential": 0.98,
+            "cultural_preservation_index": 0.85,
+            "blockchain_integration_readiness": 0.82
+          },
+          "enft_template": "enft://afro-sovereign/brazil/rio"
+        },
+        {
+          "id": "BR.MARANHAO",
+          "name": "Maranhão Tambor de Mina",
+          "population_estimate": 400000,
+          "historical_significance": "Preserved West African Vodun religious traditions",
+          "symbolic_elements": ["Tambor drums", "Casa das Minas", "Vodun altars"],
+          "cultural_practices": ["Tambor de Mina", "Bumba Meu Boi", "Ancestral veneration"],
+          "modern_relevance_score": 0.88,
+          "economic_indicators": {
+            "tourism_potential": 0.75,
+            "cultural_preservation_index": 0.90,
+            "blockchain_integration_readiness": 0.65
+          },
+          "enft_template": "enft://afro-sovereign/brazil/maranhao"
+        }
+      ],
+      "blockchain_anchor": {
+        "currency_tie": "ΔTLA_COIN",
+        "dex_integration": "EVOL_MIRROR_MARKET",
+        "cultural_asset_class": "HERITAGE_BOND"
+      }
+    },
+    {
+      "id": "REGION.USA",
+      "name": "United States of America",
+      "emoji": "🇺🇸",
+      "geographic_coordinates": {"latitude": 37.0902, "longitude": -95.7129},
+      "communities": [
+        {
+          "id": "US.NEW_ORLEANS",
+          "name": "New Orleans, Louisiana",
+          "population_estimate": 390000,
+          "historical_significance": "Creole culture hub, birthplace of Jazz, unique African-French-Spanish fusion",
+          "symbolic_elements": ["Second Line umbrellas", "Voodoo symbols", "Mardi Gras Indians"],
+          "cultural_practices": ["Jazz funerals", "Mardi Gras Indian traditions", "Louisiana Voodoo"],
+          "modern_relevance_score": 0.95,
+          "economic_indicators": {
+            "tourism_potential": 0.96,
+            "cultural_preservation_index": 0.90,
+            "blockchain_integration_readiness": 0.78
+          },
+          "enft_template": "enft://afro-sovereign/usa/new-orleans"
+        },
+        {
+          "id": "US.GULLAH_GEECHEE",
+          "name": "Gullah Geechee Corridor",
+          "population_estimate": 500000,
+          "historical_significance": "Preserved African language, culture, and traditions from Sierra Leone and Liberia",
+          "symbolic_elements": ["Sweetgrass baskets", "Indigo dye", "Ring shout circles"],
+          "cultural_practices": ["Gullah language", "Ring shout", "Praise house worship"],
+          "modern_relevance_score": 0.93,
+          "economic_indicators": {
+            "tourism_potential": 0.82,
+            "cultural_preservation_index": 0.95,
+            "blockchain_integration_readiness": 0.68
+          },
+          "enft_template": "enft://afro-sovereign/usa/gullah-geechee"
+        },
+        {
+          "id": "US.HARLEM",
+          "name": "Harlem, New York",
+          "population_estimate": 125000,
+          "historical_significance": "Heart of Harlem Renaissance, center of African American cultural innovation",
+          "symbolic_elements": ["Apollo Theater", "Brownstones", "Harlem Renaissance art"],
+          "cultural_practices": ["Gospel music", "Hip Hop origins", "Spoken word poetry"],
+          "modern_relevance_score": 0.92,
+          "economic_indicators": {
+            "tourism_potential": 0.90,
+            "cultural_preservation_index": 0.82,
+            "blockchain_integration_readiness": 0.88
+          },
+          "enft_template": "enft://afro-sovereign/usa/harlem"
+        },
+        {
+          "id": "US.ATLANTA",
+          "name": "Atlanta, Georgia",
+          "population_estimate": 500000,
+          "historical_significance": "Capital of the New South, center of civil rights movement and Black enterprise",
+          "symbolic_elements": ["HBCU legacy", "MLK landmarks", "Black Wall Street revival"],
+          "cultural_practices": ["Hip Hop culture", "Civil rights preservation", "Black business networks"],
+          "modern_relevance_score": 0.96,
+          "economic_indicators": {
+            "tourism_potential": 0.88,
+            "cultural_preservation_index": 0.85,
+            "blockchain_integration_readiness": 0.92
+          },
+          "enft_template": "enft://afro-sovereign/usa/atlanta"
+        }
+      ],
+      "blockchain_anchor": {
+        "currency_tie": "ΔTLA_COIN",
+        "dex_integration": "EVOL_MIRROR_MARKET",
+        "cultural_asset_class": "HERITAGE_BOND"
+      }
+    },
+    {
+      "id": "REGION.JAMAICA",
+      "name": "Jamaica",
+      "emoji": "🇯🇲",
+      "geographic_coordinates": {"latitude": 18.1096, "longitude": -77.2975},
+      "communities": [
+        {
+          "id": "JM.MAROON_COMMUNITIES",
+          "name": "Maroon Communities",
+          "population_estimate": 5000,
+          "historical_significance": "Descendants of escaped enslaved Africans who won freedom from British colonizers",
+          "symbolic_elements": ["Abeng horn", "Colonel Nanny statue", "Maroon flags"],
+          "cultural_practices": ["Kromanti language", "Maroon ceremonies", "Traditional governance"],
+          "modern_relevance_score": 0.90,
+          "economic_indicators": {
+            "tourism_potential": 0.78,
+            "cultural_preservation_index": 0.96,
+            "blockchain_integration_readiness": 0.60
+          },
+          "enft_template": "enft://afro-sovereign/jamaica/maroon"
+        },
+        {
+          "id": "JM.KINGSTON",
+          "name": "Kingston",
+          "population_estimate": 670000,
+          "historical_significance": "Birthplace of Reggae music and Rastafarian movement",
+          "symbolic_elements": ["Bob Marley legacy", "Sound system culture", "Lion of Judah"],
+          "cultural_practices": ["Reggae music", "Rastafarian spirituality", "Nyabinghi drumming"],
+          "modern_relevance_score": 0.97,
+          "economic_indicators": {
+            "tourism_potential": 0.94,
+            "cultural_preservation_index": 0.88,
+            "blockchain_integration_readiness": 0.76
+          },
+          "enft_template": "enft://afro-sovereign/jamaica/kingston"
+        }
+      ],
+      "blockchain_anchor": {
+        "currency_tie": "ΔTLA_COIN",
+        "dex_integration": "EVOL_MIRROR_MARKET",
+        "cultural_asset_class": "HERITAGE_BOND"
+      }
+    },
+    {
+      "id": "REGION.HAITI",
+      "name": "Haiti",
+      "emoji": "🇭🇹",
+      "geographic_coordinates": {"latitude": 18.9712, "longitude": -72.2852},
+      "communities": [
+        {
+          "id": "HT.PORT_AU_PRINCE",
+          "name": "Port-au-Prince",
+          "population_estimate": 2800000,
+          "historical_significance": "First free Black republic, successful slave revolution that defeated Napoleon",
+          "symbolic_elements": ["Citadelle Laferrière", "Vodou temples", "Iron market"],
+          "cultural_practices": ["Haitian Vodou", "Rara festivals", "Kompa music"],
+          "modern_relevance_score": 0.94,
+          "economic_indicators": {
+            "tourism_potential": 0.70,
+            "cultural_preservation_index": 0.93,
+            "blockchain_integration_readiness": 0.58
+          },
+          "enft_template": "enft://afro-sovereign/haiti/port-au-prince"
+        },
+        {
+          "id": "HT.JACMEL",
+          "name": "Jacmel",
+          "population_estimate": 50000,
+          "historical_significance": "Cultural capital with rich artistic traditions and carnival heritage",
+          "symbolic_elements": ["Paper mache art", "Carnival masks", "Colonial architecture"],
+          "cultural_practices": ["Jacmel Carnival", "Artisanal crafts", "Music traditions"],
+          "modern_relevance_score": 0.86,
+          "economic_indicators": {
+            "tourism_potential": 0.82,
+            "cultural_preservation_index": 0.90,
+            "blockchain_integration_readiness": 0.55
+          },
+          "enft_template": "enft://afro-sovereign/haiti/jacmel"
+        }
+      ],
+      "blockchain_anchor": {
+        "currency_tie": "ΔTLA_COIN",
+        "dex_integration": "EVOL_MIRROR_MARKET",
+        "cultural_asset_class": "HERITAGE_BOND"
+      }
+    },
+    {
+      "id": "REGION.COLOMBIA",
+      "name": "Colombia",
+      "emoji": "🇨🇴",
+      "geographic_coordinates": {"latitude": 4.5709, "longitude": -74.2973},
+      "communities": [
+        {
+          "id": "CO.PALENQUE",
+          "name": "San Basilio de Palenque",
+          "population_estimate": 4000,
+          "historical_significance": "First free African town in the Americas, UNESCO Masterpiece of Oral Heritage",
+          "symbolic_elements": ["Palenquero language", "Tambores", "Ancestral medicine"],
+          "cultural_practices": ["Palenquero Creole", "Lumbalú funeral rites", "Traditional medicine"],
+          "modern_relevance_score": 0.95,
+          "economic_indicators": {
+            "tourism_potential": 0.80,
+            "cultural_preservation_index": 0.98,
+            "blockchain_integration_readiness": 0.62
+          },
+          "enft_template": "enft://afro-sovereign/colombia/palenque"
+        },
+        {
+          "id": "CO.CHOCO",
+          "name": "Chocó Department",
+          "population_estimate": 500000,
+          "historical_significance": "Highest percentage of African descent in Colombia, rich musical traditions",
+          "symbolic_elements": ["Currulao drums", "Chirimía music", "Gold mining heritage"],
+          "cultural_practices": ["Currulao dance", "Chirimía music", "Oral traditions"],
+          "modern_relevance_score": 0.88,
+          "economic_indicators": {
+            "tourism_potential": 0.72,
+            "cultural_preservation_index": 0.90,
+            "blockchain_integration_readiness": 0.55
+          },
+          "enft_template": "enft://afro-sovereign/colombia/choco"
+        }
+      ],
+      "blockchain_anchor": {
+        "currency_tie": "ΔTLA_COIN",
+        "dex_integration": "EVOL_MIRROR_MARKET",
+        "cultural_asset_class": "HERITAGE_BOND"
+      }
+    },
+    {
+      "id": "REGION.CUBA",
+      "name": "Cuba",
+      "emoji": "🇨🇺",
+      "geographic_coordinates": {"latitude": 21.5218, "longitude": -77.7812},
+      "communities": [
+        {
+          "id": "CU.HAVANA",
+          "name": "Havana",
+          "population_estimate": 2100000,
+          "historical_significance": "Center of Afro-Cuban religious syncretism and musical innovation",
+          "symbolic_elements": ["Santería altars", "Batá drums", "Rumba circles"],
+          "cultural_practices": ["Santería", "Rumba", "Son cubano", "Abakuá society"],
+          "modern_relevance_score": 0.94,
+          "economic_indicators": {
+            "tourism_potential": 0.92,
+            "cultural_preservation_index": 0.91,
+            "blockchain_integration_readiness": 0.52
+          },
+          "enft_template": "enft://afro-sovereign/cuba/havana"
+        },
+        {
+          "id": "CU.SANTIAGO",
+          "name": "Santiago de Cuba",
+          "population_estimate": 500000,
+          "historical_significance": "Birthplace of Son music and Carnival traditions with strong African roots",
+          "symbolic_elements": ["Comparsa groups", "Tumba Francesa", "Carnival costumes"],
+          "cultural_practices": ["Carnival of Santiago", "Tumba Francesa", "Afro-Cuban music"],
+          "modern_relevance_score": 0.92,
+          "economic_indicators": {
+            "tourism_potential": 0.88,
+            "cultural_preservation_index": 0.93,
+            "blockchain_integration_readiness": 0.50
+          },
+          "enft_template": "enft://afro-sovereign/cuba/santiago"
+        }
+      ],
+      "blockchain_anchor": {
+        "currency_tie": "ΔTLA_COIN",
+        "dex_integration": "EVOL_MIRROR_MARKET",
+        "cultural_asset_class": "HERITAGE_BOND"
+      }
+    },
+    {
+      "id": "REGION.WEST_AFRICA",
+      "name": "West Africa Origins",
+      "emoji": "🌍",
+      "geographic_coordinates": {"latitude": 10.0000, "longitude": -5.0000},
+      "communities": [
+        {
+          "id": "WA.GHANA_COAST",
+          "name": "Ghana Cape Coast",
+          "population_estimate": 170000,
+          "historical_significance": "Major slave trading port, Door of No Return, center of diaspora reconnection",
+          "symbolic_elements": ["Cape Coast Castle", "Sankofa bird", "Kente cloth"],
+          "cultural_practices": ["PANAFEST", "Emancipation Day", "Homecoming ceremonies"],
+          "modern_relevance_score": 0.97,
+          "economic_indicators": {
+            "tourism_potential": 0.92,
+            "cultural_preservation_index": 0.95,
+            "blockchain_integration_readiness": 0.72
+          },
+          "enft_template": "enft://afro-sovereign/west-africa/ghana"
+        },
+        {
+          "id": "WA.SENEGAL_GOREE",
+          "name": "Gorée Island, Senegal",
+          "population_estimate": 2000,
+          "historical_significance": "UNESCO World Heritage site, symbolic center of the Atlantic slave trade",
+          "symbolic_elements": ["House of Slaves", "Door of No Return", "Baobab trees"],
+          "cultural_practices": ["Memorial ceremonies", "Cultural festivals", "Diaspora reunions"],
+          "modern_relevance_score": 0.96,
+          "economic_indicators": {
+            "tourism_potential": 0.94,
+            "cultural_preservation_index": 0.97,
+            "blockchain_integration_readiness": 0.68
+          },
+          "enft_template": "enft://afro-sovereign/west-africa/senegal"
+        },
+        {
+          "id": "WA.BENIN_OUIDAH",
+          "name": "Ouidah, Benin",
+          "population_estimate": 80000,
+          "historical_significance": "Major embarkation point, birthplace of Vodun religion",
+          "symbolic_elements": ["Route of the Slaves", "Python Temple", "Door of No Return"],
+          "cultural_practices": ["Vodun Festival", "Ancestral ceremonies", "Sacred forest rituals"],
+          "modern_relevance_score": 0.94,
+          "economic_indicators": {
+            "tourism_potential": 0.88,
+            "cultural_preservation_index": 0.96,
+            "blockchain_integration_readiness": 0.62
+          },
+          "enft_template": "enft://afro-sovereign/west-africa/benin"
+        }
+      ],
+      "blockchain_anchor": {
+        "currency_tie": "ΔTLA_COIN",
+        "dex_integration": "EVOL_MIRROR_MARKET",
+        "cultural_asset_class": "HERITAGE_BOND"
+      }
+    }
+  ],
+  "symbolic_glyphs": [
+    {
+      "id": "glyph_sankofa",
+      "symbol": "🔄",
+      "name": "Sankofa",
+      "meaning": "Return and retrieve - learning from the past to move forward",
+      "origin": "Ghana (Akan)",
+      "educational_domain": "Historical Reclamation",
+      "economic_function": "Heritage credit validation"
+    },
+    {
+      "id": "glyph_adinkrahene",
+      "symbol": "⭕",
+      "name": "Adinkrahene",
+      "meaning": "Chief of Adinkra symbols - leadership and greatness",
+      "origin": "Ghana (Akan)",
+      "educational_domain": "Leadership Studies",
+      "economic_function": "Governance token anchor"
+    },
+    {
+      "id": "glyph_anansi",
+      "symbol": "🕷️",
+      "name": "Anansi Web",
+      "meaning": "Wisdom, storytelling, and knowledge transfer",
+      "origin": "Ghana/Caribbean",
+      "educational_domain": "Oral Tradition Preservation",
+      "economic_function": "Knowledge asset minting"
+    },
+    {
+      "id": "glyph_nyame_nti",
+      "symbol": "🌿",
+      "name": "Nyame Nti",
+      "meaning": "By God's grace - faith and trust in the divine",
+      "origin": "Ghana (Akan)",
+      "educational_domain": "Spiritual Economics",
+      "economic_function": "Sacred trust bonds"
+    },
+    {
+      "id": "glyph_ankh",
+      "symbol": "☥",
+      "name": "Ankh",
+      "meaning": "Life force and immortality",
+      "origin": "Kemet (Ancient Egypt)",
+      "educational_domain": "Life Sciences & Biotech",
+      "economic_function": "Biohealth asset class"
+    },
+    {
+      "id": "glyph_african_star",
+      "symbol": "⭐",
+      "name": "Black Star",
+      "meaning": "Pan-African unity and liberation",
+      "origin": "Pan-African Movement",
+      "educational_domain": "Pan-African Studies",
+      "economic_function": "Continental trade token"
+    }
+  ],
+  "educational_modules": [
+    {
+      "evolverse": "MirrorEvolverse",
+      "life_domain": "Identity",
+      "title": "Afro-Sovereign Identity Reclamation",
+      "key_glyph": "🔄",
+      "instructional_mode": "Ancestral mapping + DNA heritage integration",
+      "yield_feedback": "IdentityCoin sovereignty credits"
+    },
+    {
+      "evolverse": "CivicEvolverse",
+      "life_domain": "Governance",
+      "title": "Maroon Governance Systems",
+      "key_glyph": "⭕",
+      "instructional_mode": "Historical case studies + modern DAO adaptation",
+      "yield_feedback": "Governance token allocation"
+    },
+    {
+      "evolverse": "TerraEvolverse",
+      "life_domain": "Agriculture",
+      "title": "African Agricultural Knowledge Systems",
+      "key_glyph": "🌿",
+      "instructional_mode": "Traditional farming + permaculture integration",
+      "yield_feedback": "TerraCoin land credits"
+    },
+    {
+      "evolverse": "PulseEvolverse",
+      "life_domain": "Media",
+      "title": "Diaspora Music & Cultural Transmission",
+      "key_glyph": "🎵",
+      "instructional_mode": "Musical heritage analysis + modern fusion studies",
+      "yield_feedback": "RhythmCoin royalty streams"
+    },
+    {
+      "evolverse": "ChronEvolverse",
+      "life_domain": "History",
+      "title": "Transatlantic Trade Route Reconstruction",
+      "key_glyph": "🚢",
+      "instructional_mode": "Maritime history + geographic mapping",
+      "yield_feedback": "HistoryCoin preservation credits"
+    },
+    {
+      "evolverse": "SpiritEvolverse",
+      "life_domain": "Spirituality",
+      "title": "African Traditional Religions Across Diaspora",
+      "key_glyph": "☥",
+      "instructional_mode": "Comparative religion + syncretism analysis",
+      "yield_feedback": "SpiritCoin ritual credits"
+    }
+  ],
+  "historical_anchors": [
+    {
+      "id": "ANCHOR.MIDDLE_PASSAGE",
+      "name": "Middle Passage Routes",
+      "time_period": "1501-1867",
+      "estimated_souls": 12500000,
+      "primary_routes": ["West Africa to Caribbean", "West Africa to Brazil", "West Africa to North America"],
+      "memorial_status": "Active remembrance",
+      "blockchain_memorial": "enft://memorial/middle-passage"
+    },
+    {
+      "id": "ANCHOR.HAITIAN_REVOLUTION",
+      "name": "Haitian Revolution",
+      "time_period": "1791-1804",
+      "significance": "First successful slave revolution resulting in independent Black republic",
+      "key_figures": ["Toussaint Louverture", "Jean-Jacques Dessalines", "Dutty Boukman"],
+      "blockchain_memorial": "enft://memorial/haitian-revolution"
+    },
+    {
+      "id": "ANCHOR.QUILOMBO_RESISTANCE",
+      "name": "Quilombo Resistance",
+      "time_period": "1580-1710",
+      "significance": "Largest fugitive slave community in the Americas led by Zumbi",
+      "key_figures": ["Zumbi dos Palmares", "Dandara", "Ganga Zumba"],
+      "blockchain_memorial": "enft://memorial/quilombo-palmares"
+    },
+    {
+      "id": "ANCHOR.CIVIL_RIGHTS_USA",
+      "name": "US Civil Rights Movement",
+      "time_period": "1954-1968",
+      "significance": "Landmark movement for racial equality and social justice",
+      "key_figures": ["Martin Luther King Jr.", "Rosa Parks", "Malcolm X", "Fannie Lou Hamer"],
+      "blockchain_memorial": "enft://memorial/civil-rights"
+    }
+  ],
+  "currency_tiebacks": {
+    "primary_currency": "ΔTLA_COIN",
+    "heritage_bonds": {
+      "type": "HERITAGE_BOND",
+      "description": "Tradeable cultural heritage assets backed by community value",
+      "yield_mechanism": "Cultural tourism and educational revenue sharing"
+    },
+    "dex_integration": {
+      "exchange": "EVOL_MIRROR_MARKET",
+      "trading_pairs": ["ΔTLA/ETH", "ΔTLA/USDC", "HERITAGE/ΔTLA"],
+      "liquidity_pools": ["Cultural Heritage Pool", "Diaspora Investment Pool"]
+    },
+    "global_dex_anchor": {
+      "name": "History-Global DEX Trade Anchor",
+      "description": "Blockchain-based trade anchor for Afro-descendant heritage assets",
+      "scaling_mechanism": "Community-driven valuation with historical significance multipliers"
+    }
+  },
+  "visualization_config": {
+    "chart_types": ["bar_chart", "heat_map", "geographic_scatter", "timeline"],
+    "color_palette": {
+      "primary": "#1A1A2E",
+      "secondary": "#16213E",
+      "accent": "#E94560",
+      "gold": "#FFD700",
+      "earth": "#8B4513"
+    },
+    "heatmap_metrics": ["modern_relevance_score", "cultural_preservation_index", "blockchain_integration_readiness"]
+  }
+}
