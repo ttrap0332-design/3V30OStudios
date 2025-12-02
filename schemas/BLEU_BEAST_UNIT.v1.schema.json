@@ -1,0 +1,245 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bleulion.treasury/schemas/BLEU_BEAST_UNIT.v1.schema.json",
+  "title": "BLEU Beast Robotic Unit Schema",
+  "description": "Schema for BLEU Beast Special Operations Robotic Divisions with archetypal purpose codes and safeguards",
+  "type": "object",
+  "required": ["unitId", "classification", "capabilities", "safeguards", "hierarchy"],
+  "properties": {
+    "unitId": {
+      "type": "string",
+      "pattern": "^APEX-0[1-6]-[A-Z0-9]{8}$",
+      "description": "Unique unit identifier following APEX classification"
+    },
+    "classification": {
+      "type": "object",
+      "required": ["code", "designation", "primaryFunction"],
+      "properties": {
+        "code": {
+          "type": "string",
+          "enum": ["APEX-01", "APEX-02", "APEX-03", "APEX-04", "APEX-05", "APEX-06"],
+          "description": "Archetypal purpose code"
+        },
+        "designation": {
+          "type": "string",
+          "enum": ["Lion Guardian", "Ram Breaker", "Serpent Weave", "Eagle Sight", "Turtle Shield", "Phoenix Rise"],
+          "description": "Unit designation name"
+        },
+        "primaryFunction": {
+          "type": "string",
+          "description": "Primary operational function"
+        },
+        "archetypeSymbol": {
+          "type": "string",
+          "description": "Unicode symbol representing unit archetype"
+        },
+        "mythicBinding": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether unit operates under mythic binding protocols"
+        }
+      }
+    },
+    "capabilities": {
+      "type": "object",
+      "required": ["operationalModes", "weaponSystems", "communicationProtocols"],
+      "properties": {
+        "operationalModes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "modeId": { "type": "string" },
+              "modeName": { "type": "string" },
+              "lethalityLevel": {
+                "type": "string",
+                "enum": ["non-lethal", "deterrent", "defensive", "offensive", "maximum"]
+              },
+              "authorizationRequired": {
+                "type": "string",
+                "enum": ["unit", "commander", "tribunal", "sovereign"]
+              }
+            }
+          }
+        },
+        "weaponSystems": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "systemId": { "type": "string" },
+              "systemName": { "type": "string" },
+              "category": {
+                "type": "string",
+                "enum": ["psychological", "defensive", "offensive", "support", "restoration"]
+              },
+              "glyphLocked": { "type": "boolean" },
+              "enftRequired": { "type": "boolean" }
+            }
+          }
+        },
+        "communicationProtocols": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["pulse_archive", "scroll_sync", "tribunal_relay", "watchtower_link", "ceremonial_broadcast"]
+          }
+        },
+        "efficiencyRatio": {
+          "type": "number",
+          "description": "Tri-cycle efficiency ratio - 1.0 is baseline performance, 2.1 is optimal Double Aries operation, 3.0 is theoretical maximum",
+          "minimum": 1.0,
+          "maximum": 3.0
+        }
+      }
+    },
+    "safeguards": {
+      "type": "object",
+      "required": ["authorizationProtocol", "deactivationTriggers", "civilianProtection"],
+      "properties": {
+        "authorizationProtocol": {
+          "type": "object",
+          "required": ["lockLevels", "minimumApprovals"],
+          "properties": {
+            "lockLevels": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 3,
+              "description": "Number of authorization locks required"
+            },
+            "minimumApprovals": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "approvalAuthorities": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": ["sovereign_tribunal", "grand_vault_council", "watchtower_ai", "unit_commander", "double_aries_council"]
+              }
+            }
+          }
+        },
+        "deactivationTriggers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "triggerId": { "type": "string" },
+              "triggerType": {
+                "type": "string",
+                "enum": ["treaty_recognition", "civilian_threshold", "mission_complete", "sovereign_override", "resource_critical"]
+              },
+              "automatic": { "type": "boolean" },
+              "appealable": { "type": "boolean" }
+            }
+          }
+        },
+        "civilianProtection": {
+          "type": "object",
+          "properties": {
+            "identificationSystem": { "type": "boolean" },
+            "protectionPriority": {
+              "type": "string",
+              "enum": ["maximum", "high", "standard"]
+            },
+            "evacuationCapability": { "type": "boolean" },
+            "medicalIntegration": { "type": "boolean" }
+          }
+        },
+        "bloodlineSparing": {
+          "type": "object",
+          "description": "Selective sparing protocol per bloodline",
+          "properties": {
+            "maxSparingPerBloodline": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 4,
+              "description": "Maximum individuals spared per bloodline"
+            },
+            "dnaVerificationRequired": { "type": "boolean" },
+            "pulseArchiveRecord": { "type": "boolean" },
+            "appealProcess": { "type": "boolean" }
+          }
+        },
+        "aiDeterrent": {
+          "type": "object",
+          "description": "Final AI deterrent mechanisms",
+          "properties": {
+            "conscienceCircuit": { "type": "boolean" },
+            "mirrorScrollReflection": { "type": "boolean" },
+            "yieldScrollAudit": { "type": "boolean" },
+            "faceOffProtocol": { "type": "boolean" }
+          }
+        }
+      }
+    },
+    "hierarchy": {
+      "type": "object",
+      "required": ["reportingChain", "commandAuthority"],
+      "properties": {
+        "reportingChain": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "level": { "type": "integer", "minimum": 1 },
+              "authority": { "type": "string" },
+              "address": {
+                "type": "string",
+                "pattern": "^0x[0-9a-fA-F]{40}$"
+              }
+            }
+          }
+        },
+        "commandAuthority": {
+          "type": "string",
+          "enum": ["sovereign_tribunal", "double_aries_council", "watchtower_ai_grid", "metamilitary_command", "turtle_unit_protocol", "atlantis_vault"]
+        },
+        "divisionCommander": {
+          "type": "string",
+          "pattern": "^0x[0-9a-fA-F]{40}$"
+        }
+      }
+    },
+    "operationalCodes": {
+      "type": "object",
+      "description": "Unit-specific operational codes (e.g., TURTLE unit codes)",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "codeId": { "type": "string" },
+          "description": { "type": "string" },
+          "activationSequence": { "type": "string" },
+          "authorizationLevel": {
+            "type": "string",
+            "enum": ["unit", "commander", "tribunal", "sovereign"]
+          }
+        }
+      }
+    },
+    "deploymentLog": {
+      "type": "object",
+      "properties": {
+        "activatedAt": { "type": "string", "format": "date-time" },
+        "lastMission": { "type": "string", "format": "date-time" },
+        "totalDeployments": { "type": "integer", "minimum": 0 },
+        "pulseArchiveHash": {
+          "type": "string",
+          "pattern": "^0x[0-9a-fA-F]{64}$"
+        }
+      }
+    },
+    "ecosystemIntegration": {
+      "type": "object",
+      "description": "Integration with EVOLSIP ecosystem protocols",
+      "properties": {
+        "bleucoinFunding": { "type": "boolean" },
+        "praiseCoinRecognition": { "type": "boolean" },
+        "scrollCoinArchival": { "type": "boolean" },
+        "zioniareGovernance": { "type": "boolean" },
+        "vaultRoute": { "type": "string" }
+      }
+    }
+  }
+}
