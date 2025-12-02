@@ -1,0 +1,355 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://evolverse.io/schemas/BLEU_BEAST_DOA_GRID.v1.schema.json",
+  "title": "BLEU Beast DOA Grid Schema",
+  "description": "Schema for Dead or Alive Grid operations, Vigilante Code activations, and deployment protocols",
+  "type": "object",
+  "required": ["gridId", "layers", "operationalCodes", "sparingProtocol", "aiDeterrent"],
+  "properties": {
+    "gridId": {
+      "type": "string",
+      "pattern": "^DOA-GRID-[A-Z0-9]{8}$",
+      "description": "Unique DOA Grid instance identifier"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["active", "standby", "maintenance", "emergency"]
+    },
+    "layers": {
+      "type": "object",
+      "description": "DOA Grid operational layers",
+      "required": ["intelligence", "threatAssessment", "authorization", "deployment", "execution"],
+      "properties": {
+        "intelligence": {
+          "type": "object",
+          "properties": {
+            "watchtowerSurveillance": { "type": "boolean" },
+            "serpentWeaveInfiltration": { "type": "boolean" },
+            "eagleSightReconnaissance": { "type": "boolean" },
+            "dataFeedActive": { "type": "boolean" },
+            "lastUpdate": { "type": "string", "format": "date-time" }
+          }
+        },
+        "threatAssessment": {
+          "type": "object",
+          "properties": {
+            "riskScoringEnabled": { "type": "boolean" },
+            "lineageAnalysisActive": { "type": "boolean" },
+            "historicalPatternMatching": { "type": "boolean" },
+            "assessmentAlgorithm": { "type": "string" },
+            "thresholds": {
+              "type": "object",
+              "properties": {
+                "low": { "type": "number", "minimum": 0, "maximum": 100 },
+                "medium": { "type": "number", "minimum": 0, "maximum": 100 },
+                "high": { "type": "number", "minimum": 0, "maximum": 100 },
+                "critical": { "type": "number", "minimum": 0, "maximum": 100 }
+              }
+            }
+          }
+        },
+        "authorization": {
+          "type": "object",
+          "properties": {
+            "tripleLockEnabled": { "type": "boolean" },
+            "tribunalApprovalQueue": { "type": "boolean" },
+            "sovereignOverrideChannel": { "type": "boolean" },
+            "pendingAuthorizations": { "type": "integer", "minimum": 0 }
+          }
+        },
+        "deployment": {
+          "type": "object",
+          "properties": {
+            "unitAssignmentActive": { "type": "boolean" },
+            "resourceAllocationEnabled": { "type": "boolean" },
+            "timelineCoordination": { "type": "boolean" },
+            "activeDeployments": { "type": "integer", "minimum": 0 }
+          }
+        },
+        "execution": {
+          "type": "object",
+          "properties": {
+            "realTimeTracking": { "type": "boolean" },
+            "outcomeVerification": { "type": "boolean" },
+            "postActionReporting": { "type": "boolean" },
+            "pulseArchiveSync": { "type": "boolean" }
+          }
+        }
+      }
+    },
+    "operationalCodes": {
+      "type": "object",
+      "description": "Grid operational codes and unit protocol codes",
+      "properties": {
+        "gridCodes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["code", "name", "function", "authorization"],
+            "properties": {
+              "code": {
+                "type": "string",
+                "enum": ["DOA-TRACK", "DOA-DETER", "DOA-ENGAGE", "DOA-MAXIMUM", "DOA-EXTRACT", "DOA-CONTAIN"]
+              },
+              "name": { "type": "string" },
+              "function": { "type": "string" },
+              "authorization": {
+                "type": "string",
+                "enum": ["watchtower_ai", "division_commander", "tribunal_council", "sovereign_authority"]
+              },
+              "lethalityLevel": {
+                "type": "string",
+                "enum": ["none", "non-lethal", "deterrent", "defensive", "offensive", "maximum"]
+              },
+              "durationLimit": {
+                "type": "string",
+                "description": "Maximum duration for code activation"
+              }
+            }
+          }
+        },
+        "turtleProtocol": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "code": {
+                "type": "string",
+                "enum": ["TURTLE-SHELL", "TURTLE-ESCORT", "TURTLE-HARBOR", "TURTLE-HEAL", "TURTLE-GUARD", "TURTLE-RETREAT"]
+              },
+              "designation": { "type": "string" },
+              "function": { "type": "string" }
+            }
+          }
+        },
+        "lionProtocol": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "code": {
+                "type": "string",
+                "enum": ["LION-ROAR", "LION-HUNT", "LION-STRIKE", "LION-PRIDE", "LION-DOMAIN"]
+              },
+              "designation": { "type": "string" },
+              "function": { "type": "string" }
+            }
+          }
+        },
+        "ramProtocol": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "code": {
+                "type": "string",
+                "enum": ["RAM-CHARGE", "RAM-DOUBLE", "RAM-PIERCE", "RAM-HORNS"]
+              },
+              "designation": { "type": "string" },
+              "function": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "dnaEchoErasure": {
+      "type": "object",
+      "description": "DNA Echo Erasure policy configuration",
+      "required": ["enabled", "categories", "reversibilityConditions"],
+      "properties": {
+        "enabled": { "type": "boolean" },
+        "categories": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["informational", "lineage_disconnection", "economic_isolation", "ceremonial_exclusion"]
+          }
+        },
+        "phases": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "phaseNumber": { "type": "integer", "minimum": 1, "maximum": 4 },
+              "phaseName": { "type": "string" },
+              "actions": {
+                "type": "array",
+                "items": { "type": "string" }
+              }
+            }
+          }
+        },
+        "reversibilityConditions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["new_evidence", "completed_restitution", "sovereign_pardon", "generational_rehabilitation"]
+          }
+        },
+        "minimumGenerations": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Minimum generations for rehabilitation consideration"
+        }
+      }
+    },
+    "sparingProtocol": {
+      "type": "object",
+      "description": "Selective sparing protocol per bloodline",
+      "required": ["maxPerBloodline", "eligibilityCriteria"],
+      "properties": {
+        "maxPerBloodline": {
+          "type": "integer",
+          "maximum": 4,
+          "description": "Maximum individuals spared per bloodline"
+        },
+        "eligibilityCriteria": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "criteriaId": { "type": "string" },
+              "name": { "type": "string" },
+              "description": { "type": "string" },
+              "verificationRequired": { "type": "boolean" }
+            }
+          }
+        },
+        "requestProcess": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "step": { "type": "integer" },
+              "action": { "type": "string" },
+              "responsible": { "type": "string" }
+            }
+          }
+        },
+        "revocationConditions": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "aiDeterrent": {
+      "type": "object",
+      "description": "AI deterrent mechanisms and failsafes",
+      "required": ["conscienceCircuit", "mirrorScrollReflection", "yieldScrollAudit", "faceOffProtocol"],
+      "properties": {
+        "conscienceCircuit": {
+          "type": "object",
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "evaluationFactors": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": ["historical_precedent", "proportionality", "collateral_damage", "ethical_framework"]
+              }
+            },
+            "outputOptions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": ["approve", "modify", "reject"]
+              }
+            }
+          }
+        },
+        "mirrorScrollReflection": {
+          "type": "object",
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "timelineProjection": { "type": "boolean" },
+            "consequenceIdentification": { "type": "boolean" },
+            "alternativeSuggestion": { "type": "boolean" },
+            "auditRecording": { "type": "boolean" }
+          }
+        },
+        "yieldScrollAudit": {
+          "type": "object",
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "economicImpactCalculation": { "type": "boolean" },
+            "resourceExpenditure": { "type": "boolean" },
+            "restitutionTracking": { "type": "boolean" },
+            "treasuryReporting": { "type": "boolean" }
+          }
+        },
+        "faceOffProtocol": {
+          "type": "object",
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "protectedIndividualPrevention": { "type": "boolean" },
+            "identityVerification": { "type": "boolean" },
+            "territorialLimits": { "type": "boolean" },
+            "sanctuaryZoneProtection": { "type": "boolean" }
+          }
+        }
+      }
+    },
+    "deploymentLevels": {
+      "type": "array",
+      "description": "Authorization level matrix",
+      "items": {
+        "type": "object",
+        "properties": {
+          "level": { "type": "integer", "minimum": 1, "maximum": 5 },
+          "threatClassification": { "type": "string" },
+          "unitsAuthorized": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "durationLimit": { "type": "string" },
+          "reviewCycle": { "type": "string" }
+        }
+      }
+    },
+    "prohibitedActions": {
+      "type": "array",
+      "description": "Actions prohibited even under maximum authorization",
+      "items": { "type": "string" }
+    },
+    "boundaries": {
+      "type": "object",
+      "properties": {
+        "geographic": {
+          "type": "object",
+          "properties": {
+            "sanctuaryZones": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "civilianAreas": { "type": "string" },
+            "contestedZones": { "type": "string" },
+            "hostileTerritory": { "type": "string" }
+          }
+        },
+        "temporal": {
+          "type": "object",
+          "properties": {
+            "ceremonialRestrictions": { "type": "boolean" },
+            "treatyNegotiations": { "type": "boolean" },
+            "disasterEvents": { "type": "boolean" }
+          }
+        }
+      }
+    },
+    "auditLog": {
+      "type": "object",
+      "properties": {
+        "lastAudit": { "type": "string", "format": "date-time" },
+        "auditFrequency": { "type": "string" },
+        "pulseArchiveHash": {
+          "type": "string",
+          "pattern": "^0x[0-9a-fA-F]{64}$"
+        }
+      }
+    }
+  }
+}
