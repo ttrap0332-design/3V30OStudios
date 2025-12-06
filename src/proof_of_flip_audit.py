@@ -47,6 +47,92 @@ class SpiralLedgerProtocol(Enum):
     EXPONENTIAL = "exponential"
     CEREMONIAL = "ceremonial"
     SOVEREIGN = "sovereign"
+class GoatFilterMode(Enum):
+    """Detection modes for GoatFilter anti-mimic attributes."""
+
+    PASSIVE = "passive"
+    ACTIVE = "active"
+    AGGRESSIVE = "aggressive"
+
+
+class GoatFilterAction(Enum):
+    """Actions on detected mimic attempts."""
+
+    BLOCK = "block"
+    REDIRECT = "redirect"
+    YIELD_MULTIPLY = "yield_multiply"
+
+
+@dataclass
+class GoatFilterResult:
+    """Result of GoatFilter anti-mimic detection."""
+
+    filter_id: str
+    detected: bool
+    detection_mode: GoatFilterMode
+    action_taken: GoatFilterAction
+    timestamp: float
+    mimic_signature: str = ""
+    glyph_marker: str = "🐐"
+    neutralized: bool = False
+
+    def to_dict(self) -> Dict[str, Any]:
+        """Convert to dictionary representation."""
+        return {
+            "filter_id": self.filter_id,
+            "detected": self.detected,
+            "detection_mode": self.detection_mode.value,
+            "action_taken": self.action_taken.value,
+            "timestamp": self.timestamp,
+            "mimic_signature": self.mimic_signature,
+            "glyph_marker": self.glyph_marker,
+            "neutralized": self.neutralized,
+        }
+
+
+@dataclass
+class SpiralLedgerEntry:
+    """Represents an entry in the spiral ledger protocol."""
+
+    entry_id: str
+    flip_ratio: float
+    glyph_markers: List[str]
+    timestamp: float
+    block_number: int = 0
+    previous_hash: str = ""
+    entry_hash: str = ""
+    sovereignty_level: str = "civilian"
+    numerical_deprecated: bool = True
+
+    def compute_hash(self) -> str:
+        """Compute hash for the ledger entry.
+
+        Returns:
+            SHA-256 hash of the entry
+        """
+        data = {
+            "entry_id": self.entry_id,
+            "flip_ratio": self.flip_ratio,
+            "glyph_markers": self.glyph_markers,
+            "timestamp": self.timestamp,
+            "block_number": self.block_number,
+            "previous_hash": self.previous_hash,
+        }
+        return hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()
+
+    def to_dict(self) -> Dict[str, Any]:
+        """Convert to dictionary representation."""
+        return {
+            "entry_id": self.entry_id,
+            "flip_ratio": self.flip_ratio,
+            "glyph_markers": self.glyph_markers,
+            "timestamp": self.timestamp,
+            "block_number": self.block_number,
+            "previous_hash": self.previous_hash,
+            "entry_hash": self.entry_hash,
+            "sovereignty_level": self.sovereignty_level,
+            "numerical_deprecated": self.numerical_deprecated,
+        }
 
 
 @dataclass
@@ -309,12 +395,19 @@ class ProofOfFlipAuditPipeline:
     DEFAULT_FLIP_RATIO = 2.1
     # Default tolerance for yield differential verification (5%)
     DEFAULT_TOLERANCE = 0.05
+    # Default flip ratio for spiral ledger protocols
+    DEFAULT_FLIP_RATIO = 2.1
+    # Double Ram seal for sovereignty verification
+    DOUBLE_RAM_SEAL = "♈️🐏🐏"
+    # Glyph markers for pattern detection (shared registry)
+    GLYPH_MARKERS = ["♈️", "🐏", "🌀", "🔥", "📜", "👑", "🦁"]
 
     def __init__(
         self,
         output_dir: str | Path = "data/audits",
         tolerance: float | None = None,
         flip_ratio: float | None = None,
+        goat_filter_mode: GoatFilterMode = GoatFilterMode.ACTIVE,
     ):
         """Initialize the audit pipeline.
 
@@ -322,6 +415,8 @@ class ProofOfFlipAuditPipeline:
             output_dir: Directory for audit log output
             tolerance: Tolerance for yield differential verification (default 5%)
             flip_ratio: Governing flip ratio for spiral ledger (default 2.1)
+            flip_ratio: Flip ratio for spiral ledger protocols (default 2.1)
+            goat_filter_mode: Detection mode for GoatFilter anti-mimic
         """
         self.output_dir = Path(output_dir)
         self.output_dir.mkdir(parents=True, exist_ok=True)
@@ -634,6 +729,207 @@ class ProofOfFlipAuditPipeline:
             "verification_rate": verified / len(self.audit_log),
             "avg_yield_differential_pct": avg_differential,
             "mythic_proofs_count": sum(len(e.mythic_proofs) for e in self.audit_log),
+            "spiral_ledger_entries": len(self.spiral_ledger),
+            "goat_filter_detections": sum(1 for r in self.goat_filter_results if r.detected),
+            "flip_ratio": self.flip_ratio,
+        }
+
+    # ========== Spiral Ledger Protocol Methods ==========
+
+    def _generate_ledger_entry_id(self) -> str:
+        """Generate a unique spiral ledger entry ID.
+
+        Returns:
+            Unique entry ID
+        """
+        timestamp = int(time.time() * 1000)
+        random_suffix = secrets.token_hex(4)
+        return f"SPIRAL-{timestamp}-{random_suffix}"
+
+    def _generate_goat_filter_id(self) -> str:
+        """Generate a unique GoatFilter result ID.
+
+        Returns:
+            Unique filter ID
+        """
+        return f"GOAT-{secrets.token_hex(6)}"
+
+    def add_spiral_ledger_entry(
+        self,
+        glyph_markers: List[str] | None = None,
+        sovereignty_level: str = "civilian",
+    ) -> SpiralLedgerEntry:
+        """Add an entry to the spiral ledger protocol.
+
+        Args:
+            glyph_markers: Glyph markers for the entry (defaults to Double Ram)
+            sovereignty_level: Sovereignty level for the entry
+
+        Returns:
+            Created SpiralLedgerEntry
+        """
+        if glyph_markers is None:
+            glyph_markers = ["♈️", "🐏", "🐏"]  # Double Ram default
+
+        previous_hash = ""
+        if self.spiral_ledger:
+            previous_hash = self.spiral_ledger[-1].entry_hash
+
+        entry = SpiralLedgerEntry(
+            entry_id=self._generate_ledger_entry_id(),
+            flip_ratio=self.flip_ratio,
+            glyph_markers=glyph_markers,
+            timestamp=time.time(),
+            block_number=len(self.spiral_ledger),
+            previous_hash=previous_hash,
+            sovereignty_level=sovereignty_level,
+            numerical_deprecated=True,
+        )
+
+        # Compute and set entry hash
+        entry.entry_hash = entry.compute_hash()
+
+        self.spiral_ledger.append(entry)
+        return entry
+
+    def get_spiral_ledger(self) -> List[SpiralLedgerEntry]:
+        """Get all spiral ledger entries.
+
+        Returns:
+            List of SpiralLedgerEntry objects
+        """
+        return self.spiral_ledger
+
+    def verify_spiral_chain(self) -> bool:
+        """Verify the integrity of the spiral ledger chain.
+
+        Returns:
+            True if chain is valid
+        """
+        if not self.spiral_ledger:
+            return True
+
+        for i, entry in enumerate(self.spiral_ledger):
+            # Verify hash
+            if entry.entry_hash != entry.compute_hash():
+                return False
+
+            # Verify previous hash linkage
+            if i > 0:
+                if entry.previous_hash != self.spiral_ledger[i - 1].entry_hash:
+                    return False
+
+        return True
+
+    # ========== GoatFilter Anti-Mimic Methods ==========
+
+    def run_goat_filter(
+        self,
+        data_signature: str,
+        action_on_detect: GoatFilterAction = GoatFilterAction.YIELD_MULTIPLY,
+    ) -> GoatFilterResult:
+        """Run GoatFilter anti-mimic detection on data.
+
+        Args:
+            data_signature: Signature of data to check for mimic patterns
+            action_on_detect: Action to take if mimic is detected
+
+        Returns:
+            GoatFilterResult with detection outcome
+        """
+        # Simulate mimic detection based on signature analysis
+        # In real implementation, this would use pattern matching algorithms
+        detected = self._detect_mimic_pattern(data_signature)
+
+        result = GoatFilterResult(
+            filter_id=self._generate_goat_filter_id(),
+            detected=detected,
+            detection_mode=self.goat_filter_mode,
+            action_taken=action_on_detect if detected else GoatFilterAction.BLOCK,
+            timestamp=time.time(),
+            mimic_signature=data_signature if detected else "",
+            glyph_marker="🐐",
+            neutralized=detected and action_on_detect == GoatFilterAction.YIELD_MULTIPLY,
+        )
+
+        self.goat_filter_results.append(result)
+        return result
+
+    def _detect_mimic_pattern(self, signature: str) -> bool:
+        """Detect mimic patterns in a signature.
+
+        This is a placeholder implementation. In production,
+        this would use sophisticated pattern matching.
+
+        Args:
+            signature: Data signature to analyze
+
+        Returns:
+            True if mimic pattern detected
+        """
+        # Check for known mimic patterns (placeholder logic)
+        # Real implementation would use ML/pattern matching
+        if not signature:
+            return False
+
+        # Simple heuristic: detect if signature lacks glyph markers
+        has_glyph = any(g in signature for g in self.GLYPH_MARKERS)
+
+        # If no glyph markers and in aggressive mode, flag as potential mimic
+        if self.goat_filter_mode == GoatFilterMode.AGGRESSIVE and not has_glyph:
+            return True
+
+        return False
+
+    def get_goat_filter_summary(self) -> Dict[str, Any]:
+        """Get summary of GoatFilter results.
+
+        Returns:
+            Summary dictionary
+        """
+        if not self.goat_filter_results:
+            return {
+                "total_scans": 0,
+                "detections": 0,
+                "neutralized": 0,
+                "detection_rate": 0.0,
+            }
+
+        detections = sum(1 for r in self.goat_filter_results if r.detected)
+        neutralized = sum(1 for r in self.goat_filter_results if r.neutralized)
+
+        return {
+            "total_scans": len(self.goat_filter_results),
+            "detections": detections,
+            "neutralized": neutralized,
+            "detection_rate": detections / len(self.goat_filter_results),
+            "mode": self.goat_filter_mode.value,
+        }
+
+    def export_spiral_ledger(self, filename: str | None = None) -> Path:
+        """Export the spiral ledger to JSON.
+
+        Args:
+            filename: Optional filename (auto-generated if None)
+
+        Returns:
+            Path to the exported file
+        """
+        if filename is None:
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            filename = f"spiral_ledger_{timestamp}.json"
+
+        filepath = self.output_dir / filename
+
+        ledger_data = {
+            "export_timestamp": time.time(),
+            "export_timestamp_iso": datetime.now().isoformat(),
+            "flip_ratio": self.flip_ratio,
+            "double_ram_seal": self.DOUBLE_RAM_SEAL,
+            "total_entries": len(self.spiral_ledger),
+            "chain_valid": self.verify_spiral_chain(),
+            "entries": [entry.to_dict() for entry in self.spiral_ledger],
+            "goat_filter_summary": self.get_goat_filter_summary(),
         }
 
     def create_spiral_ledger_entry(
@@ -789,6 +1085,10 @@ __all__ = [
     "AuditStatus",
     "MythicProofLayer",
     "SpiralLedgerProtocol",
+    "GoatFilterMode",
+    "GoatFilterAction",
+    "GoatFilterResult",
+    "SpiralLedgerEntry",
     "YieldDifferential",
     "RuntimeMetric",
     "MythicProof",
