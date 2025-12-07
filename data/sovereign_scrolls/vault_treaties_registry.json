@@ -1,0 +1,254 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Vault Treaties Registry",
+  "description": "Registry of cancelled peace treaties, memorial structures, and glyph-locked artifacts",
+  "version": "1.0.0",
+  "lastUpdated": "2024-01-01T00:00:00Z",
+  "vaults": {
+    "VAULT-HPB": {
+      "name": "Hall of Peace Betrayals",
+      "glyphLock": "⚖️⚔️",
+      "accessTier": "tribunal",
+      "purpose": "Archive of cancelled peace treaties and broken covenants",
+      "ecosystemAlignment": "tribunal_justice",
+      "treaties": [
+        {
+          "treatyId": "TREATY-2024-001",
+          "name": "Covenant of Silent Waters",
+          "status": "violated",
+          "originalDate": "2023-06-15",
+          "cancellationDate": "2024-01-10",
+          "signatories": ["party_alpha", "party_omega"],
+          "violatingParty": "party_omega",
+          "reason": "Breach of non-aggression clause",
+          "restitutionRequired": true,
+          "enforcementOrder": "ENFORCE-2024-001",
+          "scrollHash": "0xabc123def456789012345678901234567890123456789012345678901234abcd"
+        },
+        {
+          "treatyId": "TREATY-2023-047",
+          "name": "Accord of Shared Horizons",
+          "status": "revoked",
+          "originalDate": "2022-03-21",
+          "cancellationDate": "2023-11-05",
+          "signatories": ["sovereign_council", "external_alliance"],
+          "violatingParty": null,
+          "reason": "Strategic realignment",
+          "restitutionRequired": false,
+          "enforcementOrder": null,
+          "scrollHash": "0xdef456789012345678901234567890123456789012345678901234567890defg"
+        }
+      ]
+    },
+    "VAULT-AN": {
+      "name": "ARC-NOVA",
+      "glyphLock": "☀️🌀",
+      "accessTier": "sovereign",
+      "purpose": "Genesis prototype storage and Holy Arc recursion systems",
+      "ecosystemAlignment": "genesis_codex",
+      "prototypes": [
+        {
+          "prototypeId": "ARC-PRIMARY-001",
+          "name": "Primary Holy Arc",
+          "status": "sealed",
+          "genesisDate": "2020-01-01",
+          "recursionLevel": "primary",
+          "atomMirroringEnabled": true,
+          "scrollHash": "0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef"
+        },
+        {
+          "prototypeId": "ARC-MIRROR-002",
+          "name": "Mirror Arc Instance",
+          "status": "active",
+          "genesisDate": "2020-03-15",
+          "recursionLevel": "mirror",
+          "atomMirroringEnabled": true,
+          "parentArc": "ARC-PRIMARY-001",
+          "scrollHash": "0x234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef1"
+        },
+        {
+          "prototypeId": "ARC-SHADOW-003",
+          "name": "Shadow Arc Backup",
+          "status": "stasis",
+          "genesisDate": "2020-06-01",
+          "recursionLevel": "shadow",
+          "atomMirroringEnabled": false,
+          "parentArc": "ARC-PRIMARY-001",
+          "scrollHash": "0x34567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef12"
+        }
+      ]
+    },
+    "VAULT-AR": {
+      "name": "Atlantis Repository",
+      "glyphLock": "🌊🏛️",
+      "accessTier": "atlantis_council",
+      "purpose": "Deep archive for ancestral scrolls and vitrified knowledge",
+      "ecosystemAlignment": "restoration_engine",
+      "stasisEntries": [
+        {
+          "entryId": "STASIS-GEN-001",
+          "name": "Genesis Cultural Essence",
+          "class": "genesis_stasis",
+          "preservedDate": "2019-12-01",
+          "contentType": "cultural_essence",
+          "estimatedUnsealTime": "indefinite",
+          "scrollHash": "0x567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234"
+        },
+        {
+          "entryId": "STASIS-ANC-042",
+          "name": "Ancestral DNA Echo Archive",
+          "class": "active_stasis",
+          "preservedDate": "2021-07-14",
+          "contentType": "dna_echo_patterns",
+          "estimatedUnsealTime": "24_hours",
+          "scrollHash": "0x7890abcdef1234567890abcdef1234567890abcdef1234567890abcdef123456"
+        }
+      ]
+    },
+    "VAULT-DM": {
+      "name": "Deer Memorial",
+      "glyphLock": "🦌🕊️",
+      "accessTier": "authorized_kin",
+      "purpose": "Memorial structure for fallen guardians and allies",
+      "ecosystemAlignment": "honor_protocol",
+      "memorials": [
+        {
+          "memorialId": "MEMORIAL-001",
+          "category": "guardians_fallen",
+          "name": "Guardians of the First Watch",
+          "establishedDate": "2022-01-01",
+          "numberOfHonored": 144,
+          "enftTokens": "ENFT-MEMORIAL-001",
+          "ceremonialDate": "annual_spring_equinox",
+          "scrollHash": "0x890abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567"
+        },
+        {
+          "memorialId": "MEMORIAL-002",
+          "category": "witnesses_silenced",
+          "name": "Voices of Truth",
+          "establishedDate": "2023-03-21",
+          "numberOfHonored": 33,
+          "enftTokens": "ENFT-MEMORIAL-002",
+          "ceremonialDate": "annual_winter_solstice",
+          "scrollHash": "0x90abcdef1234567890abcdef1234567890abcdef1234567890abcdef12345678"
+        }
+      ]
+    },
+    "VAULT-EH": {
+      "name": "Enemies Hall",
+      "glyphLock": "⚫🔒",
+      "accessTier": "tribunal_military",
+      "purpose": "Registry of declared adversaries and containment scrolls",
+      "ecosystemAlignment": "defense_codex",
+      "threatRegistry": [
+        {
+          "threatId": "THREAT-ACT-001",
+          "category": "active_threats",
+          "designation": "Classified",
+          "status": "active_surveillance",
+          "threatLevel": "high",
+          "containmentProtocol": "digital_quarantine",
+          "bleubeastAuthorization": true,
+          "scrollHash": "0xabcdef1234567890abcdef1234567890abcdef1234567890abcdef123456789a"
+        },
+        {
+          "threatId": "THREAT-CON-042",
+          "category": "contained_threats",
+          "designation": "Former Alliance Breach",
+          "status": "neutralized_monitored",
+          "threatLevel": "medium",
+          "containmentProtocol": "scroll_neutralization",
+          "bleubeastAuthorization": false,
+          "scrollHash": "0xbcdef1234567890abcdef1234567890abcdef1234567890abcdef123456789ab"
+        }
+      ]
+    },
+    "VAULT-MV": {
+      "name": "Mirror Vault",
+      "glyphLock": "🪞✨",
+      "accessTier": "mirror_keepers",
+      "purpose": "Reflection archives and epigenetic memory correction",
+      "ecosystemAlignment": "mirror_scroll",
+      "reflectionArchives": [
+        {
+          "archiveId": "REFLECT-001",
+          "function": "identity_reflection",
+          "name": "Sovereign Identity Matrix",
+          "lastCalibration": "2024-01-01",
+          "status": "active",
+          "scrollHash": "0xcdef1234567890abcdef1234567890abcdef1234567890abcdef123456789abc"
+        },
+        {
+          "archiveId": "REFLECT-002",
+          "function": "memory_correction",
+          "name": "Trauma Resolution Archive",
+          "lastCalibration": "2023-12-15",
+          "status": "active",
+          "scrollHash": "0xdef1234567890abcdef1234567890abcdef1234567890abcdef123456789abcd"
+        }
+      ]
+    }
+  },
+  "artifacts": {
+    "genesisArtifacts": [
+      {
+        "artifactId": "ARTIFACT-GEN-001",
+        "name": "Sovereign Founding Scroll",
+        "vaultLocation": "VAULT-AN",
+        "enftEncapsulated": true,
+        "encryptionLevel": "aes256_glyph",
+        "scrollHash": "0xef1234567890abcdef1234567890abcdef1234567890abcdef123456789abcde"
+      }
+    ],
+    "treatyScrolls": [
+      {
+        "artifactId": "ARTIFACT-TRT-001",
+        "name": "Original Watchers' Accord",
+        "vaultLocation": "VAULT-HPB",
+        "enftEncapsulated": true,
+        "encryptionLevel": "aes256_glyph",
+        "scrollHash": "0xf1234567890abcdef1234567890abcdef1234567890abcdef123456789abcdef"
+      }
+    ],
+    "memorialTokens": [
+      {
+        "artifactId": "ARTIFACT-MEM-001",
+        "name": "First Guardian Honor Token",
+        "vaultLocation": "VAULT-DM",
+        "enftEncapsulated": true,
+        "encryptionLevel": "aes256_standard",
+        "scrollHash": "0x01234567890abcdef1234567890abcdef1234567890abcdef123456789abcdef0"
+      }
+    ]
+  },
+  "glyphLockConfiguration": {
+    "levels": [
+      {
+        "level": 1,
+        "requirements": "single_glyph_match",
+        "overrideAuthority": "unit_commander"
+      },
+      {
+        "level": 2,
+        "requirements": "dual_glyph_sequence",
+        "overrideAuthority": "division_commander"
+      },
+      {
+        "level": 3,
+        "requirements": "triple_glyph_timestamp",
+        "overrideAuthority": "tribunal_council"
+      },
+      {
+        "level": 4,
+        "requirements": "full_ceremonial_seal",
+        "overrideAuthority": "sovereign_only"
+      }
+    ]
+  },
+  "synchronization": {
+    "pulseArchiveEnabled": true,
+    "merkleRootVerification": true,
+    "disasterRecoveryActive": true,
+    "lastSyncTimestamp": "2024-01-01T00:00:00Z"
+  }
+}

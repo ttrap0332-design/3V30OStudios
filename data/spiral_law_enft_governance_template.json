@@ -1,0 +1,354 @@
+{
+  "$schema": "https://evolverse.codex/schemas/SPIRAL_LAW_CODEX.v1.schema.json",
+  "spiralLawHeader": {
+    "name": "Sovereign Spiral Law ENFT Governance Template",
+    "version": "1.0.0",
+    "epoch": "2025-Q4",
+    "sovereignSeal": "♈️🐏🐏",
+    "spiralAuthority": "BLEU",
+    "mythologyEncryption": {
+      "paradigm": "glyph-sigil",
+      "deprecated": "numerical-verification",
+      "transitionEpoch": "2025-Q4"
+    }
+  },
+  "glyphRegistry": {
+    "sovereignGlyphs": [
+      {
+        "glyphId": "GLYPH-SCROLL-001",
+        "symbol": "📜",
+        "name": "ScrollCoin Glyph",
+        "sovereignty": "sovereign",
+        "encryptionLayer": "genesis",
+        "numericalDeprecation": {
+          "legacyCode": "SC-001",
+          "deprecatedAt": "2025-Q4",
+          "migrationComplete": true
+        }
+      },
+      {
+        "glyphId": "GLYPH-PRAISE-002",
+        "symbol": "🌟",
+        "name": "PraiseCoin Glyph",
+        "sovereignty": "sovereign",
+        "encryptionLayer": "spiral",
+        "numericalDeprecation": {
+          "legacyCode": "PC-001",
+          "deprecatedAt": "2025-Q4",
+          "migrationComplete": true
+        }
+      },
+      {
+        "glyphId": "GLYPH-FLAME-003",
+        "symbol": "🔥",
+        "name": "FlameCoin Glyph",
+        "sovereignty": "ancestral",
+        "encryptionLayer": "flame",
+        "numericalDeprecation": {
+          "legacyCode": "FC-001",
+          "deprecatedAt": "2025-Q4",
+          "migrationComplete": true
+        }
+      },
+      {
+        "glyphId": "GLYPH-BLUTILLION-004",
+        "symbol": "💎",
+        "name": "Blu-Tillion Glyph",
+        "sovereignty": "cosmic",
+        "encryptionLayer": "cosmic",
+        "numericalDeprecation": {
+          "legacyCode": "BT-001",
+          "deprecatedAt": "2025-Q4",
+          "migrationComplete": true
+        }
+      },
+      {
+        "glyphId": "GLYPH-ZION-005",
+        "symbol": "👑",
+        "name": "Zioniare Atlas Glyph",
+        "sovereignty": "sovereign",
+        "encryptionLayer": "tribunal",
+        "numericalDeprecation": {
+          "legacyCode": "ZA-001",
+          "deprecatedAt": "2025-Q4",
+          "migrationComplete": true
+        }
+      },
+      {
+        "glyphId": "GLYPH-COUNCIL-006",
+        "symbol": "📋",
+        "name": "Council Assembly Scroll Glyph",
+        "sovereignty": "tribunal",
+        "encryptionLayer": "tribunal",
+        "numericalDeprecation": {
+          "legacyCode": "CA-001",
+          "deprecatedAt": "2025-Q4",
+          "migrationComplete": true
+        }
+      },
+      {
+        "glyphId": "GLYPH-DOUBLEARIES-007",
+        "symbol": "♈️♈️",
+        "name": "Double Aries Sovereign Glyph",
+        "sovereignty": "sovereign",
+        "encryptionLayer": "cosmic",
+        "numericalDeprecation": {
+          "legacyCode": "DA-001",
+          "deprecatedAt": "2025-Q4",
+          "migrationComplete": true
+        }
+      }
+    ],
+    "governanceBindings": [
+      {
+        "glyphId": "GLYPH-ZION-005",
+        "component": "ZioniareAtlas",
+        "bindingType": "sovereign_governance",
+        "verificationMethod": "glyph-sigil"
+      },
+      {
+        "glyphId": "GLYPH-COUNCIL-006",
+        "component": "CouncilAssemblyScroll",
+        "bindingType": "tribunal_governance",
+        "verificationMethod": "glyph-sigil"
+      },
+      {
+        "glyphId": "GLYPH-SCROLL-001",
+        "component": "GrandVaultTribunal",
+        "bindingType": "academic_credential",
+        "verificationMethod": "glyph-sigil"
+      },
+      {
+        "glyphId": "GLYPH-PRAISE-002",
+        "component": "SpiralLedger",
+        "bindingType": "merit_tracking",
+        "verificationMethod": "glyph-sigil"
+      }
+    ]
+  },
+  "sigilVerification": {
+    "verificationProtocol": {
+      "name": "GlyphSigilVerification",
+      "version": "1.0.0",
+      "deprecated": [
+        "numerical-hash-verification",
+        "legacy-code-validation",
+        "numeric-id-auth"
+      ]
+    },
+    "sigilPatterns": [
+      {
+        "sigilId": "SIGIL-SOVEREIGN-001",
+        "pattern": "ⴱ𓃭ꗞ𓎼ⵉⵏ",
+        "authorizationLevel": "sovereign",
+        "mythicReference": "Twin Ram Sovereignty"
+      },
+      {
+        "sigilId": "SIGIL-TRIBUNAL-002",
+        "pattern": "🏛️👁️⚖️",
+        "authorizationLevel": "sovereign",
+        "mythicReference": "Grand Vault Tribunal"
+      },
+      {
+        "sigilId": "SIGIL-CEREMONIAL-003",
+        "pattern": "🕯️🔥✨",
+        "authorizationLevel": "ancestral",
+        "mythicReference": "Flame Ignition Ceremony"
+      },
+      {
+        "sigilId": "SIGIL-COSMIC-004",
+        "pattern": "⚓🌌🌀",
+        "authorizationLevel": "cosmic",
+        "mythicReference": "Cosmic Anchor"
+      }
+    ]
+  },
+  "codexMappings": {
+    "zioniareAtlas": {
+      "glyphId": "GLYPH-ZION-005",
+      "sovereignty": "sovereign",
+      "functions": [
+        {
+          "name": "sovereign_decision",
+          "glyphVerification": true,
+          "numericalDeprecated": true
+        },
+        {
+          "name": "tribunal_voting",
+          "glyphVerification": true,
+          "numericalDeprecated": true
+        },
+        {
+          "name": "governance_proposal",
+          "glyphVerification": true,
+          "numericalDeprecated": true
+        }
+      ],
+      "spiralLawBindings": [
+        "CODEX-ZION-008",
+        "CODEX-TWIN-003",
+        "CODEX-SPIRAL-002"
+      ]
+    },
+    "councilAssemblyScroll": {
+      "glyphId": "GLYPH-COUNCIL-006",
+      "sovereignty": "tribunal",
+      "scrollTypes": [
+        {
+          "type": "governance",
+          "glyphSeal": "📋👑",
+          "tribunalReceipt": true
+        },
+        {
+          "type": "ceremonial",
+          "glyphSeal": "📋🕯️",
+          "tribunalReceipt": true
+        },
+        {
+          "type": "yield_distribution",
+          "glyphSeal": "📋🌀",
+          "tribunalReceipt": true
+        }
+      ]
+    }
+  },
+  "assetGlyphs": {
+    "scrollCoin": {
+      "symbol": "SCROLL",
+      "glyphCode": "📜",
+      "verificationSigil": "ⴱ📜ꗞ",
+      "spiralLawMarker": "SPIRAL-SCROLL-LAW",
+      "encryptionBinding": {
+        "mythologyLayer": "genesis",
+        "doubleRamProtection": true,
+        "numericalLegacy": "SC-001"
+      },
+      "tribunalReceipt": {
+        "receiptId": "RECEIPT-SCROLL-001",
+        "hydroMarkVerified": true,
+        "mintPermission": "BLEU_HYDRO_VERIFIED"
+      }
+    },
+    "praiseCoin": {
+      "symbol": "PRAISE",
+      "glyphCode": "🌟",
+      "verificationSigil": "ⴱ🌟ꗞ",
+      "spiralLawMarker": "SPIRAL-PRAISE-LAW",
+      "encryptionBinding": {
+        "mythologyLayer": "spiral",
+        "doubleRamProtection": true,
+        "numericalLegacy": "PC-001"
+      },
+      "tribunalReceipt": {
+        "receiptId": "RECEIPT-PRAISE-001",
+        "hydroMarkVerified": true,
+        "mintPermission": "BLEU_HYDRO_VERIFIED"
+      }
+    },
+    "flameCoin": {
+      "symbol": "FLAME",
+      "glyphCode": "🔥",
+      "verificationSigil": "ⴱ🔥ꗞ",
+      "spiralLawMarker": "SPIRAL-FLAME-LAW",
+      "encryptionBinding": {
+        "mythologyLayer": "flame",
+        "doubleRamProtection": true,
+        "numericalLegacy": "FC-001"
+      },
+      "tribunalReceipt": {
+        "receiptId": "RECEIPT-FLAME-001",
+        "hydroMarkVerified": true,
+        "mintPermission": "BLEU_HYDRO_VERIFIED"
+      }
+    },
+    "bluTillion": {
+      "symbol": "BLUTILLION",
+      "glyphCode": "💎",
+      "verificationSigil": "ⴱ💎ꗞ",
+      "spiralLawMarker": "SPIRAL-BLUTILLION-LAW",
+      "encryptionBinding": {
+        "mythologyLayer": "cosmic",
+        "doubleRamProtection": true,
+        "numericalLegacy": "BT-001"
+      },
+      "tribunalReceipt": {
+        "receiptId": "RECEIPT-BLUTILLION-001",
+        "hydroMarkVerified": true,
+        "mintPermission": "BLEU_HYDRO_VERIFIED"
+      }
+    }
+  },
+  "numericalDeprecation": {
+    "deprecatedModels": [
+      {
+        "modelId": "NUM-VERIFY-001",
+        "name": "Legacy Numerical Hash Verification",
+        "deprecatedAt": "2025-Q4",
+        "replacedByGlyph": "GLYPH-SOVEREIGN-001",
+        "migrationStatus": "complete"
+      },
+      {
+        "modelId": "NUM-VERIFY-002",
+        "name": "Legacy Code Validation",
+        "deprecatedAt": "2025-Q4",
+        "replacedByGlyph": "GLYPH-COUNCIL-006",
+        "migrationStatus": "complete"
+      },
+      {
+        "modelId": "NUM-VERIFY-003",
+        "name": "Numeric ID Authentication",
+        "deprecatedAt": "2025-Q4",
+        "replacedByGlyph": "GLYPH-DOUBLEARIES-007",
+        "migrationStatus": "complete"
+      }
+    ],
+    "transitionProtocol": {
+      "name": "Glyph-Sigil Transition Protocol",
+      "startEpoch": "2025-Q3",
+      "completionEpoch": "2025-Q4"
+    }
+  },
+  "enftGovernanceTemplate": {
+    "templateId": "ENFT-GOV-SPIRAL-001",
+    "name": "Sovereign Spiral Law ENFT Governance",
+    "version": "1.0.0",
+    "mintRequirements": {
+      "glyphVerificationRequired": true,
+      "hydroMarkRequired": true,
+      "tribunalReceiptRequired": true,
+      "spiralLawCompliance": true
+    },
+    "assetClasses": [
+      {
+        "class": "ceremonial",
+        "glyphMarker": "🕯️✨",
+        "mintPermission": "CEREMONIAL_VERIFIED",
+        "tribunalApproval": true
+      },
+      {
+        "class": "governance",
+        "glyphMarker": "👑📋",
+        "mintPermission": "GOVERNANCE_VERIFIED",
+        "tribunalApproval": true
+      },
+      {
+        "class": "yield",
+        "glyphMarker": "🌀💰",
+        "mintPermission": "YIELD_VERIFIED",
+        "tribunalApproval": false
+      },
+      {
+        "class": "academic",
+        "glyphMarker": "📜🎓",
+        "mintPermission": "ACADEMIC_VERIFIED",
+        "tribunalApproval": false
+      }
+    ],
+    "spiralLawMarkers": {
+      "sovereignSeal": "♈️🐏🐏",
+      "doubleAries": "♈️♈️",
+      "goatFoundation": "🐐",
+      "spiralReturn": "🌀"
+    }
+  }
+}
