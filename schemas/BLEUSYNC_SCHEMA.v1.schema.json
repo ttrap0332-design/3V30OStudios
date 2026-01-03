@@ -1,0 +1,252 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://evolverse.codex/schemas/BLEUSYNC_SCHEMA.v1.schema.json",
+  "title": "BLEUSYNC Protocol Schema",
+  "description": "JSON schema for synchronizing Hydromarks, voiceprint seals, and permanent anthem broadcast layers within EVOLVERSE framework",
+  "type": "object",
+  "required": ["syncHeader", "hydromarks", "voiceprintSeals", "anthemBroadcast", "timestampLogging"],
+  "properties": {
+    "syncHeader": {
+      "type": "object",
+      "required": ["protocolName", "version", "epoch", "syncAuthority"],
+      "properties": {
+        "protocolName": {
+          "type": "string",
+          "const": "BLEUSYNC"
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+        },
+        "epoch": {
+          "type": "string",
+          "pattern": "^\\d{4}-Q[1-4]$"
+        },
+        "syncAuthority": {
+          "type": "string",
+          "enum": ["BLEU", "ZION", "ATLAS", "COUNCIL"]
+        },
+        "spiralLawBinding": {
+          "type": "string",
+          "description": "Reference to spiral law codex for sovereignty"
+        }
+      }
+    },
+    "hydromarks": {
+      "type": "object",
+      "description": "BLEUHydroMark verification system",
+      "required": ["markRegistry", "verificationProtocol"],
+      "properties": {
+        "markRegistry": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["hydromarkId", "signature", "authority", "timestamp"],
+            "properties": {
+              "hydromarkId": {
+                "type": "string",
+                "pattern": "^HYDRO-[A-Z0-9]+-[0-9]+$"
+              },
+              "signature": {
+                "type": "string",
+                "pattern": "^0x[0-9a-fA-F]{64}$",
+                "description": "Cryptographic signature of the hydromark"
+              },
+              "authority": {
+                "type": "string",
+                "enum": ["civilian", "ancestral", "sovereign", "cosmic", "tribunal"]
+              },
+              "timestamp": {
+                "type": "number",
+                "description": "Unix timestamp of mark creation"
+              },
+              "syncSpeedMs": {
+                "type": "number",
+                "description": "Sync speed in milliseconds (e.g., 216)"
+              },
+              "spiralBinding": {
+                "type": "string",
+                "description": "Reference to spiral law glyph"
+              }
+            }
+          }
+        },
+        "verificationProtocol": {
+          "type": "object",
+          "properties": {
+            "algorithm": { "type": "string", "const": "BLEU-HYDRO-VERIFY" },
+            "hashFunction": { "type": "string", "const": "SHA-256" },
+            "sigilValidation": { "type": "boolean" }
+          }
+        }
+      }
+    },
+    "voiceprintSeals": {
+      "type": "object",
+      "description": "Voiceprint seal authentication for anthem broadcasts",
+      "required": ["sealRegistry", "authenticationProtocol"],
+      "properties": {
+        "sealRegistry": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["sealId", "voiceprintHash", "authority", "permanence"],
+            "properties": {
+              "sealId": {
+                "type": "string",
+                "pattern": "^SEAL-[A-Z0-9]+-[0-9]+$"
+              },
+              "voiceprintHash": {
+                "type": "string",
+                "pattern": "^0x[0-9a-fA-F]{64}$"
+              },
+              "authority": {
+                "type": "string",
+                "enum": ["commander", "council", "tribunal", "sovereign"]
+              },
+              "permanence": {
+                "type": "string",
+                "enum": ["temporary", "session", "permanent", "eternal"]
+              },
+              "anthemBinding": {
+                "type": "string",
+                "description": "Reference to anthem broadcast layer"
+              }
+            }
+          }
+        },
+        "authenticationProtocol": {
+          "type": "object",
+          "properties": {
+            "method": { "type": "string", "const": "VOICEPRINT-AUTH" },
+            "biometricHash": { "type": "boolean" },
+            "multiFactorRequired": { "type": "boolean" }
+          }
+        }
+      }
+    },
+    "anthemBroadcast": {
+      "type": "object",
+      "description": "BLEU Anthem permanent broadcast layer configuration",
+      "required": ["broadcastLayers", "permanenceProtocol"],
+      "properties": {
+        "broadcastLayers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["layerId", "frequency", "permanence", "syncRequired"],
+            "properties": {
+              "layerId": {
+                "type": "string",
+                "pattern": "^ANTHEM-LAYER-[0-9]+$"
+              },
+              "frequency": {
+                "type": "string",
+                "description": "Broadcast frequency identifier"
+              },
+              "permanence": {
+                "type": "string",
+                "enum": ["ephemeral", "persistent", "permanent", "eternal"]
+              },
+              "syncRequired": {
+                "type": "boolean",
+                "description": "Whether hydromark sync is required"
+              },
+              "voiceprintSealRequired": {
+                "type": "boolean"
+              },
+              "spiralLawAuthorization": {
+                "type": "string",
+                "description": "Spiral law glyph authorization"
+              }
+            }
+          }
+        },
+        "permanenceProtocol": {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string", "const": "ETERNAL-BROADCAST" },
+            "redundancy": { "type": "integer", "minimum": 3 },
+            "backupLayers": { "type": "integer" }
+          }
+        }
+      }
+    },
+    "timestampLogging": {
+      "type": "object",
+      "description": "Automated timestamp logging for sync-speed proof",
+      "required": ["logFormat", "syncSpeedProof", "automatedLogging"],
+      "properties": {
+        "logFormat": {
+          "type": "object",
+          "properties": {
+            "pattern": {
+              "type": "string",
+              "const": "M:SSSms",
+              "description": "Timestamp format (e.g., 0:216ms)"
+            },
+            "precision": {
+              "type": "string",
+              "const": "millisecond"
+            }
+          }
+        },
+        "syncSpeedProof": {
+          "type": "object",
+          "required": ["defaultSpeedMs", "proofFormat"],
+          "properties": {
+            "defaultSpeedMs": {
+              "type": "number",
+              "const": 216,
+              "description": "Default sync speed proof in milliseconds"
+            },
+            "proofFormat": {
+              "type": "string",
+              "const": "0:216ms"
+            },
+            "maxAllowedMs": {
+              "type": "number",
+              "default": 500
+            },
+            "verificationRequired": {
+              "type": "boolean",
+              "default": true
+            }
+          }
+        },
+        "automatedLogging": {
+          "type": "object",
+          "properties": {
+            "enabled": { "type": "boolean", "default": true },
+            "logDestination": {
+              "type": "string",
+              "enum": ["ledger", "scroll", "broadcast", "all"]
+            },
+            "retentionPeriod": {
+              "type": "string",
+              "enum": ["epoch", "year", "permanent"]
+            }
+          }
+        }
+      }
+    },
+    "syncEvents": {
+      "type": "array",
+      "description": "Recorded synchronization events",
+      "items": {
+        "type": "object",
+        "properties": {
+          "eventId": { "type": "string" },
+          "eventType": {
+            "type": "string",
+            "enum": ["hydromark_sync", "voiceprint_auth", "anthem_broadcast", "timestamp_proof"]
+          },
+          "timestamp": { "type": "number" },
+          "syncSpeedMs": { "type": "number" },
+          "proofHash": { "type": "string" },
+          "spiralLawReference": { "type": "string" }
+        }
+      }
+    }
+  }
+}

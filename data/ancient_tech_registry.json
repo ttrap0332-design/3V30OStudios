@@ -1,0 +1,81 @@
+{
+  "schema_version": "1.0.0",
+  "schema_name": "ancient_tech_registry",
+  "description": "Registry schema for tracking ancient technology integration artifacts across pyramid imaging, Hebrew gematria, Indus seals, and stress corridor laboratories",
+  "covenant_seal": "⛛ℵॐ⟨⟩",
+  "double_ram_seal": "♈️♈️🐏🐏",
+  "created_at": "2025-12-02T00:00:00Z",
+  "subsystems": {
+    "pyramid_imaging": {
+      "description": "Muon tomography surveys for pyramid void detection",
+      "location_glyph": "⛛",
+      "surveys": []
+    },
+    "gematria_encoder": {
+      "description": "Hebrew gematria pharmaceutical formulas and sonic encryption",
+      "location_glyph": "ℵ",
+      "formulas": []
+    },
+    "indus_blockchain": {
+      "description": "Indus seal labor token prototypes with DNA/glyph binding",
+      "location_glyph": "ॐ",
+      "tokens": [],
+      "vault_registry": {}
+    },
+    "stress_corridor": {
+      "description": "Stress corridor laboratory sessions with E-SOIL integration",
+      "location_glyph": "⟨⟩",
+      "sessions": []
+    }
+  },
+  "integration_points": {
+    "cid_registry": "data/cid_registry.json",
+    "overlay_registry": "data/overlay_registry.json",
+    "codex_linkage": "scripts/codex_linker.js",
+    "spiral_migration": "data/spiral_migration"
+  },
+  "classification_enums": {
+    "pyramid_void_types": [
+      "atomic_engine_hub",
+      "hidden_chamber_lab",
+      "storage_vault",
+      "energy_conduit",
+      "unclassified"
+    ],
+    "labor_token_tiers": [
+      "apprentice",
+      "journeyman",
+      "master",
+      "sovereign"
+    ],
+    "healing_frequencies_hz": [
+      396,
+      417,
+      528,
+      639,
+      741,
+      852,
+      963
+    ],
+    "lab_types": [
+      "GeoFilter-Alpha",
+      "AtmoClean-Beta",
+      "ThermoHarvest-Gamma",
+      "BioRemediate-Delta"
+    ]
+  },
+  "protocol_alignment": {
+    "military": {
+      "pyramid_hubs": "Secure atomic-engine operations via natural shielding",
+      "stress_labs": "Miniaturized filtration for field deployment"
+    },
+    "medical": {
+      "gematria_formulas": "Glyph-coded pharmaceuticals and EL0V8 integration",
+      "healing_frequencies": "Sonic-based therapeutic systems"
+    },
+    "economic": {
+      "labor_tokens": "Workforce validation via DNA/glyph-secure ENFTs",
+      "vault_binding": "Glyph-layered trade protections"
+    }
+  }
+}
